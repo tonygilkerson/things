@@ -20,11 +20,11 @@ Follow the [Go Install Guide](https://go.dev/doc/install). Note, currently 4/11/
 
 Following the [TinyGo Install Guid](https://tinygo.org/getting-started/install/). The install guide describes a few *Additional Requirements* that I don't believe I need but I installed the Arduino Uno tool because, well, I don't know I am new I don't know what I am doing.  If you have a simular setup as I do, I would not install the additional tools unless you find you actually need them. 
 
-## Install VS Code
+### Install VS Code
 
 If you are like me you already have VS Code but if not you can go [here](https://code.visualstudio.com/download) to install it.
 
-## Install the TinyGo VSCode Plugin
+### Install the TinyGo VSCode Plugin
 
 This plugin adds minimal but important functionality to VS Code.  You can click the extensions icon in VS Code and search for "TinyGo" or go [here](https://marketplace.visualstudio.com/items?itemName=tinygo.vscode-tinygo) and click the install button.
 
