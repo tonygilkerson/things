@@ -12,4 +12,6 @@ A secondary goal is to use a "real" programming language like C++ and Go for may
 
 This repo will have several subfolders each containing the source code and doc for some project. The first subfolder `example01` is me working through a "hello world" project, which for microcontrollers is a blinking LED. The code is not that interesting but my notes will be from the point of view of a newbie and thus may contain things that were useful to me at the the time.
 
+## Projects
 
+* [Example01](example01/README.md) - Hello World Blinky
