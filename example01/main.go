@@ -11,11 +11,10 @@ func main() {
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	for {
-
 		pin.Low()
-		time.Sleep(time.Millisecond * 1000)
+		time.Sleep(time.Millisecond * 500)
 
 		pin.High()
-		time.Sleep(time.Millisecond * 1000)
+		time.Sleep(time.Millisecond * 500)
 	}
 }
