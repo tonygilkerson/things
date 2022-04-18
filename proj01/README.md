@@ -13,11 +13,10 @@ To get started we need to install some tools:
 
 * **VS Code** - You can download and install VS Code from [here](https://code.visualstudio.com/).
 
-* **TinyGo VSCode Extension** Click the extensions icon in VS Code and search for "TinyGo" or go [here](https://marketplace.visualstudio.com/items?itemName=tinygo.vscode-tinygo) and click the install button.
+* **TinyGo VSCode Extension** - Click the extensions icon in VS Code and search for "TinyGo" or go [here](https://marketplace.visualstudio.com/items?itemName=tinygo.vscode-tinygo) and click the install button.
 
-### Install VCP Drivers
-
-I *think* VCP drivers are needed for connect your board to your Mac via USB cable. I am not 100% on this but I think you need to install the [USB to UART Bridge VPC Drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) from Silicon Labs.
+* **VCP Drivers** - The VCP drivers are needed to connect your board to your Mac via USB cable. I am not 100% on this but I think you need to install the [USB to UART Bridge VPC Drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) from Silicon Labs.
+* **picocom** - This CLI is optional but useful for monitoring your serial port, `brew install picoc
 
 On my Mac the board shows up as `/dev/cu.usbserial-D30DOR8N` if you have a Mac it should show up as `/dev/cu.something`.  I hope that helps.
 
@@ -91,15 +90,27 @@ Here are the steps I use to create the blinky program found in the `project01` f
     Compressed 3120 bytes to 2361...
     Wrote 3120 bytes (2361 compressed) at 0x00001000 in 0.3 seconds (effective 86.6 kbit/s)...
     Hash of data verified.
+
+    #
+    # Other useful command
+    #
+
+    # To monitor the serial port
+    picocom --baud 115200 /dev/cu.usbserial-D30DOR8N
+
+    # Flash the chip
+    esptool.py --chip=esp32 erase_flash
     ```
 
     > **IMPORTANT**: You must hold the `0` button down during the flashing process.  This button is built into the board in the upper right near the `TX` pin.
 
-1. The above assume the circuit looks like the drawing below. Click the `RST` on the board to restart the program.
+  
+1. The circuit is shown in the drawing below. Click the `RST` on the board to restart the program.
   
 ![](proj01.png)
 
 ## See it in action
+
 DEVTODO Add video link here
 
 ## References
@@ -107,8 +118,11 @@ DEVTODO Add video link here
 * [TinyGo: Good Things Come in Small Packages](https://auth0.com/blog/tinygo-good-things-come-in-small-packages/?utm_source=content_synd&utm_medium=sc&utm_campaign=golang) - Liam Hampton
 * [TinyGo's GitHub Page](https://github.com/tinygo-org/tinygo)
 * [TinyGo's Website](https://tinygo.org/)
-* [TinyGo on arduino-uno an introduction](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - trybotics.com
+* [TinyGo an introduction](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - trybotics.com, good video of several sample projects
 * [TinyGo Driver Examples](https://pkg.go.dev/tinygo.org/x/drivers/examples) - pkg.go.dev
 * [TinyGo's examples in src/examples](https://github.com/tinygo-org/tinygo/tree/release/src/examples)
 * [using screen CLI to monitor the serial port](https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux#:~:text=You%20can%20now%20use%20the,now%20connected%20to%20that%20port!) - To disconnect, type **control-a** then **shift-k**.
+* [Honey I shrunk the Gophers!](https://www.youtube.com/watch?v=2v91Rff4Ipk&list=PL9DQRFSnwAyM7Ti02BUS1FEFNQV_dQGjJ&index=4) on YouTube -- Donia Chaiehloudj and her [TinyGo Discovery GitHub Page](https://github.com/doniacld/tinygo-discovery)
+* [Weather Hub](https://github.com/ardnew/weatherhub) - Andrew, Uses ESP32 wifi
+
   

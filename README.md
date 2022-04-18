@@ -14,4 +14,4 @@ This repo will have several subfolders each containing the source code and doc f
 
 ## Projects
 
-* [Example01](example01/README.md) - Hello World Blinky
+* [proj01](proj01/README.md) - Hello World Blinky
