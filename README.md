@@ -15,3 +15,8 @@ This repo will have several subfolders each containing the source code and doc f
 ## Projects
 
 * [proj01](proj01/README.md) - Hello World Blinky
+
+
+## Ideas for future projects
+
+* [TryBotics](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - has a good list of prjects
