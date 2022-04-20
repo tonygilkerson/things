@@ -124,5 +124,8 @@ DEVTODO Add video link here
 * [using screen CLI to monitor the serial port](https://learn.sparkfun.com/tutorials/terminal-basics/command-line-windows-mac-linux#:~:text=You%20can%20now%20use%20the,now%20connected%20to%20that%20port!) - To disconnect, type **control-a** then **shift-k**.
 * [Honey I shrunk the Gophers!](https://www.youtube.com/watch?v=2v91Rff4Ipk&list=PL9DQRFSnwAyM7Ti02BUS1FEFNQV_dQGjJ&index=4) on YouTube -- Donia Chaiehloudj and her [TinyGo Discovery GitHub Page](https://github.com/doniacld/tinygo-discovery)
 * [Weather Hub](https://github.com/ardnew/weatherhub) - Andrew, Uses ESP32 wifi
+* [TynyGo Drivers](https://github.com/tinygo-org/drivers)
+* [TynyGo Driver Examples](https://github.com/tinygo-org/drivers/tree/release/examples)
+* [Aykevl's Examples on GitHub](https://github.com/aykevl/things)
 
   
