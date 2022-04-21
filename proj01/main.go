@@ -8,7 +8,7 @@ import (
 func main() {
 
 	println("START")
-
+	
 	var pin machine.Pin = 2
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
 

@@ -16,7 +16,7 @@ To get started we need to install some tools:
 * **TinyGo VSCode Extension** - Click the extensions icon in VS Code and search for "TinyGo" or go [here](https://marketplace.visualstudio.com/items?itemName=tinygo.vscode-tinygo) and click the install button.
 
 * **VCP Drivers** - The VCP drivers are needed to connect your board to your Mac via USB cable. I am not 100% on this but I think you need to install the [USB to UART Bridge VPC Drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) from Silicon Labs.
-* **picocom** - This CLI is optional but useful for monitoring your serial port, `brew install picoc
+* **picocom** - This CLI is optional but useful for monitoring your serial port, `brew install picoc`
 
 On my Mac the board shows up as `/dev/cu.usbserial-D30DOR8N` if you have a Mac it should show up as `/dev/cu.something`.  I hope that helps.
 
@@ -33,8 +33,8 @@ Here are the steps I use to create the blinky program found in the `project01` f
 1. Create a project folder
 
     ```sh
-    mkdir example01
-    cd example01
+    mkdir proj01
+    cd proj01
     go mod init blinky
     ```
 
@@ -104,14 +104,13 @@ Here are the steps I use to create the blinky program found in the `project01` f
 
     > **IMPORTANT**: You must hold the `0` button down during the flashing process.  This button is built into the board in the upper right near the `TX` pin.
 
-  
 1. The circuit is shown in the drawing below. Click the `RST` on the board to restart the program.
   
 ![](proj01.png)
 
 ## See it in action
 
-DEVTODO Add video link here
+See the demo on [YouTube](https://www.youtube.com/watch?v=3h1Oa36aLyA)
 
 ## References
 
