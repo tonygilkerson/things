@@ -1,0 +1,3 @@
+# Project 02 - Ez-Stepper on Sparkfun ESP32 Thing
+
+This is a work in progress...
