@@ -114,6 +114,7 @@ See the demo on [YouTube](https://www.youtube.com/watch?v=3h1Oa36aLyA)
 
 ## References
 
+* [SparkFun ESP32 Thing (DEV-13907) Visual Data Sheet](https://cdn.sparkfun.com/assets/learn_tutorials/5/0/7/ESP32ThingV1a.pdf)
 * [TinyGo: Good Things Come in Small Packages](https://auth0.com/blog/tinygo-good-things-come-in-small-packages/?utm_source=content_synd&utm_medium=sc&utm_campaign=golang) - Liam Hampton
 * [TinyGo's GitHub Page](https://github.com/tinygo-org/tinygo)
 * [TinyGo's Website](https://tinygo.org/)
