@@ -7,5 +7,6 @@ This project shows how to use a serial monitor tool to monitor or debug your app
 ## Serial Monitor
 
 ```sh
-picocom --baud 115200 /dev/cu.usbserial-81564DF200
+picocom --baud 115200 /dev/cu.usbserial-81564DF200   # my M5 Stick
+picocom --baud 115200 /dev/cu.usbserial-D30DOR8N     # sparkfun thing
 ```
