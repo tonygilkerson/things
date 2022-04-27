@@ -16,7 +16,12 @@ This repo will have several subfolders each containing the source code and doc f
 
 * [proj01](proj01/README.md) - Hello World Blinky
 
-
 ## Ideas for future projects
 
 * [TryBotics](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - has a good list of prjects
+* [Astro Tracker](https://learn.adafruit.com/diy-robotic-sky-tracking-astrophotography-mount) - a DIY Robotic Sky Tracking Astrophotography Mount 
+
+## Resources
+
+* *Hands On Tec* - https://handsontec.com
+

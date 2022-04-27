@@ -1,9 +1,3 @@
-# Project 04 - TBD M5 Stack
+# Project 03 - Ez-Stepper on Sparkfun ESP32 Thing
 
-This is a work in progress
-
-## Serial Monitor
-
-```sh
-picocom --baud 115200 /dev/cu.usbserial-81564DF200
-```
+This is a work in progress...
