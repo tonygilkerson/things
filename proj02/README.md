@@ -1,6 +1,6 @@
 # Project 02 - Serial Monitor
 
-This project shows how to use command line tool to monitor or debug your app runnin on a ESP32 microcontroler.
+This project shows how to use command line tool to monitor or debug your app running on a ESP32 microcontroller.
 
 ## Used in this project
 
