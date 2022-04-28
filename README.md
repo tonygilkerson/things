@@ -16,6 +16,17 @@ This repo will have several subfolders each containing the source code and doc f
 
 * [proj01](proj01/README.md) - Hello World Blinky
 
+## Devices
+
+ESP32-WROOM-32D
+* [Product Page](https://www.espressif.com/en/products/modules)
+* [Data Sheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf)
+
+M5 Stack ESP32 Plus
+* [Product Page](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit) development kit. 
+* [Data Sheet](https://cdn.competec.ch/documents2/8/5/9/185624958/185624958.pdf) 
+
+
 ## Ideas for future projects
 
 * [TryBotics](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - has a good list of prjects
@@ -24,4 +35,3 @@ This repo will have several subfolders each containing the source code and doc f
 ## Resources
 
 * *Hands On Tec* - https://handsontec.com
-

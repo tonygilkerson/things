@@ -5,11 +5,11 @@ import (
 )
 
 func main() {
-	println("Hi M5 4")
-
+	println("Hello World!")
 
 	for {
-		println("Hi")
+		dt := time.Now().String()
+		println( dt, " Hi...")
 		time.Sleep(time.Second)
 	}
 
