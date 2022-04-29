@@ -12,5 +12,11 @@ A work in progress
 http://www.handsontec.com/dataspecs/L298N%20Motor%20Driver.pdf
 
 
-
 ## Project Demo
+
+![](setup.drawio.png)
+
+```bash
+tinygo flash -target=esp32-coreboard-v2  -port=/dev/cu.usbserial-0001
+picocom --baud 115200 /dev/cu.usbserial-0001
+```
