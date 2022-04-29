@@ -56,9 +56,9 @@ This repo will have several subfolders each containing the source code and doc f
 
 The pins on the motor, I think I have "Wiring Diagram 2"
 
-pin1 | pin2 | pin3  | pin4 | pin5 | pin6
------|------|-------|------|------|-----
-red  |      | black | blue |      | green
+pin1   | pin2 | pin3     | pin4    | pin5 | pin6
+-------|------|----------|---------|------|---------
+red B+ |      | black A+ | blue B- |      | green A-
 
 ![L298N-Motor-Driver-wiring.png](img/L298N-Motor-Driver-wiring.png)
 
