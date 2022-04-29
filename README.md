@@ -16,16 +16,66 @@ This repo will have several subfolders each containing the source code and doc f
 
 * [proj01](proj01/README.md) - Hello World Blinky
 
-## Devices
+## Components
 
-ESP32-WROOM-32D
+### ESP32-WROOM-32D
+
 * [Product Page](https://www.espressif.com/en/products/modules)
 * [Data Sheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf)
 
-M5 Stack ESP32 Plus
-* [Product Page](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit) development kit. 
-* [Data Sheet](https://cdn.competec.ch/documents2/8/5/9/185624958/185624958.pdf) 
+![esp32-wroom-32d-pins.jpeg](img/esp32-wroom-32d-pins.jpeg)
 
+### Sparkfun ESP32 Thing
+
+* [Product Page](https://www.sparkfun.com/products/13907)
+* [Data Sheet](https://cdn.sparkfun.com/assets/learn_tutorials/5/0/7/ESP32ThingV1a.pdf)
+
+![Spartfun-esp32-thing.png](img/Spartfun-esp32-thing.png)
+
+### M5Stickc Plus ESP32
+
+* [Product Page](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit) development kit. 
+* [Data Sheet](https://cdn.competec.ch/documents2/8/5/9/185624958/185624958.pdf)
+
+![M5Stickc Plus ESP32](img/M5Stick-Plus-ESP32.webp)
+
+### L298N Motor Driver
+
+* [Data Sheet](http%3A%2F%2Fwww.handsontec.com%2Fdataspecs%2FL298N%20Motor%20Driver.pdf)
+
+![L298N-Motor-Driver.png](img/L298N-Motor-Driver.png)
+![L298N-Motor-Driver2.png](img/L298N-Motor-Driver2.png)
+
+### Twotrees Nema17 Stepper Motor
+
+* [Product Page](https://www.amazon.com/Twotrees-Nema-17-Stepper-Motor/dp/B07TGJSNJB?th=1)
+
+![Twotrees-Nema-17-Stepper-Motor.png](img/Twotrees-Nema-17-Stepper-Motor.png)
+
+This is high torque Nema 17 stepper motor with 1.8 deg.Each phase draws 1.5A,allowing for a holding torque 13Ncm(18.4oz.in)
+40cm wire, one connect electrical machine, on the other end has variety optional ports.
+
+It's ideal for the RepRap Prusa, Mendel 90, Rostock and， similar 3D printers, as well as CNC and robotics applications.
+The motor is supplied with a 1 metre long power cable with a 4-pin Harwin female connector already fitted - ready to plug and print!
+
+```text
+Electrical Specification:
+Product type:Bipolar 42 Stepper Motor
+Step Angle: 1.8 deg. 
+Rated Current/phase: 1.5A
+Holding Torque:13Ncm(18.4oz.in)
+
+General Specification:
+Step angle accuracy: + - 5%(full step,not load)
+Resistance accuracy: + - 10%
+Inductance accuracy: + - 20%
+Insulation resistance:100M Min,500VDC
+Insultion Strength--------500VAC for one minute.
+
+Package Included:
+1 X Nema 17 Stepper Motors
+1 X Cables
+```
 
 ## Ideas for future projects
 

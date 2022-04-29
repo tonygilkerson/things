@@ -1,9 +1,8 @@
 # Project 02 - Serial Monitor
 
-This project shows how to use command line tool to monitor or debug your app running on a ESP32 microcontroller.
+This project shows how to use command line tool to monitor or debug your app running on a ESP32 microcontroller. Here are the project components.
 
-## Used in this project
-
+* **TinyGo** - A Go compiler for small places, see [tinygo.org](https://tinygo.org/)
 * **picocom CLI** - minimal dumb-terminal emulation program, see [man page](https://linux.die.net/man/8/picocom)
 * **ESP32-WROOM-32D** - ESP32 dev board, see [Data Sheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf) 
 

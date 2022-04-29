@@ -1,4 +1,9 @@
-# Project 05 - Bipolar Steper with the L298N Motor driver
+# Project 05 - Bipolar Stepper Motor
+
+In this project we will demonstrate how to drive a Bipolar Stepper Motor with TinyGo. Here are the project components.
+
+* **TinyGo** - A Go compiler for small places, see [tinygo.org](https://tinygo.org/)
+* **L298N Motor Driver** - [Data Sheet](http%3A%2F%2Fwww.handsontec.com%2Fdataspecs%2FL298N%20Motor%20Driver.pdf)
 
 A work in progress
 
@@ -6,8 +11,6 @@ A work in progress
 
 http://www.handsontec.com/dataspecs/L298N%20Motor%20Driver.pdf
 
-## Serial Monitor
 
-```sh
-picocom --baud 115200 /dev/cu.usbserial-81564DF200
-```
+
+## Project Demo

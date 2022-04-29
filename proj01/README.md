@@ -127,5 +127,3 @@ See the demo on [YouTube](https://www.youtube.com/watch?v=3h1Oa36aLyA)
 * [TynyGo Drivers](https://github.com/tinygo-org/drivers)
 * [TynyGo Driver Examples](https://github.com/tinygo-org/drivers/tree/release/examples)
 * [Aykevl's Examples on GitHub](https://github.com/aykevl/things)
-
-  
