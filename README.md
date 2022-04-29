@@ -49,8 +49,20 @@ This repo will have several subfolders each containing the source code and doc f
 ### Twotrees Nema17 Stepper Motor
 
 * [Product Page](https://www.amazon.com/Twotrees-Nema-17-Stepper-Motor/dp/B07TGJSNJB?th=1)
+* [Data Sheet](https://datasheetspdf.com/pdf/1328258/ETC/SM-17HS4023/1)
 
 ![Twotrees-Nema-17-Stepper-Motor.png](img/Twotrees-Nema-17-Stepper-Motor.png)
+![Twotrees-Nema-17-Stepper-Motor.png](img/Twotrees-Nema-17-Stepper-Motor2.jpg)
+
+The pins on the motor, I think I have "Wiring Diagram 2"
+
+pin1 | pin2 | pin3  | pin4 | pin5 | pin6
+-----|------|-------|------|------|-----
+red  |      | black | blue |      | green
+
+![L298N-Motor-Driver-wiring.png](img/L298N-Motor-Driver-wiring.png)
+
+
 
 This is high torque Nema 17 stepper motor with 1.8 deg.Each phase draws 1.5A,allowing for a holding torque 13Ncm(18.4oz.in)
 40cm wire, one connect electrical machine, on the other end has variety optional ports.
