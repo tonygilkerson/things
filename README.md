@@ -4,19 +4,20 @@ This repo is intended to hold the notes and code examples that I work through as
 
 ## Why?
 
-My current goal is to learn how to program [ESP32](https://en.wikipedia.org/wiki/ESP32) based microcontrollers. I grow cut flowers, have a greenhouse and as a result I have several automation projects in mind, mostly involved with watering, climate control and tracking.  I also have a few project ideas for my computerized telescope to automate long imaging sessions.
-
-A secondary goal is to use a "real" programming language like C++ and Go for may projects.  I have looked at the Arduino IDE, which seems to be very popular, but I am not really interested.  Same for the visual programming tools that I have seen. However, I am considering using the visual tools for the [M5 Stack](https://docs.m5stack.com/) because they look like a good learing tool.  I can develop visually and then convert to C++, that might be useful as a stop-gap, but my end goal is to not use the visual programming tools.
+My current goal is to learn how to program [ESP32](https://en.wikipedia.org/wiki/ESP32) based microcontrollers. I grow cut flowers, have a greenhouse and as a result I have several automation projects in mind, mostly involved with watering, climate control and tracking.  I also have a few project ideas for my computerized telescope to automate long imaging sessions. A secondary goal is to use a "real" programming language like C++ and Go for may projects.  I have looked at the Arduino IDE, which seems to be very popular, but I am not really interested.  Same for the visual programming tools that I have seen. 
 
 ## What?
 
-This repo will have several subfolders each containing the source code and doc for some project. The first subfolder `example01` is me working through a "hello world" project, which for microcontrollers is a blinking LED. The code is not that interesting but my notes will be from the point of view of a newbie and thus may contain things that were useful to me at the the time.
+This repo will have several subfolders each containing the source code and doc for some project. The first subfolder `proj01` is me working through a "hello world" project, which for microcontrollers is a blinking LED. The code is not that interesting but my notes will be from the point of view of a newbie and thus may contain things that were useful to me at the the time.
 
 ## Projects
 
 * [proj01](proj01/README.md) - Hello World Blinky
+* [proj02](proj02/README.md) - Serial port moniting with `picocom` CLI
 
-## Components
+## Components Reference
+
+Below is an aggergate list of reference infomation used components use.
 
 ### ESP32-WROOM-32D
 
@@ -61,8 +62,6 @@ pin1   | pin2 | pin3     | pin4    | pin5 | pin6
 red B+ |      | black A+ | blue B- |      | green A-
 
 ![L298N-Motor-Driver-wiring.png](img/L298N-Motor-Driver-wiring.png)
-
-
 
 This is high torque Nema 17 stepper motor with 1.8 deg.Each phase draws 1.5A,allowing for a holding torque 13Ncm(18.4oz.in)
 40cm wire, one connect electrical machine, on the other end has variety optional ports.

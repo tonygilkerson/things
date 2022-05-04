@@ -3,6 +3,8 @@ package main
 import (
 	"machine"
 	"time"
+
+	"fmt"
 	"tinygo.org/x/drivers/easystepper"
 )
 
@@ -49,62 +51,51 @@ func main() {
 	//
 	//   Total Steps ----------
 	//                  600      <--- at 200 spr this is equivialent to 3 rotations
-
+  //
   // Schoolhouse Rock 3-6-9 takes 3 rotations so at 3 rpm this will take 1 min
-	rpmMotorSpeed := int32(10)  
-	motor := easystepper.New(pin25, pin26, pin32, pin33, sprNema17HS4023, rpmMotorSpeed) 
+	//
+
+	rpmMotorSpeed := int32(3)  
+	motor := easystepper.New(pin25, pin26, pin32, pin33, sprNema17HS4023, rpmMotorSpeed)
 	motor.Configure()
 
+  println("\nSchoolhouse Rock 3-6-9...")
+	
 	for {
 
-		// time.Sleep(time.Millisecond * 10000)
-		// println("\nget ready\t", time.Now().String())
-		// motor.Move(600)
-		// println("\ndone\t", time.Now().String())
-		// time.Sleep(time.Millisecond * 20000)
-
+		// Pause to setup "hour hand"
 		time.Sleep(time.Millisecond * 10000)
-		println("\nSchoolhouse Rock 3-6-9...")
+		println("\nStart 3-6-9...\t", time.Now().String())
+		startTime := time.Now()
 
-		// 3
-		motor.Off()
-		println("\nGo to 3 o'clock\t", time.Now().String())
+		///
+		// to 3 o'clock and back
+		//
+		println("3 o'clock\t", time.Now().String())
 		motor.Move(50)
-		println("We're at 3 o'clock\t", time.Now().String())
-		time.Sleep(time.Millisecond * 1000)
+		motor.Move(-50)
 
-
-		println("go back. . . . .  \t", time.Now().String())
-		motor.Off()
-		motor.Move(-49)
-		println("We're back. . . .  \t", time.Now().String())
-		time.Sleep(time.Millisecond * 1000)
-
-		// 6
-		println("\nGo to 6 o'clock\t", time.Now().String())
-		motor.Off()
+		//
+		// to 6 o'clock and back
+		//
+		println("6 o'clock\t", time.Now().String())
 		motor.Move(100)
-		println("We're at 6 o'clock\t", time.Now().String())
-		time.Sleep(time.Millisecond * 1000)
+		motor.Move(-100)
 
-		println("go back. . . . .  \t", time.Now().String())
-		motor.Off()
-		motor.Move(-99)
-		println("We're back. . . .  \t", time.Now().String())
-		time.Sleep(time.Millisecond * 1000)
-
-		// 9
-		println("\nGo to 9 o'clock\t", time.Now().String())
-		motor.Off()
+		//
+		// to 9 o'clock and back
+		//
+		println("9 o'clock\t", time.Now().String())
 		motor.Move(150)
-		println("We're at 9 o'clock\t", time.Now().String())
-		time.Sleep(time.Millisecond * 1000)
+		motor.Move(-150)
 
-		println("go back. . . . .  \t", time.Now().String())
-		motor.Off()
-		motor.Move(-149)
-		println("We're back. . . .  \t", time.Now().String())
-		time.Sleep(time.Millisecond * 1000)
+		println("End 3-6-9...\t", time.Now().String())
+
+		// Print duration
+		endTime := time.Now()
+		diff := endTime.Sub(startTime)
+		duration := fmt.Sprintf("Duration: %s", diff.String())
+		println(duration)
 
 	}
 

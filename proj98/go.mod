@@ -1,4 +1,4 @@
-module proj04
+module proj98
 
 go 1.17
 
