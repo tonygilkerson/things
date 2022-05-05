@@ -3,12 +3,12 @@ package main
 import (
 	"machine"
 	"time"
-
 	"fmt"
 	"tinygo.org/x/drivers/easystepper"
 )
 
 func main() {
+
 
 	// Define a few pins that will be used to drive the motor
 	var pin25 machine.Pin = 25 // to IN01 on controler board
@@ -32,7 +32,7 @@ func main() {
 	// Let's spin the motor to 3 o'clock, then back,  6 o'clock then back and 9 o'clock
 	// We will return the hand back to 12 o'clock each time
 	//
-		//  o'clock | Rotations | Steps
+	//  o'clock | Rotations | Steps
 	//  ----------+-----------+-----------------
 	//      3     |   .25     |  50 (200 * .25)
 	//      6     |   .5      | 100 (200 * .5)
