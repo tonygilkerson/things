@@ -16,15 +16,8 @@ func main() {
 	var pin32 machine.Pin = 32 // to IN03 on controler board
 	var pin33 machine.Pin = 33 // to IN04 on controler board
 
-	// Configure each pin for output
-	pin25.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	pin26.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	pin32.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	pin33.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
 	// nema17-HS4023 Bipolar takes 200 steps per rotation
 	var sprNema17HS4023 int32 = 200
-
 
 
 	// Schoolhouse Rock 3-6-9
