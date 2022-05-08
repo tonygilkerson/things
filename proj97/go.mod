@@ -1,5 +1,5 @@
-module proj03
+module proj97
 
-go 1.18
+go 1.17
 
 require tinygo.org/x/drivers v0.20.0

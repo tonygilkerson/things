@@ -41,19 +41,18 @@ picocom --baud 115200 /dev/cu.usbserial-0001
 ## References
 
 ```text
-
-This project
+The code on GitHub
 https://github.com/tonygilkerson/things/tree/main/proj03
 
-My component reference
+My Component Reference on GitHub
 https://github.com/tonygilkerson/things#components
 
 
-DroneBot Workshop
+DroneBot Workshop channel is great to watch it. 
 
-Stepper Motors with Arduino - Controlling Bipolar & Unipolar stepper motors 
+DroneBot Workshop: Stepper Motors with Arduino - Controlling Bipolar & Unipolar stepper motors 
 https://youtu.be/0qwrnUeSpYQ
 
-Related article 
+DroneBot Workshop: Article 
 https://dronebotworkshop.com/stepper-motors-with-arduino/
 ```
