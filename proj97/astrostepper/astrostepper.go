@@ -9,16 +9,16 @@ import (
 // Device holds the pins and the delay between steps
 type Device struct {
 	pins       [4]machine.Pin
-	stepDelay  int32
+	stepDelay  float32
 	// stepNumber uint8
 	Position   int32
 }
 
 // New returns a new easystepper driver given 4 pins, number of steps and rpm
-func New(pin1, pin2, pin3, pin4 machine.Pin, steps int32, rpm int32) Device {
+func New(pin1, pin2, pin3, pin4 machine.Pin, steps int32, rpm float32) Device {
 	return Device{
 		pins:      [4]machine.Pin{pin1, pin2, pin3, pin4},
-		stepDelay: 60000000 / (steps * rpm),
+		stepDelay: float32(60000000) / (float32(steps) * rpm),
 	}
 }
 
