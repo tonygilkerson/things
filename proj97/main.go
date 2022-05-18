@@ -20,7 +20,7 @@ func main() {
 	// nema17-HS4023 Bipolar takes 200 steps per rotation
 	var sprNema17HS4023 int32 = 5785
 
-	rpmMotorSpeed := float32(0.5)  
+	rpmMotorSpeed := float32(0.10033444816053	)  
 	motor := astrostepper.New(pin25, pin26, pin32, pin33, sprNema17HS4023, rpmMotorSpeed)
 	motor.Configure()
 
@@ -38,8 +38,8 @@ func main() {
 		// 	motor.Move(10)	
 		// }
 
-		// motor.Move(5782) // one rotation
-		motor.Move(2891) // half rotation
+		motor.Move(5782) // one rotation
+		// motor.Move(2891) // half rotation
 		
 		// time.Sleep(time.Millisecond * 3000)
 		// println("back \t", time.Now().String())
