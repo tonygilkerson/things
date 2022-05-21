@@ -12,6 +12,7 @@ type Device struct {
 	stepDelay  float32
 	// stepNumber uint8
 	Position   int32
+	Moves			 int32
 }
 
 // New returns a new easystepper driver given 4 pins, number of steps and rpm
@@ -27,8 +28,11 @@ func (d *Device) Configure() {
 	for _, pin := range d.pins {
 		pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	}
-	// I want the position to always be positive so make it arbitrary large
-	d.Position = 100000
+
+	// DEVTODO - init position to 0 and add logic to have it roll over to 0 if greater that 5782.  
+	// For now I will just make it arbitrary large to ensure it is always positive
+	d.Position = 1000000
+	d.Moves = 0 //how many times have we moved, regardless of direction
 }
 
 // Move rotates the motor the number of given steps
@@ -51,13 +55,24 @@ func (d *Device) Move(steps int32) {
 // Direction true: 0, 1, 2, 3, 0, 1, 2, ...
 // Direction false: 0, 3, 2, 1, 0, 3, 2, ...
 func (d *Device) moveDirectionSteps(direction bool) {
-	println("position: ", d.Position)
+
+	if (d.Moves % 1000) == 0 {
+		println("-")
+		println("Moves: ", d.Moves, " - ", time.Now().String())
+	} else {
+		if (d.Moves % 25) == 0 {
+			print(" *")
+		}
+	}
+	// println("Moves: ", d.Moves, " - ", time.Now().String())
+	
 	
 	if direction {
 		d.Position++
 	} else {
 		d.Position--
 	}
+	d.Moves++
 	
 	d.stepMotor(uint8(d.Position % 4))
 }
