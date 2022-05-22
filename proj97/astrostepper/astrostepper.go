@@ -1,5 +1,5 @@
 // Package easystepper provides a simple driver to rotate a 4-wire stepper motor.
-package astrostepper 
+package astrostepper
 
 import (
 	"machine"
@@ -8,11 +8,12 @@ import (
 
 // Device holds the pins and the delay between steps
 type Device struct {
-	pins       [4]machine.Pin
-	stepDelay  float32
-	// stepNumber uint8
-	Position   int32
-	Moves			 int32
+	pins      [4]machine.Pin
+	stepDelay float32
+	// Step position. Starts at 0 goes up by one for each step forward
+	// goes down one for each step back, position can be negative
+	Position         int32
+	PreviousPosition int32
 }
 
 // New returns a new easystepper driver given 4 pins, number of steps and rpm
@@ -28,23 +29,16 @@ func (d *Device) Configure() {
 	for _, pin := range d.pins {
 		pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	}
-
-	// DEVTODO - init position to 0 and add logic to have it roll over to 0 if greater that 5782.  
-	// For now I will just make it arbitrary large to ensure it is always positive
-	d.Position = 1000000
-	d.Moves = 0 //how many times have we moved, regardless of direction
 }
 
 // Move rotates the motor the number of given steps
 // (negative steps will rotate it the opposite direction)
 func (d *Device) Move(steps int32) {
 	direction := steps > 0
-	if steps < 0 {
-		steps = -steps
-	}
-	//steps += int32(d.stepNumber)
+	steps = Abs(steps)
+
 	var s int32
-	//d.stepMotor(d.stepNumber)
+
 	for s = 0; s < steps; s++ {
 		time.Sleep(time.Duration(d.stepDelay) * time.Microsecond)
 		d.moveDirectionSteps(direction)
@@ -56,29 +50,34 @@ func (d *Device) Move(steps int32) {
 // Direction false: 0, 3, 2, 1, 0, 3, 2, ...
 func (d *Device) moveDirectionSteps(direction bool) {
 
-	if (d.Moves % 1000) == 0 {
-		println("-")
-		println("Moves: ", d.Moves, " - ", time.Now().String())
-	} else {
-		if (d.Moves % 25) == 0 {
-			print(" *")
-		}
-	}
-	// println("Moves: ", d.Moves, " - ", time.Now().String())
-	
-	
+	prev := d.Position
+
 	if direction {
 		d.Position++
 	} else {
 		d.Position--
 	}
-	d.Moves++
-	
-	d.stepMotor(uint8(d.Position % 4))
+
+	// if d.Position == d.PreviousPosition {
+	// 	// DEVTODO - add backlash adjustment
+	// }
+	d.PreviousPosition = prev
+
+	// Account for negitive position
+	s := d.Position % 4
+	if s < 0 {
+		s = 4 + s
+	}
+
+	//
+	// Step the motor
+	//
+	d.stepMotor(int8(s))
+
 }
 
 // stepMotor changes the pins' state to the correct step
-func (d *Device) stepMotor(step uint8) {
+func (d *Device) stepMotor(step int8) {
 	switch step {
 	case 0:
 		d.pins[0].High()
@@ -113,4 +112,11 @@ func (d *Device) Off() {
 	for _, pin := range d.pins {
 		pin.Low()
 	}
+}
+
+func Abs(x int32) int32 {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
