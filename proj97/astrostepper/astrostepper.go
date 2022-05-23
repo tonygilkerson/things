@@ -9,7 +9,8 @@ import (
 // Device holds the pins and the delay between steps
 type Device struct {
 	pins      [4]machine.Pin
-	stepDelay float32
+	// step delay in Nanosecond
+	StepDelay int32 
 	// Step position. Starts at 0 goes up by one for each step forward
 	// goes down one for each step back, position can be negative
 	Position         int32
@@ -17,10 +18,12 @@ type Device struct {
 }
 
 // New returns a new easystepper driver given 4 pins, number of steps and rpm
-func New(pin1, pin2, pin3, pin4 machine.Pin, steps int32, rpm float32) Device {
+func New(pin1, pin2, pin3, pin4 machine.Pin, stepDelay int32) Device {
 	return Device{
-		pins:      [4]machine.Pin{pin1, pin2, pin3, pin4},
-		stepDelay: float32(60000000) / (float32(steps) * rpm),
+		pins:             [4]machine.Pin{pin1, pin2, pin3, pin4},
+		StepDelay:        stepDelay,
+		Position:         0,
+		PreviousPosition: 0,
 	}
 }
 
@@ -38,9 +41,8 @@ func (d *Device) Move(steps int32) {
 	steps = Abs(steps)
 
 	var s int32
-
 	for s = 0; s < steps; s++ {
-		time.Sleep(time.Duration(d.stepDelay) * time.Microsecond)
+		time.Sleep(time.Duration(d.StepDelay * int32(time.Nanosecond)))
 		d.moveDirectionSteps(direction)
 	}
 }

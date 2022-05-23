@@ -35,13 +35,16 @@ func main() {
 	var pin32 machine.Pin = 32 // to IN03 on controler board
 	var pin33 machine.Pin = 33 // to IN04 on controler board
 
-	// 48 steps per period and tin can gearbox at 120:1
-	var motorWithTinCanPeriod int32 = 5760
 
-	// rpmMotorSpeed := float32(0.10033444816053	) // 24hr day, i think
-	// rpmMotorSpeed := float32(0.100274)  // sidereal day 23h 56m 4s
-	rpmMotorSpeed := float32(1.7) // test
-	motor := astrostepper.New(pin25, pin26, pin32, pin33, motorWithTinCanPeriod, rpmMotorSpeed)
+	// sidereal day 23h 56m 4s = 8.616409056e+13 ns
+	// step delay =  8.616409056e+13 ns / 829,440 steps = 103882247 ns
+	// step delay in Nanosecond which is 103.882247ms or .103882247s
+  const siderealStepDelay int32 = 103882247
+
+	//DEVTODO = find out what the max motor speed is I think it is something > 10 * siderealStepDelay
+	//          I need this for the slew buttons
+	
+	motor := astrostepper.New(pin25, pin26, pin32, pin33, siderealStepDelay)
 	motor.Configure()
 
 	println("\nCalie...")
@@ -53,27 +56,7 @@ func main() {
 	println("\nStart...\t", time.Now().String())
 	startTime := time.Now()
 
-	// println("forward \t", time.Now().String())
-	// for i := 0; i < 5785; i++ {
-	// 	motor.Move(10)
-	// }
-
-	//////////////////////////////////////////////////////////////////////////////
-	// tests ran at ran at expermintal motor spr of 5785
-	/////////////////////////////////////////////////////////////////////////////
-	// motor.Move(832608)    // test 1 @ 1rpm
-	// motor.Move(830758)    // test 2 @ 1rpm subtract 1850; 832608-1850 = 830758
-	//
-	// This is a good fit. Test ran at expermintal motor spr of 5785
-	// motor.Move(829528)    // test 3 @ 1rpm subtract 1230; 830758-1230 = 829528   This looks good
-	// motor.Move(1659056)   // test 4 @ 1.7rpm 829528*2 = 1,659,056 Two ota turns to verify, looks good!
-
-	// motor.Move(5782) // one motor rotation
 	motor.Move(5760) // one motor rotation if motor=48spr and gearbox 120:1
-
-	// time.Sleep(time.Millisecond * 3000)
-	// println("back \t", time.Now().String())
-	// motor.Move(-2500)
 
 	// Print duration
 	endTime := time.Now()

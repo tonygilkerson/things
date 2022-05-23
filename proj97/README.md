@@ -22,3 +22,8 @@ picocom --baud 115200 /dev/cu.usbserial-0001
 
 tbd
 ```
+
+
+https://onstep.groups.io/g/main/wiki/4414
+https://instein.eu/index.php?route=product/category&path=25
+https://www.youtube.com/watch?v=FKAPvcvGb-s
