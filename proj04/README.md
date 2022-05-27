@@ -9,7 +9,7 @@ Components used:
 * **L298N Motor Driver** - [Data Sheet](http%3A%2F%2Fwww.handsontec.com%2Fdataspecs%2FL298N%20Motor%20Driver.pdf)
 * **Twotrees Nema17 Stepper Motor** - [Data Sheet](https://datasheetspdf.com/pdf/1328258/ETC/SM-17HS4023/1)
 * **astrostepper** - this module is my initial modifications to tinygo's *easystepper*  package, [reference](https://pkg.go.dev/tinygo.org/x/drivers/easystepper)
-* **Orion SkyView RA Stepper Motor** - The original guide motor on the old Orion Skyview Pro telescope. See "Orion Skyview Pro RA Drive Motor" on my [component reference](https://github.com/tonygilkerson/things#components) for more detail.
+* **Orion SkyView RA Stepper Motor** - The original guide motor on the old Orion Skyview Pro telescope. See "Orion Skyview Pro RA Drive Motor" on my [component reference](https://github.com/tonygilkerson/things#orion-skyview-pro-ra-drive-motor) for more detail.
 
 > See also my [component reference](https://github.com/tonygilkerson/things#components)
 
