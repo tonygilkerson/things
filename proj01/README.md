@@ -1,4 +1,4 @@
-# Project 01 - Hello World LED Blink on Sparkfun ESP32 Thing
+# proj01 - Hello World LED Blink on Sparkfun ESP32 Thing
 
 In this project I will create a "hello world" LED blink program.
 

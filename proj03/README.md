@@ -1,6 +1,8 @@
-# Project 03 - Bipolar Stepper Motor
+# proj03 - Bipolar Stepper Motor
 
 In this project we will demonstrate how to drive a Bipolar Stepper Motor using TinyGo. Here are the project components.
+
+Components used:
 
 * **TinyGo** - A Go compiler for small places, see [tinygo.org](https://tinygo.org/)
 * **ESP32-WROOM-32D** - [Data Sheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf)
