@@ -15,29 +15,39 @@ Components used:
 
 ## Project Demo
 
-![](setup.drawio.png)
+![setup](img/setup.drawio.png)
 
 ```bash
 tinygo flash -target=esp32-coreboard-v2  -port=/dev/cu.usbserial-0001
 picocom --baud 115200 /dev/cu.usbserial-0001
 ```
 
+## Mount and Motor Specs
+
+During the making of this demo I did my best to determine the basic specifications of the motor and my mount gears. I believe the following to be true, although I could be wrong:
+
+* drive motor period = `48` steps ([data sheet?](http://www.motionking.com/Products/PM_Stepper_Motors/42PM_Stepper_Motor.htm))
+* "tin can" gearbox attached to drive motor = 120:1
+* motor w/tin can period = 48*120 = 5760 steps
+* RA worm gear = 144:1
+* RA period = 5760*144 = 829,440 steps
+* drive motor wiring 
+  * coil A - Green and Yellow
+  * coil B - Red and Brown
+  * 42PM48L(CZ) RoHS NO:20160720
+
+Mount Gearbox Ratio Calculator ([www.astrofriend.eu](http://www.astrofriend.eu/astronomy/astronomy-calculations/mount-gearbox-ratio/mount-gearbox-ratio.html))
+![gearbox1](img/gearbox1.png)
+![gearbox2](img/gearbox2.png)
+> **Note** - I don't know what is inside the "tin can" gearbox but I do believe the combined ratio is `120:1`, therefore, I fabricated numbers for the primary and secondary gears to achieve the correct ratio.
+> 
+> **Key Takaway** - Angle resolution of motor: `1.56250` Arc Seconds
 
 ## References
 
-DEVTODO - cleanup this section
-
-https://onstep.groups.io/g/main/wiki/4414
-https://instein.eu/index.php?route=product/category&path=25
-https://www.youtube.com/watch?v=FKAPvcvGb-s
-
-Mount Gearbox Ratio Calculator
-http://www.astrofriend.eu/astronomy/astronomy-calculations/mount-gearbox-ratio/mount-gearbox-ratio.html
-
-EasyDriver A3967 Stepper Motor Driver Tutorial
-https://www.youtube.com/watch?v=nafoHAhz8Ys
-This is a way to do microstepping also, you can enable/disable the moter via logic board to allow for manual adjustment of the mount, very interesting (not sure if I would need that if I got everything thing else working but it is an interesting option.)
-
-
-
-
+* My Component Reference on GitHub ([github.com](https://github.com/tonygilkerson/things#components))
+* Mount Gearbox Ratio Calculator ([www.astrofriend.eu](http://www.astrofriend.eu/astronomy/astronomy-calculations/mount-gearbox-ratio/mount-gearbox-ratio.html))
+* OnStep
+  * OnStep product page ([https://instein.eu](https://instein.eu/index.php?route=product/category&path=25))
+  * This page showcases what users have built with OnStep ([https://onstep.groups.io](https://onstep.groups.io/g/main/wiki/4414))
+  * OnStep Telescope Making EQ5 ([www.youtube.com](https://www.youtube.com/watch?v=FKAPvcvGb-s))
