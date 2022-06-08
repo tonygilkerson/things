@@ -104,6 +104,7 @@ func (d *Device) stepMotor(step int8) {
 		d.pins[1].Low()
 		d.pins[2].Low()
 		d.pins[3].High()
+		print(".")
 		break
 	}
 	// d.stepNumber = step

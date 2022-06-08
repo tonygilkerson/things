@@ -1,8 +1,10 @@
-# Project 99 - Ez-Stepper on Sparkfun ESP32 Thing
+# Project 99 - Upgrade telescope mount with better stepper Motor belts and pullies
 
 This is a work in progress...
 
 ## Project Demo
+
+[TinkerCad Astro1](https://www.tinkercad.com/things/0Bnc9lE5KZd-cool-hango-duup/editel?tenant=circuits)
 
 ![setup](img/setup.drawio.png)
 
@@ -14,3 +16,21 @@ picocom --baud 115200 /dev/cu.usbserial-0001
 ## Ref
 
 https://www.electronicshub.org/esp32-oled-display/
+
+https://github.com/tinygo-org/drivers/tree/release/ssd1351
+
+
+LibrePCB is a free EDA software to develop printed circuit boards.
+https://librepcb.org/
+
+
+I need:
+GT2 12T 5mm bore 6mm belt pulley (DEC motor shaft)
+GT2 12T 5mm bore 6mm belt pulley (RA motor shaft)
+https://www.amazon.com/gp/product/B01IMPM44O/ref=ox_sc_act_title_1?smid=A12MRQC2NA7LMA&psc=1
+
+GT2 48T 6mm bore 6mm belt pulley (The other end)
+https://www.amazon.com/gp/product/B07SR78PKY/ref=ox_sc_act_title_1?smid=A1NQCH9MN8OPZG&th=1
+
+Stepper Motor
+https://www.amazon.com/gp/product/B00W98OYE4/ref=ox_sc_act_title_4?smid=AWQBCGWISS7BL&psc=1

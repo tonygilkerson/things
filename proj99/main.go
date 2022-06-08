@@ -4,8 +4,17 @@ import (
 	"machine"
 
 	"image/color"
+	"time"
 
 	"tinygo.org/x/drivers/ssd1351"
+
+	//"tinygo.org/x/tinyfont/examples/initdisplay"
+	// "tinygo.org/x/tinyfont/freemono"
+	// "tinygo.org/x/tinyfont/freesans"
+	// "tinygo.org/x/tinyfont/freeserif"
+	"tinygo.org/x/tinyfont/gophers"
+
+	"tinygo.org/x/tinyfont"
 )
 
 /*
@@ -25,7 +34,7 @@ import (
 */
 
 func main() {
-
+	
 	machine.SPI2.Configure(machine.SPIConfig{
 		Frequency: 2000000,
 		SCK:       machine.SPI0_SCK_PIN, // 18
@@ -51,17 +60,69 @@ func main() {
 		ColumnOffset: 0,
 	})
 
-	width, height := display.Size()
+	display.Command(ssd1351.SET_REMAP_COLORDEPTH)
+	display.Data(0x62)
 
-	white := color.RGBA{255, 255, 255, 255}
-	red := color.RGBA{255, 0, 0, 255}
-	blue := color.RGBA{0, 0, 255, 255}
-	green := color.RGBA{0, 255, 0, 255}
+	// width, height := display.Size()
 
-	display.FillRectangle(0, 0, width, height/4, white)
-	display.FillRectangle(0, height/4, width, height/4, red)
-	display.FillRectangle(0, height/2, width, height/4, green)
-	display.FillRectangle(0, 3*height/4, width, height/4, blue)
+	// white := color.RGBA{255, 255, 255, 255}
+	//? := color.RGBA{255, 0, 0, 0}
+	
+	// red := color.RGBA{0, 0, 255, 255}
+	// green := color.RGBA{0, 255, 0, 255}
 
-	display.Display()
+	// display.FillRectangle(0, 0, width, height/4, white)
+	// display.FillRectangle(0, height/4, width, height/4, red)
+	// display.FillRectangle(0, height/2, width, height/4, green)
+	// display.FillRectangle(0, 3*height/4, width, height/4, blue)
+
+	// display.FillScreen(color.RGBA{255, 255, 255, 255})
+	display.FillScreen(color.RGBA{0, 0, 0, 0})
+
+	///////////////////////////////////////////////////////////////////////////////
+
+	mycolors := make([]color.RGBA, 20)
+	for k := 0; k < 20; k++ {
+		mycolors[k] = getRainbowRGB(uint8(k * 14))
+	}
+	// tinyfont.WriteLineColors(&display, &freesans.Bold18pt7b, 10, 35, "HELLO", mycolors)
+	// tinyfont.WriteLineColorsRotated(&display, &freemono.Bold9pt7b, 100, 100, "Gophers", mycolors[6:], tinyfont.ROTATION_180)
+	// tinyfont.WriteLineColorsRotated(&display, &freeserif.Bold9pt7b, 150, 90, "TinyGo", mycolors[12:], tinyfont.ROTATION_270)
+	// tinyfont.WriteLineColorsRotated(&display, &tinyfont.Org01, 10, 40, "TinyGo", mycolors[18:], tinyfont.ROTATION_90)
+	tinyfont.WriteLineColorsRotated(&display, &tinyfont.Org01, 10, 20, "Kelsey is a Gopher", mycolors[18:], tinyfont.ROTATION_90)
+
+	tinyfont.WriteLineColors(&display, &gophers.Regular58pt, 18, 90, "ABC", mycolors[9:])
+
+	// tinyfont.WriteLine(&display,&freemono.Regular9pt7b,10,10,"Tony Gilkerson",red)
+	// tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,30,"Tony Gilkerson",red)
+	// tinyfont.WriteLine(&display,&freemono.Regular18pt7b,10,80,"Tony Gilkerson",red)
+
+	// tinyfont.WriteLine(&display,&freemono.Regular9pt7b,5,10,"Tony Gilkerson",red)
+	// display.DrawFastHLine(3,125,20,green)
+	// tinyfont.WriteLine(&display,&freemono.Bold12pt7b,5,50,"Tony Gilkerson",red)
+	// tinyfont.WriteLine(&display,&freemono.Bold18pt7b,10,100,"Tony Gilkerson",red)
+
+	// tinyfont.WriteLine(&display,&tinyfont.Org01,10,30,"Tony Gilkerson 1",red)
+	// tinyfont.WriteLine(&display,&tinyfont.Org01,10,50,"Tony Gilkerson 2",red)
+	// tinyfont.WriteLine(&display,&tinyfont.Org01,10,80,"Tony Gilkerson 3",red)
+	// tinyfont.WriteLineRotated(&display,&tinyfont.Org01,10,40,"Tony Gilkerson",red,tinyfont.ROTATION_90)
+
+
+	for {
+		time.Sleep(time.Hour)
+	}
+
+
+}
+
+
+func getRainbowRGB(i uint8) color.RGBA {
+	if i < 85 {
+		return color.RGBA{i * 3, 255 - i*3, 0, 255}
+	} else if i < 170 {
+		i -= 85
+		return color.RGBA{255 - i*3, 0, i * 3, 255}
+	}
+	i -= 170
+	return color.RGBA{0, i * 3, 255 - i*3, 255}
 }

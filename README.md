@@ -90,11 +90,11 @@ Package Included:
 
 ### Orion Skyview Pro RA Drive Motor
 
-![](img/stepper-motor-orion-skyview.png)
+![stepper-motor-orion-skyview](img/stepper-motor-orion-skyview.png)
 
-![](img/stepper-motor-orion-skyview2.png)
+![stepper-motor-orion-skyview2](img/stepper-motor-orion-skyview2.png)
 
-![](img/stepper-motor-orion-skyview-on-mount.png)
+![stepper-motor-orion-skyview-on-mount](img/stepper-motor-orion-skyview-on-mount.png)
 
 This might be the [data sheet](http://www.motionking.com/Products/PM_Stepper_Motors/42PM_Stepper_Motor.htm) I am not sure:
 
@@ -110,6 +110,22 @@ Information for this motor and mount was hard to find but I believe the followin
   * coil B - Red and Brown
   * 42PM48L(CZ) RoHS NO:20160720
 
+### 1.5inch RGB OLED Display Module, 65K RGB Colors, 128×128, SPI
+
+* [Product Page](https://www.waveshare.com/1.5inch-rgb-oled-module.htm)
+* [Data Sheet](https://components101.com/sites/default/files/component_datasheet/XL6009-Datasheet_0.pdf)
+* [How to use](https://components101.com/modules/xl6009-dc-dc-step-down-voltage-regulator-module)
+* [dronebotworkshop Reference](https://dronebotworkshop.com/powering-your-projects/)
+
+ 
+![1.5inch-rgb-oled-module-3_2](img/1.5inch-rgb-oled-module-3_2.jpg)
+![1.5inch-RGB-OLED-Module-details](img/1.5inch-RGB-OLED-Module-details.jpg)
+
+### Adjustable DC-DC Buck Boost Converter Automatic Wide Voltage Regulator XL6009 DC to DC 5-32 V to 1.25-35 V Voltage Module
+
+![](img/71DNEUuQTkL._AC_SX679_.jpg)
+
+* [Product Page](https://www.amazon.com/dp/B07NTXSJHB?psc=1&ref=ppx_yo2ov_dt_b_product_details)
 ## Ideas for future projects
 
 * [TryBotics](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - has a good list of prjects
