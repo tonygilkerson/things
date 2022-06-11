@@ -24,6 +24,11 @@ LibrePCB is a free EDA software to develop printed circuit boards.
 https://librepcb.org/
 
 
+KiCAD example:
+https://www.youtube.com/watch?v=RMPezTH0cck
+https://www.youtube.com/watch?v=mc1WHTEFIFU
+
+
 I need:
 GT2 12T 5mm bore 6mm belt pulley (DEC motor shaft)
 GT2 12T 5mm bore 6mm belt pulley (RA motor shaft)
