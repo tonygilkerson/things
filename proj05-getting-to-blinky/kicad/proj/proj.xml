@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/tgilkerson/github/things/proj05-getting-to-blinky/kicad/proj/proj.kicad_sch</source>
+    <date>Sunday, June 12, 2022 at 08:00:45 AM</date>
+    <tool>Eeschema (6.0.5-0)</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Getting to blinky</title>
+        <company/>
+        <rev>0</rev>
+        <date>2022-06-11</date>
+        <source>proj.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="BT1">
+      <value>CR2032</value>
+      <libsource lib="Device" part="Battery_Cell" description="Single-cell battery"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0e140521-1355-41c7-8e68-dd36649ad71f</tstamps>
+    </comp>
+    <comp ref="C1">
+      <value>1u</value>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5c7bbb61-9215-4be9-b7e1-c0dedcb8002e</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2fdd81ed-3592-4f6d-b0ae-fdbad7c5f1f4</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>1k</value>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b40e69c3-c4f3-4391-bcaa-aa53c5766e26</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>470k</value>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a19367d6-645a-483a-b958-46be367025de</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>1k</value>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7091d79d-ba23-4c71-b608-b2b72a97f001</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>7555</value>
+      <libsource lib="projSymbolLib" part="7555" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="proj.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>73325b43-57cc-4c1d-9dba-40e4f1f80337</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Device" part="Battery_Cell">
+      <description>Single-cell battery</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">Battery_Cell</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="projSymbolLib" part="7555">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">7555</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="~TRIG" type="input"/>
+        <pin num="3" name="OUT" type="output"/>
+        <pin num="4" name="~RST" type="input"/>
+        <pin num="5" name="CNTL" type="input"/>
+        <pin num="6" name="THRES" type="input"/>
+        <pin num="7" name="DISCH" type="input"/>
+        <pin num="8" name="VDD" type="input"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Device">
+      <uri>/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols//Device.kicad_sym</uri>
+    </library>
+    <library logical="projSymbolLib">
+      <uri>/Users/tgilkerson/github/things/proj05-getting-to-blinky/kicad/proj/lib/projSymbolLib.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="GND">
+      <node ref="BT1" pin="2" pinfunction="-" pintype="passive"/>
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="2" name="Net-(BT1-Pad1)">
+      <node ref="BT1" pin="1" pinfunction="+" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="~RST" pintype="input"/>
+      <node ref="U1" pin="8" pinfunction="VDD" pintype="input"/>
+    </net>
+    <net code="3" name="Net-(C1-Pad1)">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="~TRIG" pintype="input"/>
+      <node ref="U1" pin="6" pinfunction="THRES" pintype="input"/>
+    </net>
+    <net code="4" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+    </net>
+    <net code="5" name="Net-(R1-Pad2)">
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="DISCH" pintype="input"/>
+    </net>
+    <net code="6" name="Net-(R3-Pad1)">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="OUT" pintype="output"/>
+    </net>
+    <net code="7" name="unconnected-(U1-Pad5)">
+      <node ref="U1" pin="5" pinfunction="CNTL" pintype="input+no_connect"/>
+    </net>
+  </nets>
+</export>
