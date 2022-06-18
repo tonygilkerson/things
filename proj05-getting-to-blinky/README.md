@@ -9,6 +9,7 @@ Note: I created `kicad/proj` following along with the *gitting to blinky* tutori
 * `kicad/proj` - SMT
 * `kicad/proj2` - THT
 
-## Mfg Ref
+## Ref
 
+* https://octopart.com/
 * https://oshpark.com/
