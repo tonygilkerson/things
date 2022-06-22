@@ -9,7 +9,7 @@ To get started we need to install some tools:
 * **Go** - Follow the [Go Install Guide](https://go.dev/doc/install). 
   >Note, as of the time of this writing, Go v1.18 is available but you will need to install v1.17. TinyGo does not yet support Go v1.18 yet.
 
-* **TinyGo** - Following the [TinyGo Install Guid](https://tinygo.org/getting-started/install/).
+* **TinyGo** - Following the [TinyGo Install Guide](https://tinygo.org/getting-started/install/).
 
 * **VS Code** - You can download and install VS Code from [here](https://code.visualstudio.com/).
 
