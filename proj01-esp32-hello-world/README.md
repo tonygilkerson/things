@@ -16,7 +16,7 @@ To get started we need to install some tools:
 * **TinyGo VSCode Extension** - Click the extensions icon in VS Code and search for "TinyGo" or go [here](https://marketplace.visualstudio.com/items?itemName=tinygo.vscode-tinygo) and click the install button.
 
 * **VCP Drivers** - The VCP drivers are needed to connect your board to your Mac via USB cable. I am not 100% on this but I think you need to install the [USB to UART Bridge VPC Drivers](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) from Silicon Labs.
-* **picocom** - This CLI is optional but useful for monitoring your serial port, `brew install picoc`
+* **picocom** - This CLI is optional but useful for monitoring your serial port, `brew install picocom`
 
 On my Mac the board shows up as `/dev/cu.usbserial-D30DOR8N` if you have a Mac it should show up as `/dev/cu.something`.  I hope that helps.
 

@@ -24,7 +24,7 @@ import (
 	"machine"
 	"time"
 	// "tinygo.org/x/drivers/easystepper"
-	"proj04/astrostepper"
+	"github.com/tonygilkerson/things/tree/main/proj06-17HM15-0904S/astrostepper"
 )
 
 func main() {
@@ -35,20 +35,18 @@ func main() {
 	var pin32 machine.Pin = 32 // to IN03 on controler board
 	var pin33 machine.Pin = 33 // to IN04 on controler board
 
-
 	// sidereal day 23h 56m 4s = 8.616409056e+13 ns
 	// step delay =  8.616409056e+13 ns / 829,440 steps = 103882247 ns
 	// step delay in Nanosecond which is 103.882247ms or .103882247s
-  const siderealStepDelay int32 = 103882247
+	const siderealStepDelay int32 = 103882247
 
 	//DEVTODO = find out what the max motor speed is I think it is something like siderealStepDelay/15
 	//          I need this for the slew buttons
-	
+
 	motor := astrostepper.New(pin25, pin26, pin32, pin33, siderealStepDelay/15)
 	motor.Configure()
 
 	println("\nCalie...")
-
 
 	// Pause to setup "hour hand"
 	time.Sleep(time.Millisecond * 5000)
@@ -62,7 +60,6 @@ func main() {
 	diff := endTime.Sub(startTime)
 	duration := fmt.Sprintf("Duration: %s", diff.String())
 	println(duration)
-
 
 	for {
 		time.Sleep(time.Millisecond * 300000)
