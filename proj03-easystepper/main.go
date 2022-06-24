@@ -1,14 +1,13 @@
-package mainx
+package main
 
 import (
+	"fmt"
 	"machine"
 	"time"
-	"fmt"
 	"tinygo.org/x/drivers/easystepper"
 )
 
 func main() {
-
 
 	// Define a few pins that will be used to drive the motor
 	var pin25 machine.Pin = 25 // to IN01 on controler board
@@ -18,7 +17,6 @@ func main() {
 
 	// nema17-HS4023 Bipolar takes 200 steps per rotation
 	var sprNema17HS4023 int32 = 200
-
 
 	// Schoolhouse Rock 3-6-9
 	//
@@ -30,7 +28,7 @@ func main() {
 	//      3     |   .25     |  50 (200 * .25)
 	//      6     |   .5      | 100 (200 * .5)
 	//      9     |   .75     | 150 (200 * .75)
-	// 
+	//
 	// Therefor the total number of steps for the 3-6-9
 	//
 	//   12 to 3    =  50 steps
@@ -44,16 +42,16 @@ func main() {
 	//
 	//   Total Steps ----------
 	//                  600      <--- at 200 spr this is equivialent to 3 rotations
-  //
-  // Schoolhouse Rock 3-6-9 takes 3 rotations so at 3 rpm this will take 1 min
+	//
+	// Schoolhouse Rock 3-6-9 takes 3 rotations so at 3 rpm this will take 1 min
 	//
 
-	rpmMotorSpeed := int32(3)  
+	rpmMotorSpeed := int32(3)
 	motor := easystepper.New(pin25, pin26, pin32, pin33, sprNema17HS4023, rpmMotorSpeed)
 	motor.Configure()
 
-  println("\nSchoolhouse Rock 3-6-9...")
-	
+	println("\nSchoolhouse Rock 3-6-9...")
+
 	for {
 
 		// Pause to setup "hour hand"
@@ -92,6 +90,4 @@ func main() {
 
 	}
 
-
 }
-

@@ -11,5 +11,12 @@ Note: I created `kicad/proj` following along with the *gitting to blinky* tutori
 
 ## Ref
 
+PCB Mfg:
 * https://octopart.com/
 * https://oshpark.com/
+* LibrePCB is a free EDA software to develop printed circuit boards https://librepcb.org/
+
+
+KiCAD example:
+https://www.youtube.com/watch?v=RMPezTH0cck
+https://www.youtube.com/watch?v=mc1WHTEFIFU

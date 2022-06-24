@@ -1,4 +1,4 @@
-module proj03
+module aeg
 
 go 1.18
 
