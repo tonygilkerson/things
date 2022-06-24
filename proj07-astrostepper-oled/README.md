@@ -1,6 +1,6 @@
-# proj06 - nema17 the start of astro
+# proj07 - Astrostepper with OLED
 
-In this project I start exploring how to use the Nema19 my new STEPPERONLINE 0.9deg Nema 17 Stepper Motor.
+In this project I am combining the astrostepper and OLED projectes into one.
 
 Components used:
 
@@ -24,3 +24,16 @@ todo
 ## References
 
 * todo
+
+## Ref
+
+I need:
+GT2 12T 5mm bore 6mm belt pulley (DEC motor shaft)
+GT2 12T 5mm bore 6mm belt pulley (RA motor shaft)
+https://www.amazon.com/gp/product/B01IMPM44O/ref=ox_sc_act_title_1?smid=A12MRQC2NA7LMA&psc=1
+
+GT2 48T 6mm bore 6mm belt pulley (The other end)
+https://www.amazon.com/gp/product/B07SR78PKY/ref=ox_sc_act_title_1?smid=A1NQCH9MN8OPZG&th=1
+
+Stepper Motor
+https://www.amazon.com/gp/product/B00W98OYE4/ref=ox_sc_act_title_4?smid=AWQBCGWISS7BL&psc=1
