@@ -1,3 +1,8 @@
-module github.com/tonygilkerson/things/tree/main/proj06-17HM15-0904S
+module aeg
 
 go 1.18
+
+require (
+	tinygo.org/x/drivers v0.20.0
+	tinygo.org/x/tinyfont v0.3.0
+)
