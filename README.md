@@ -13,6 +13,7 @@ This repo will have several subfolders each containing the source code and doc f
 ## Components Reference
 
 * [My Component Reference](component-ref.md)
+* [ESP32 Pin Reference](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/)
 
 ## Ideas for future projects
 
