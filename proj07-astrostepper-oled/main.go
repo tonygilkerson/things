@@ -26,16 +26,13 @@ import (
 	"time"
 	// "tinygo.org/x/drivers/easystepper"
 	"aeg/astrostepper"
-
-	"tinygo.org/x/drivers/ssd1351"
-
+	// "tinygo.org/x/drivers/ssd1351"
 	//"tinygo.org/x/tinyfont/examples/initdisplay"
 	// "tinygo.org/x/tinyfont/freemono"
 	// "tinygo.org/x/tinyfont/freesans"
 	// "tinygo.org/x/tinyfont/freeserif"
-	"tinygo.org/x/tinyfont/gophers"
-
-	"tinygo.org/x/tinyfont"
+	// "tinygo.org/x/tinyfont/gophers"
+	// "tinygo.org/x/tinyfont"
 )
 
 /*
@@ -59,35 +56,37 @@ func main() {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	// OLED
 	///////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+		machine.SPI2.Configure(machine.SPIConfig{
+			Frequency: 2000000,
+			SCK:       machine.SPI0_SCK_PIN, // 18
+			SDO:       machine.SPI0_SDO_PIN, // 23
+			SDI:       machine.SPI0_SDI_PIN, // 19
+			LSBFirst:  false,
+			Mode:      0,
+		})
 
-	machine.SPI2.Configure(machine.SPIConfig{
-		Frequency: 2000000,
-		SCK:       machine.SPI0_SCK_PIN, // 18
-		SDO:       machine.SPI0_SDO_PIN, // 23
-		SDI:       machine.SPI0_SDI_PIN, // 19
-		LSBFirst:  false,
-		Mode:      0,
-	})
-
-	rst := machine.Pin(25) // just pick some gpio
-	dc := machine.Pin(26)  // just pick some gpio
-	en := machine.Pin(14)  // just pick some gpio
-	rw := machine.Pin(12)  // just pick some gpio
+		rst := machine.Pin(25) // just pick some gpio
+		dc := machine.Pin(26)  // just pick some gpio
+		en := machine.Pin(14)  // just pick some gpio
+		rw := machine.Pin(12)  // just pick some gpio
+	*/
 
 	//display := ssd1351.New(machine.SPI1, machine.D18, machine.D17, machine.D16, machine.D4, machine.D19)
 	// ssd1351.New(machine.SPI2,resetPin, dcPin, csPin, enPin, rwPin)
-	display := ssd1351.New(machine.SPI2, rst, dc, machine.SPI0_CS0_PIN, en, rw)
+	/*
+		display := ssd1351.New(machine.SPI2, rst, dc, machine.SPI0_CS0_PIN, en, rw)
 
-	display.Configure(ssd1351.Config{
-		Width:        128,
-		Height:       128,
-		RowOffset:    0,
-		ColumnOffset: 0,
-	})
+		display.Configure(ssd1351.Config{
+			Width:        128,
+			Height:       128,
+			RowOffset:    0,
+			ColumnOffset: 0,
+		})
 
-	display.Command(ssd1351.SET_REMAP_COLORDEPTH)
-	display.Data(0x62)
-
+		display.Command(ssd1351.SET_REMAP_COLORDEPTH)
+		display.Data(0x62)
+	*/
 	// width, height := display.Size()
 
 	// white := color.RGBA{255, 255, 255, 255}
@@ -102,21 +101,26 @@ func main() {
 	// display.FillRectangle(0, 3*height/4, width, height/4, blue)
 
 	// display.FillScreen(color.RGBA{255, 255, 255, 255})
-	display.FillScreen(color.RGBA{0, 0, 0, 0})
-
+	/*
+		display.FillScreen(color.RGBA{0, 0, 0, 0})
+	*/
 	///////////////////////////////////////////////////////////////////////////////
 
-	mycolors := make([]color.RGBA, 20)
-	for k := 0; k < 20; k++ {
-		mycolors[k] = getRainbowRGB(uint8(k * 14))
-	}
+	/*
+		mycolors := make([]color.RGBA, 20)
+		for k := 0; k < 20; k++ {
+			mycolors[k] = getRainbowRGB(uint8(k * 14))
+		}
+	*/
 	// tinyfont.WriteLineColors(&display, &freesans.Bold18pt7b, 10, 35, "HELLO", mycolors)
 	// tinyfont.WriteLineColorsRotated(&display, &freemono.Bold9pt7b, 100, 100, "Gophers", mycolors[6:], tinyfont.ROTATION_180)
 	// tinyfont.WriteLineColorsRotated(&display, &freeserif.Bold9pt7b, 150, 90, "TinyGo", mycolors[12:], tinyfont.ROTATION_270)
 	// tinyfont.WriteLineColorsRotated(&display, &tinyfont.Org01, 10, 40, "TinyGo", mycolors[18:], tinyfont.ROTATION_90)
-	tinyfont.WriteLineColorsRotated(&display, &tinyfont.Org01, 10, 20, "Kelsey is a Gopher", mycolors[18:], tinyfont.ROTATION_90)
+	/*
+		tinyfont.WriteLineColorsRotated(&display, &tinyfont.Org01, 10, 20, "Kelsey is a Gopher", mycolors[18:], tinyfont.ROTATION_90)
 
-	tinyfont.WriteLineColors(&display, &gophers.Regular58pt, 18, 90, "ABC", mycolors[9:])
+		tinyfont.WriteLineColors(&display, &gophers.Regular58pt, 18, 90, "ABC", mycolors[9:])
+	*/
 
 	// tinyfont.WriteLine(&display,&freemono.Regular9pt7b,10,10,"Tony Gilkerson",red)
 	// tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,30,"Tony Gilkerson",red)

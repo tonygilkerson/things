@@ -15,6 +15,8 @@ Components used:
 ```bash
 tinygo flash -target=esp32-coreboard-v2  -port=/dev/cu.usbserial-0001
 picocom --baud 115200 /dev/cu.usbserial-0001
+
+
 ```
 
 ## Mount and Motor Specs
