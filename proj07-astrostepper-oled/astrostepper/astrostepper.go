@@ -8,9 +8,9 @@ import (
 
 // Device holds the pins and the delay between steps
 type Device struct {
-	pins      [4]machine.Pin
+	pins [4]machine.Pin
 	// step delay in Nanosecond
-	StepDelay int32 
+	StepDelay int32
 	// Step position. Starts at 0 goes up by one for each step forward
 	// goes down one for each step back, position can be negative
 	Position         int32
@@ -104,7 +104,7 @@ func (d *Device) stepMotor(step int8) {
 		d.pins[1].Low()
 		d.pins[2].Low()
 		d.pins[3].High()
-		print(".")
+
 		break
 	}
 	// d.stepNumber = step
