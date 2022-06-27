@@ -46,9 +46,10 @@ func (ad *AstroDisplay) WriteStatus() {
 	// green := color.RGBA{0, 255, 0, 255}
 	red := color.RGBA{0, 0, 255, 255}
 	black := color.RGBA{0, 0, 0, 0}
+	// black := color.RGBA{55, 55, 55, 55}
 
 	// clear status line
-	ad.Display.FillRectangle(0, 0, 128, 11, black)
+	ad.Display.FillRectangle(0, 0, 128, 14, black)
 	ad.Display.DrawFastHLine(0, 127, 14, red)
 
 	tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 10, ad.Status, red)
@@ -59,12 +60,12 @@ func (ad *AstroDisplay) WriteStatus() {
 func (ad *AstroDisplay) WriteBody() {
 	// green := color.RGBA{0, 255, 0, 255}
 	red := color.RGBA{0, 0, 255, 255}
-	// black := color.RGBA{0, 0, 0, 0}
-	black := color.RGBA{66, 66, 66, 66}
+	black := color.RGBA{0, 0, 0, 0}
+	// black := color.RGBA{111, 111, 111, 111}
 
 	// clear body
-	ad.Display.FillRectangle(0, 15, 128, 20, black)
+	ad.Display.FillRectangle(0, 15, 128, 40, black)
 
-	tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 20, ad.Body, red)
-	println(ad.Body)
+	tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 30, ad.Body, red)
+
 }

@@ -28,9 +28,6 @@ import (
 	// "tinygo.org/x/drivers/easystepper"
 	"aeg/astrodisplay"
 	"aeg/astrostepper"
-	// "tinygo.org/x/drivers/ssd1351"
-	// "tinygo.org/x/tinyfont"
-	// "tinygo.org/x/tinyfont/freemono"
 )
 
 /*
@@ -98,27 +95,35 @@ func main() {
 	// step delay in Nanosecond which is 103.882247ms or .103882247s
 	const siderealStepDelay int32 = 103882247
 
-	//DEVTODO = find out what the max motor speed is I think it is something like siderealStepDelay/15
+	//DEVTODO = find out what the max motor speed
 	//          I need this for the slew buttons
 
-	motor := astrostepper.New(in1, in2, in3, in4, siderealStepDelay/15)
+	motor := astrostepper.New(in1, in2, in3, in4, siderealStepDelay/70, &astroDisplay)
 	motor.Configure()
 
 	// Pause to setup "hour hand"
-	time.Sleep(time.Millisecond * 5000)
+	time.Sleep(time.Millisecond * 3000)
 	println("\nStart...\t", time.Now().String())
 	startTime := time.Now()
 
 	astroDisplay.Status = "Go..."
 	astroDisplay.WriteStatus()
 
-	motor.Move(829440) // one RA period
+	// using http://www.astrofriend.eu/astronomy/astronomy-calculations/mount-gearbox-ratio/mount-gearbox-ratio.html
+	// with worm 144 teeth
+	//      gear 48:16
+	//      spr: 400
+	// I compute a 7.5 arc second per step or 172800 steps per full turn
+	motor.Move(172800) // one RA period
 
 	// Print duration
 	endTime := time.Now()
 	diff := endTime.Sub(startTime)
 	duration := fmt.Sprintf("Duration: %s", diff.String())
 	println(duration)
+
+	astroDisplay.Status = "Done."
+	astroDisplay.WriteStatus()
 
 	for {
 		time.Sleep(time.Millisecond * 300000)

@@ -2,6 +2,8 @@
 package astrostepper
 
 import (
+	"aeg/astrodisplay"
+	"fmt"
 	"machine"
 	"time"
 )
@@ -15,15 +17,17 @@ type Device struct {
 	// goes down one for each step back, position can be negative
 	Position         int32
 	PreviousPosition int32
+	AstroDisplay     *astrodisplay.AstroDisplay
 }
 
 // New returns a new easystepper driver given 4 pins, number of steps and rpm
-func New(pin1, pin2, pin3, pin4 machine.Pin, stepDelay int32) Device {
+func New(pin1, pin2, pin3, pin4 machine.Pin, stepDelay int32, astroDisplay *astrodisplay.AstroDisplay) Device {
 	return Device{
 		pins:             [4]machine.Pin{pin1, pin2, pin3, pin4},
 		StepDelay:        stepDelay,
 		Position:         0,
 		PreviousPosition: 0,
+		AstroDisplay:     astroDisplay,
 	}
 }
 
@@ -44,6 +48,13 @@ func (d *Device) Move(steps int32) {
 	for s = 0; s < steps; s++ {
 		time.Sleep(time.Duration(d.StepDelay * int32(time.Nanosecond)))
 		d.moveDirectionSteps(direction)
+
+		// Display the position very so often
+		if s%1000 == 0 {
+			d.AstroDisplay.Body = fmt.Sprintf("RA: %v", d.Position)
+			d.AstroDisplay.WriteBody()
+		}
+
 	}
 }
 
@@ -104,7 +115,6 @@ func (d *Device) stepMotor(step int8) {
 		d.pins[1].Low()
 		d.pins[2].Low()
 		d.pins[3].High()
-
 		break
 	}
 	// d.stepNumber = step
