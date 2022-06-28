@@ -24,7 +24,7 @@ Below is an aggergate list of reference infomation used components use.
 
 ## M5Stickc Plus ESP32
 
-* [Product Page](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit) development kit. 
+* [Product Page](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit) development kit.
 * [Data Sheet](https://cdn.competec.ch/documents2/8/5/9/185624958/185624958.pdf)
 
 ![M5Stickc Plus ESP32](img/M5Stick-Plus-ESP32.webp)
@@ -98,7 +98,7 @@ Information for this motor and mount was hard to find but I believe the followin
 * motor w/tin can period = 48*120 = 5760 steps
 * RA worm gear = 144:1
 * RA period = 5760*144 = 829,440 steps
-* drive motor wiring 
+* drive motor wiring
   * coil A - Green and Yellow
   * coil B - Red and Brown
   * 42PM48L(CZ) RoHS NO:20160720

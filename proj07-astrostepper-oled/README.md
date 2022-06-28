@@ -90,8 +90,13 @@ DEVTODO - Update KiCad to match actual wireing
 
 The suggestion is to use a PWM channel to drive the motor so as to not interupt the main CPU loop.
 
+## Project Pics
 
-DEVTODO - attach proj pics here
+![pp](img/astro-mount-pulleys-2.jpeg)
+![pp](img/astro-mount-pulleys.jpeg)
+![pp](img/astro-mount-stepper-motor.jpeg)
+![pp](img/proj-wireing.jpeg)
+
 ## Notes
 
 ```bash
@@ -104,7 +109,6 @@ picocom --baud 115200 /dev/cu.usbserial-0001
 * GT2 12T 5mm bore 6mm belt pulley (DEC motor shaft)
 * GT2 12T 5mm bore 6mm belt pulley (RA motor shaft)
   * [product page](https://www.amazon.com/gp/product/B01IMPM44O/ref=ox_sc_act_title_1?smid=A12MRQC2NA7LMA&psc=1) - Qunqi 5packs Aluminum GT2 Timing Belt Pulley 16 Teeth Bore 5mm Width 6mm
-
 
 * GT2 48T 6mm bore 6mm belt pulley (The other attached to worm drive )
   * [product page](https://www.amazon.com/gp/product/B07SR78PKY/ref=ox_sc_act_title_1?smid=A1NQCH9MN8OPZG&th=1) - 2GT 48T Timing Pulley 6mm Bore 6mm Belt Width For CNC 3D Printer Reprap (Tooth Width：7mm, Bore：6mm)
