@@ -96,6 +96,7 @@ The suggestion is to use a PWM channel to drive the motor so as to not interupt 
 ![pp](img/astro-mount-pulleys.jpeg)
 ![pp](img/astro-mount-stepper-motor.jpeg)
 ![pp](img/proj-wireing.jpeg)
+![pp](img/worm-pulley.jpeg)
 
 ## Notes
 
