@@ -8,9 +8,9 @@ import (
 
 // Device holds the pins and the delay between steps
 type Device struct {
-	pins      [4]machine.Pin
+	pins [4]machine.Pin
 	// step delay in Nanosecond
-	StepDelay int32 
+	StepDelay int32
 	// Step position. Starts at 0 goes up by one for each step forward
 	// goes down one for each step back, position can be negative
 	Position         int32
@@ -61,7 +61,7 @@ func (d *Device) moveDirectionSteps(direction bool) {
 	}
 
 	// if d.Position == d.PreviousPosition {
-	// 	// DEVTODO - add backlash adjustment
+	// 	// TODO - add backlash adjustment
 	// }
 	d.PreviousPosition = prev
 

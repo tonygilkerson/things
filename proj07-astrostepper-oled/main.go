@@ -78,7 +78,7 @@ func main() {
 	// display := ssd1351.New(machine.SPI2, rst, dc, cs, en, rw)
 
 	astroDisplay.Status = "Get Ready"
-	astroDisplay.WriteStatus()
+	go astroDisplay.WriteStatus()
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// motor
@@ -95,7 +95,7 @@ func main() {
 	// step delay in Nanosecond which is 103.882247ms or .103882247s
 	const siderealStepDelay int32 = 103882247
 
-	//DEVTODO = find out what the max motor speed
+	//TODO = find out what the max motor speed
 	//          I need this for the slew buttons
 
 	motor := astrostepper.New(in1, in2, in3, in4, siderealStepDelay/70, &astroDisplay)

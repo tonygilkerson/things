@@ -50,9 +50,9 @@ func (d *Device) Move(steps int32) {
 		d.moveDirectionSteps(direction)
 
 		// Display the position very so often
-		if s%1000 == 0 {
+		if s%500 == 0 {
 			d.AstroDisplay.Body = fmt.Sprintf("RA: %v", d.Position)
-			d.AstroDisplay.WriteBody()
+			go d.AstroDisplay.WriteBody()
 		}
 
 	}
@@ -72,7 +72,7 @@ func (d *Device) moveDirectionSteps(direction bool) {
 	}
 
 	// if d.Position == d.PreviousPosition {
-	// 	// DEVTODO - add backlash adjustment
+	// 	// TODO - add backlash adjustment
 	// }
 	d.PreviousPosition = prev
 

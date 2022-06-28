@@ -112,7 +112,6 @@ Information for this motor and mount was hard to find but I believe the followin
 * [How to use](https://components101.com/modules/xl6009-dc-dc-step-down-voltage-regulator-module)
 * [dronebotworkshop Reference](https://dronebotworkshop.com/powering-your-projects/)
 
- 
 ![1.5inch-rgb-oled-module-3_2](img/1.5inch-rgb-oled-module-3_2.jpg)
 ![1.5inch-RGB-OLED-Module-details](img/1.5inch-RGB-OLED-Module-details.jpg)
 
@@ -125,7 +124,8 @@ Information for this motor and mount was hard to find but I believe the followin
 * [Product Page](https://www.amazon.com/dp/B07NTXSJHB?psc=1&ref=ppx_yo2ov_dt_b_product_details)
 
 ---
-STEPPERONLINE 0.9deg Nema 17 Stepper Motor Bipolar 0.9A 36Ncm/50oz.in 42x42x39mm 4-wires DIY
+
+## STEPPERONLINE 0.9deg Nema 17 Stepper Motor Bipolar 0.9A 36Ncm/50oz.in 42x42x39mm 4-wires DIY
 
 17HM15-0904S
 OSM 20161018
@@ -159,4 +159,26 @@ Physical Specification
 * Number of Leads: 4
 * Lead Length: 300mm
 * Weight : 280g
+```
+
+---
+
+## Adjustable DC Power Supply (0-30 V 0-5 A) with Output Enable/Disable Button HANMATEK HM305 Mini Variable Switching Digital Bench Power Supply
+
+![bench power](img/bench-power-hanmatek-hm305.jpg)
+
+* [product page](https://www.amazon.com/dp/B0852JZQZR?psc=1&ref=ppx_yo2ov_dt_b_product_details)
+
+```txt
+Product Specifications
+
+* Color: 30V-5A
+* Ean: 0745245800069
+* Form Factor: Compact
+* Model Number: HM305
+* Part Number: dc-power
+* Size: 30V5A
+* Style: 30V5A
+* UNSPSC Code: 43210000
+* UPC: 745245800069
 ```

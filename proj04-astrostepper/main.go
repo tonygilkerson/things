@@ -40,7 +40,7 @@ func main() {
 	// step delay in Nanosecond which is 103.882247ms or .103882247s
 	const siderealStepDelay int32 = 103882247
 
-	//DEVTODO = find out what the max motor speed is I think it is something like siderealStepDelay/15
+	// TODO - find out what the max motor speed is I think it is something like siderealStepDelay/15
 	//          I need this for the slew buttons
 
 	motor := astrostepper.New(pin25, pin26, pin32, pin33, siderealStepDelay/15)
