@@ -182,3 +182,55 @@ Product Specifications
 * UNSPSC Code: 43210000
 * UPC: 745245800069
 ```
+
+---
+
+## Raspberry Pi - Pico MCU
+
+![pico pins](img/pico-pins.png)
+
+* [product page](https://www.raspberrypi.com/products/raspberry-pi-pico/)
+* [data sheet](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)
+
+Product Desecription:
+
+* 21 mm × 51 mm form factor
+* RP2040 microcontroller chip designed by Raspberry Pi in the UK
+* Dual-core Arm Cortex-M0+ processor, flexible clock running up to 133 MHz
+* 264kB on-chip SRAM
+* 2MB on-board QSPI flash
+* 2.4GHz 802.11n wireless LAN (Raspberry Pi Pico W and WH only)
+* 26 multifunction GPIO pins, including 3 analogue inputs
+* 2 × UART, 2 × SPI controllers, 2 × I2C controllers, 16 × PWM channels
+* 1 × USB 1.1 controller and PHY, with host and device support
+* 8 × Programmable I/O (PIO) state machines for custom peripheral support
+* Supported input power 1.8–5.5V DC
+* Operating temperature -20°C to +85°C (Raspberry Pi Pico and Pico H); -20°C to +70°C (Raspberry Pi Pico W and Pico WH)
+* Castellated module allows soldering direct to carrier boards (Raspberry Pi Pico and Pico W only)
+* Drag-and-drop programming using mass storage over USB
+* Low-power sleep and dormant modes
+* Accurate on-chip clock
+* Temperature sensor
+* Accelerated integer and floating-point libraries on-chip
+
+---
+
+## HiLetgo A4988 Stepstick Stepper Motor Driver Module with Heat Sink
+
+![A4988](img/A4988-stepper-motor-driver.jpg)
+![A4988](img/A4988-Stepper-Controller-Pinout.png)
+>Note, Pin-1 lower right `GND`, Pin-16 lower left `DIR`
+
+* product page - [pololu](https://www.pololu.com/product/1182) | [amazon](https://www.amazon.com/dp/B07BND65C8?psc=1&ref=ppx_yo2ov_dt_b_product_details)
+* Data sheet - [pololu](https://www.pololu.com/file/0J450/A4988.pdf)
+
+Product Description:
+
+* Size: 1.5mmX2mm (for RAMPS, ultimaker or other compatible boards);
+* The drive current: 2A (best to install the heat sink)
+* Segments: 1,1 / 2,1 / 4,1 / 8,1 / 16
+* Manufacturing process: higher SMT placement machine manufacturing, non-manual welding, yield, more stable performance.
+
+Reference:
+
+* Dronebot Workshop - [Blog](https://dronebotworkshop.com/stepper-motors-with-arduino/) | [Youtube](https://www.youtube.com/watch?v=0qwrnUeSpYQ)
