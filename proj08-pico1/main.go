@@ -6,27 +6,48 @@ import (
 )
 
 func main() {
-	print("Start")
+	// sidereal day 23h 56m 4s = 8.616409056e+13 ns
+	// step delay =  8.616409056e+13 ns / 829,440 steps = 103882247 ns
+	// step delay in Nanosecond which is 103.882247ms or .103882247s
+	const siderealStepDelay int32 = 103882247
+
 	ledOnboard := machine.LED
-	ledOnboard.Configure(machine.PinConfig{
-		Mode: machine.PinOutput,
-	})
+	step := machine.GP15
+	direction := machine.GP16
+
+	ledOnboard.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	step.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	direction.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	var stepDelay int32
+	// stepDelay = 103882247 / 5
+	stepDelay = 103882247 / 1000
 
 	for {
 
-		for i := 0; i < 50; i++ {
-			time.Sleep(time.Millisecond * 50)
-			ledOnboard.High()
+		direction.Low()
+		for i := 0; i < 200*16; i++ {
 
-			time.Sleep(time.Millisecond * 50)
+			ledOnboard.High()
+			step.High()
+			time.Sleep(time.Duration(stepDelay * int32(time.Nanosecond)))
+
 			ledOnboard.Low()
+			step.Low()
+			time.Sleep(time.Duration(stepDelay * int32(time.Nanosecond)))
+
 		}
 
-		time.Sleep(time.Millisecond * 300)
-		ledOnboard.High()
+		direction.High()
+		for i := 0; i < 200*16; i++ {
+			ledOnboard.High()
+			step.High()
+			time.Sleep(time.Duration(stepDelay * int32(time.Nanosecond)))
 
-		time.Sleep(time.Millisecond * 5000)
-		ledOnboard.Low()
+			ledOnboard.Low()
+			step.Low()
+			time.Sleep(time.Duration(stepDelay * int32(time.Nanosecond)))
+
+		}
+
 	}
-
 }
