@@ -81,6 +81,7 @@ Physical Specification
 * Used pullys and belt to drive the worm gear
 * I did not implement microstepping yet
 * See KiCad for wireing detail
+
 DEVTODO - Update KiCad to match actual wireing
 
 > **FAIL** -  The motor driver pauses when the OLED display is updated. See this

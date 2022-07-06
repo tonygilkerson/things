@@ -218,6 +218,7 @@ Product Desecription:
 ## HiLetgo A4988 Stepstick Stepper Motor Driver Module with Heat Sink
 
 ![A4988](img/A4988-stepper-motor-driver.jpg)
+
 ![A4988](img/A4988-Stepper-Controller-Pinout.png)
 >Note, Pin-1 lower right `GND`, Pin-16 lower left `DIR`
 

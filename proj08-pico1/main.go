@@ -13,9 +13,9 @@ func main() {
 	ledOnboard.High()
 	step := machine.GP15
 	direction := false
-	microStep1 := machine.GP11
-	microStep2 := machine.GP12
-	microStep3 := machine.GP13
+	microStep1 := machine.GP10
+	microStep2 := machine.GP11
+	microStep3 := machine.GP12
 	var stepsPerRevolution int32 = 400
 	var microStepSetting int32 = 16
 	var maxMicroStepSetting int32 = 16
@@ -34,25 +34,6 @@ func main() {
 	// stepDelay = 103882247 / 5
 	// var stepDelay int32 = siderealStepDelay / 10000
 
-	for {
-
-		time.Sleep(3 * time.Second)
-
-		for i := 0; i < 200*16; i++ {
-
-			ledOnboard.High()
-			raDriver.Step.High()
-			// step.High()
-			// time.Sleep(time.Duration(stepDelay * int32(time.Nanosecond)))
-			time.Sleep(20 * time.Microsecond)
-
-			ledOnboard.Low()
-			raDriver.Step.Low()
-			// step.Low()
-			// time.Sleep(time.Duration(stepDelay * int32(time.Nanosecond)))
-			time.Sleep(20 * time.Microsecond)
-
-		}
-	}
+	raDriver.Run(22*time.Millisecond, microStepSetting, true, ledOnboard)
 
 }

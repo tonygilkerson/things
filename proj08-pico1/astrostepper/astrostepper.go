@@ -3,6 +3,8 @@ package astrostepper
 import (
 	"errors"
 	"machine"
+	"sync"
+	"time"
 )
 
 const (
@@ -15,6 +17,12 @@ const (
 
 // The driver that controls the RA motor ie. an A4988 Stepstick Stepper Motor Driver
 type RADriver struct {
+
+	// Mutex when thread safe operations are needed
+	mu sync.Mutex
+
+	// How long to pause between steps
+	StepDelay time.Duration
 
 	// A pulse to this pin will step the motor
 	Step machine.Pin
@@ -217,18 +225,40 @@ func (ra *RADriver) Configure() {
 		ra.microStep1.High()
 		ra.microStep2.Low()
 		ra.microStep3.Low()
-	case 3:
+	case 4:
 		ra.microStep1.Low()
 		ra.microStep2.High()
 		ra.microStep3.Low()
-	case 4:
+	case 8:
+		ra.microStep1.High()
+		ra.microStep2.High()
+		ra.microStep3.High()
+	case 16:
 		ra.microStep1.High()
 		ra.microStep2.High()
 		ra.microStep3.High()
 	default:
-		ra.microStep1.Low()
-		ra.microStep2.Low()
-		ra.microStep3.Low()
+		ra.microStep1.High()
+		ra.microStep2.High()
+		ra.microStep3.High()
+	}
+
+}
+
+func (ra *RADriver) Run(stepDelay time.Duration, microStepSetting int32, direction bool, led machine.Pin) {
+	ra.Direction = direction
+	ra.StepDelay = stepDelay
+	ra.MicroStepSetting = microStepSetting
+
+	for {
+		ra.Step.High()
+		ra.Step.Low()
+		led.High()
+		time.Sleep(stepDelay)
+		ra.Step.High()
+		ra.Step.Low()
+		led.Low()
+		time.Sleep(stepDelay)
 	}
 
 }
