@@ -35,6 +35,7 @@ func (s *SafeStatus) display() {
 		s.mu.Unlock()
 
 		time.Sleep(500 * time.Millisecond)
+		runtime.Gosched() // yield to another goroutine
 
 	}
 }
