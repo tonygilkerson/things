@@ -3,7 +3,7 @@ package astrostepper
 import (
 	"errors"
 	"machine"
-	"sync"
+	"runtime"
 	"time"
 )
 
@@ -17,9 +17,6 @@ const (
 
 // The driver that controls the RA motor ie. an A4988 Stepstick Stepper Motor Driver
 type RADriver struct {
-
-	// Mutex when thread safe operations are needed
-	mu sync.Mutex
 
 	// How long to pause between steps
 	StepDelay time.Duration
@@ -75,6 +72,13 @@ type RADriver struct {
 	// The previous motor position
 	previousMotorPosition int32
 
+	// maxMotorPosition = StepsPerRevolution * MaxMicroStepSetting
+	maxMotorPosition int32
+
+	// This channel will be written to with the current motor position
+	// The driver decides when to update the channel, it is not updated on every step, that would be too expensive
+	MotorPositionCh chan int32
+
 	// The step position from 0 to (StepsPerRevolution * MaxMicroStepSetting * WormRatio * GearRatio)
 	RAPosition int32
 
@@ -88,7 +92,7 @@ type RADriver struct {
 	//           WormRatio           = 144 (144:1)
 	//           GearRatio           = 6   (48:8)
 	//
-	//     then: MotorPosition       = (Steps * MaxMicroStepSetting)/MicroStepSetting
+	//     then: MotorPosition       = (Step * MaxMicroStepSetting)/MicroStepSetting
 	//           RAPosition          = MotorPosition * WormRatio * GearRatio
 	//           RADegrees           = 360 * (RAPosition/StepsPerRevolution*MaxMicroStepSetting*WormRatio*GearRatio)
 	//
@@ -183,6 +187,10 @@ func New(
 		return RADriver{}, errors.New("gearRatio must be greater than 0, use 1 if not using a gearbox, typical values between 1 and 75")
 	}
 
+	maxMicroStepSetting = stepsPerRevolution * maxMicroStepSetting
+
+	motorPositionCh := make(chan int32, 10)
+
 	return RADriver{
 		Step:                  step,
 		Direction:             direction,
@@ -194,8 +202,10 @@ func New(
 		MaxMicroStepSetting:   maxMicroStepSetting,
 		WormRatio:             wormRatio,
 		GearRatio:             gearRatio,
+		MotorPositionCh:       motorPositionCh,
 		MotorPosition:         0,
 		previousMotorPosition: 0,
+		maxMotorPosition:      maxMicroStepSetting,
 		RAPosition:            0,
 		RADegrees:             0,
 	}, nil
@@ -216,6 +226,12 @@ func (ra *RADriver) Configure() {
 	ra.microStep2.Configure(machine.PinConfig{Mode: machine.PinOutput})
 	ra.microStep3.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
+	//  ms1  ms2  ms3  Steps
+	//  ---  ---  ---  ------------------------
+	//   L    L    L   Full
+	//   H    L    L   Half
+	//   L    H    L   Quarter
+	//   H    H    H   Sixteenth
 	switch ra.MicroStepSetting {
 	case 1:
 		ra.microStep1.Low()
@@ -250,15 +266,45 @@ func (ra *RADriver) Run(stepDelay time.Duration, microStepSetting int32, directi
 	ra.StepDelay = stepDelay
 	ra.MicroStepSetting = microStepSetting
 
+	var stepCount int32
 	for {
 		ra.Step.High()
 		ra.Step.Low()
+		stepCount++
+
+		// //DEVTODO - i forget why i need the previous position?  delete if not needed
+		ra.previousMotorPosition = ra.MotorPosition
+		ra.MotorPosition++
+
+		// Reset to zero after 360 degree
+		if ra.MotorPosition > ra.maxMotorPosition {
+			ra.MotorPosition = 0
+		}
+
+		// For now hardcode update every 10 steps
+		if stepCount > 10 {
+			stepCount = 0
+
+			ra.MotorPositionCh <- ra.MotorPosition
+		}
+		time.Sleep(stepDelay)
+
+	}
+
+}
+
+func (ra *RADriver) Dispaly(led machine.Pin) {
+
+	for {
+		p := <-ra.MotorPositionCh
+		print(p)
+
 		led.High()
-		time.Sleep(stepDelay)
-		ra.Step.High()
-		ra.Step.Low()
+		time.Sleep(3 * time.Millisecond)
 		led.Low()
-		time.Sleep(stepDelay)
+		time.Sleep(3 * time.Millisecond)
+		runtime.Gosched() // yield to another goroutine
+
 	}
 
 }
