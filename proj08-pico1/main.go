@@ -10,15 +10,14 @@ func main() {
 
 	ledOnboard := machine.LED
 	ledOnboard.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	// ledOnboard.High()
+	ledOnboard.High()
 	step := machine.GP15
 	direction := false
 	microStep1 := machine.GP10
 	microStep2 := machine.GP11
 	microStep3 := machine.GP12
 	var stepsPerRevolution int32 = 400
-	// var microStepSetting int32 = 16
-	var microStepSetting int32 = 1
+	var microStepSetting int32 = 16
 	var maxMicroStepSetting int32 = 16
 	var wormRatio int32 = 1
 	var gearRatio int32 = 1

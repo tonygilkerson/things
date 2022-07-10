@@ -188,9 +188,11 @@ Product Specifications
 ## Raspberry Pi - Pico MCU
 
 ![pico pins](img/pico-pins.png)
+![pico pwm](img/pico-GPIO-PWM-Table.png)
 
 * [product page](https://www.raspberrypi.com/products/raspberry-pi-pico/)
-* [data sheet](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)
+* [data sheet pico](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)
+* [data sheet rp2040](https://datasheets.raspberrypi.org/rp2040/rp2040-datasheet.pdf)
 
 Product Desecription:
 
