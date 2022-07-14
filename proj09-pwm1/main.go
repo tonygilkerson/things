@@ -3,6 +3,11 @@ package main
 import (
 	"aeg/astrodisplay"
 	"machine"
+
+	// "math"
+
+	// "strconv"
+	"fmt"
 	"time"
 )
 
@@ -29,8 +34,6 @@ import (
 
 */
 
-var period uint64 = 1e9 / 10
-
 func main() {
 
 	cs := machine.GP17  // GP17  SPI0_CSn
@@ -50,14 +53,23 @@ func main() {
 	})
 
 	astroDisplay := astrodisplay.New(*machine.SPI0, rst, dc, cs, en, rw)
-	// display := ssd1351.New(machine.SPI2, rst, dc, cs, en, rw)
 
-	astroDisplay.Status = "Get Ready"
-	go astroDisplay.WriteStatus()
+	astroDisplay.Status = "Get Ready!"
+	astroDisplay.WriteStatus()
 
 	/////////////////////////////////////////////////////////////////////////////
 	// motor
 	/////////////////////////////////////////////////////////////////////////////
+	microStep1 := machine.GP10
+	microStep2 := machine.GP11
+	microStep3 := machine.GP12
+	microStep1.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	microStep2.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	microStep3.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	microStep1.Low()
+	microStep2.Low()
+	microStep3.Low()
+
 	pinB := machine.GP9
 
 	// This program is specific to the Raspberry Pi Pico.
@@ -65,6 +77,31 @@ func main() {
 	pwm := machine.PWM4 // Pin 25 (LED on pico) corresponds to PWM4.
 
 	// Configure the PWM with the given period.
+	// var period uint64 = 1e9
+	// var period uint64 = 1e11 + 500
+	// var period uint64 = 500
+	// var period uint64 = 1e9	display: 124_053_888
+	// var period uint64 = 1e5	display:     100_000
+	// var period uint64 = 1e4  display:      10_000
+	// var period uint64 = 1e3  display:       1_000
+
+	// maxTop := math.MaxUint16
+	// // start algorithm at 95% Top. This allows us to undershoot period with prescale.
+	// var period uint64 = uint64(90 * maxTop / 100)
+
+	// var period uint64 = 6.41753e10 // ????This should rotate the RA 360 in one day
+	// var period uint64 = 6.41753e10 / uint64(96) // ??? This should rotate the RA 360 in ~15min
+	// var period uint64 = 1e9 / uint64(48) // ra full turn in ~30min
+	// var period uint64 = 1e9 // 27 seconds 7.4 Hz (no ms @ 200spr)
+	// var period uint64 = 1e9 / 2 // 26.7 seconds (no ms @ 200spr)
+	// var period uint64 = 1e9 / 4 // 23.5 seconds (no ms @ 200spr)
+	// var period uint64 = 1e7 // 100hz ~ 2 seconds (no ms @ 200spr)
+	// var period uint64 = 1e8 // 10hz ~ 20 seconds (no ms @ 200spr)
+	// var period uint64 = 2e7 // 50hz ~ 4 seconds (no ms @ 200spr)
+	// var period uint64 = 2e7 // 50hz ~ 64 seconds (ms=16 @ 200spr)
+	// var period uint64 = 5.625e7
+	var period uint64 = 5.20833e6
+
 	pwm.Configure(machine.PWMConfig{
 		Period: period,
 	})
@@ -73,16 +110,23 @@ func main() {
 	chB, err := pwm.Channel(pinB)
 	if err != nil {
 		println(err.Error())
+		astroDisplay.Body = err.Error()
+		astroDisplay.WriteBody()
+		time.Sleep(time.Second * 30)
 		return
 	}
 
+	pwm.Set(chA, pwm.Top()/2)
+	pwm.Set(chB, pwm.Top()/2)
+
 	for {
-		for i := 1; i < 255; i++ {
-			// This performs a stylish fade-out blink
-			// pwm.Set(ch, pwm.Top()/uint32(i))
-			pwm.Set(chA, pwm.Top()/2)
-			pwm.Set(chB, pwm.Top()/2)
-			time.Sleep(time.Millisecond * 5)
-		}
+
+		time.Sleep(time.Millisecond * 2000)
+		// c := pwm.Counter()
+		c := pwm.Period()
+		astroDisplay.Body = fmt.Sprint(c)
+		// astroDisplay.Body = strconv.Itoa(i)
+		astroDisplay.WriteBody()
+
 	}
 }
