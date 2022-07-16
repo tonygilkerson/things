@@ -10,16 +10,14 @@ My current goal is to learn how to program [ESP32](https://en.wikipedia.org/wiki
 
 This repo will have several subfolders each containing the source code and doc for some project. The first subfolder `proj01` is me working through a "hello world" project, which for microcontrollers is a blinking LED. The code is not that interesting but my notes will be from the point of view of a newbie and thus may contain things that were useful to me at the the time.
 
-## Components Reference
+## Reference
 
-* [My Component Reference](component-ref.md)
-* [ESP32 Pin Reference](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/)
+* [Component Reference](component-ref.md)
+* [MCUs](mcu-ref.md)
 
 ## Ideas for future projects
 
 * [TryBotics](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - has a good list of prjects
 * [Astro Tracker](https://learn.adafruit.com/diy-robotic-sky-tracking-astrophotography-mount) - a DIY Robotic Sky Tracking Astrophotography Mount 
 
-## Resources
 
-* *Hands On Tec* - https://handsontec.com

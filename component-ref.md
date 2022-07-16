@@ -4,33 +4,6 @@ Below is an aggergate list of reference infomation used components use.
 
 ---
 
-## ESP32-WROOM-32D
-
-* [Product Page](https://www.espressif.com/en/products/modules)
-* [Data Sheet](https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf)
-
-![esp32-wroom-32d-pins.jpeg](img/esp32-wroom-32d-pins.jpeg)
-
----
-
-## Sparkfun ESP32 Thing
-
-* [Product Page](https://www.sparkfun.com/products/13907)
-* [Data Sheet](https://cdn.sparkfun.com/assets/learn_tutorials/5/0/7/ESP32ThingV1a.pdf)
-
-![Spartfun-esp32-thing.png](img/Spartfun-esp32-thing.png)
-
----
-
-## M5Stickc Plus ESP32
-
-* [Product Page](https://shop.m5stack.com/products/m5stickc-plus-esp32-pico-mini-iot-development-kit) development kit.
-* [Data Sheet](https://cdn.competec.ch/documents2/8/5/9/185624958/185624958.pdf)
-
-![M5Stickc Plus ESP32](img/M5Stick-Plus-ESP32.webp)
-
----
-
 ## L298N Motor Driver
 
 * [Data Sheet](http%3A%2F%2Fwww.handsontec.com%2Fdataspecs%2FL298N%20Motor%20Driver.pdf)
@@ -81,29 +54,6 @@ Package Included:
 
 ---
 
-## Orion Skyview Pro RA Drive Motor
-
-![stepper-motor-orion-skyview](img/stepper-motor-orion-skyview.png)
-
-![stepper-motor-orion-skyview2](img/stepper-motor-orion-skyview2.png)
-
-![stepper-motor-orion-skyview-on-mount](img/stepper-motor-orion-skyview-on-mount.png)
-
-This might be the [data sheet](http://www.motionking.com/Products/PM_Stepper_Motors/42PM_Stepper_Motor.htm) I am not sure:
-
-Information for this motor and mount was hard to find but I believe the following to be true, although I could be wrong:
-
-* drive motor period = 48 steps
-* "tin can" gearbox attached to drive motor = 120:1
-* motor w/tin can period = 48*120 = 5760 steps
-* RA worm gear = 144:1
-* RA period = 5760*144 = 829,440 steps
-* drive motor wiring
-  * coil A - Green and Yellow
-  * coil B - Red and Brown
-  * 42PM48L(CZ) RoHS NO:20160720
-
----
 
 ## 1.5inch RGB OLED Display Module, 65K RGB Colors, 128×128, SPI
 
@@ -185,39 +135,7 @@ Product Specifications
 
 ---
 
-## Raspberry Pi - Pico MCU
-
-![pico pins](img/pico-pins.png)
-![pico pwm](img/pico-GPIO-PWM-Table.png)
-
-* [product page](https://www.raspberrypi.com/products/raspberry-pi-pico/)
-* [data sheet pico](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf)
-* [data sheet rp2040](https://datasheets.raspberrypi.org/rp2040/rp2040-datasheet.pdf)
-
-Product Desecription:
-
-* 21 mm × 51 mm form factor
-* RP2040 microcontroller chip designed by Raspberry Pi in the UK
-* Dual-core Arm Cortex-M0+ processor, flexible clock running up to 133 MHz
-* 264kB on-chip SRAM
-* 2MB on-board QSPI flash
-* 2.4GHz 802.11n wireless LAN (Raspberry Pi Pico W and WH only)
-* 26 multifunction GPIO pins, including 3 analogue inputs
-* 2 × UART, 2 × SPI controllers, 2 × I2C controllers, 16 × PWM channels
-* 1 × USB 1.1 controller and PHY, with host and device support
-* 8 × Programmable I/O (PIO) state machines for custom peripheral support
-* Supported input power 1.8–5.5V DC
-* Operating temperature -20°C to +85°C (Raspberry Pi Pico and Pico H); -20°C to +70°C (Raspberry Pi Pico W and Pico WH)
-* Castellated module allows soldering direct to carrier boards (Raspberry Pi Pico and Pico W only)
-* Drag-and-drop programming using mass storage over USB
-* Low-power sleep and dormant modes
-* Accurate on-chip clock
-* Temperature sensor
-* Accelerated integer and floating-point libraries on-chip
-
----
-
-## HiLetgo A4988 Stepstick Stepper Motor Driver Module with Heat Sink
+Letgo A4988 Stepstick Stepper Motor Driver Module with Heat Sink
 
 ![A4988](img/A4988-stepper-motor-driver.jpg)
 
@@ -237,3 +155,12 @@ Product Description:
 Reference:
 
 * Dronebot Workshop - [Blog](https://dronebotworkshop.com/stepper-motors-with-arduino/) | [Youtube](https://www.youtube.com/watch?v=0qwrnUeSpYQ)
+
+---
+
+## USB to TTL Serial Cable - Debug / Console Cable for Raspberry Pi
+
+![usbser](img/usb-ser.jpg)
+
+* product page - [adafruit](https://www.adafruit.com/product/954)
+* If you are running Mac OS X, check [this tutorial page](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/software-installation-mac) with links to drivers for both PL2303 and CP2012
