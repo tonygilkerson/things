@@ -8,6 +8,7 @@ import (
 
 	// "strconv"
 	"fmt"
+	"math"
 	"time"
 )
 
@@ -102,6 +103,7 @@ func main() {
 	// var period uint64 = 5.625e7
 	var period uint64 = 5.20833e6
 
+	// var period uint64 = 1e6 / 1
 	pwm.Configure(machine.PWMConfig{
 		Period: period,
 	})
@@ -119,14 +121,33 @@ func main() {
 	pwm.Set(chA, pwm.Top()/2)
 	pwm.Set(chB, pwm.Top()/2)
 
-	for {
+	time.Sleep(time.Second * 5)
+	astroDisplay.Status = "Run!"
+	astroDisplay.WriteStatus()
 
-		time.Sleep(time.Millisecond * 2000)
-		// c := pwm.Counter()
-		c := pwm.Period()
-		astroDisplay.Body = fmt.Sprint(c)
-		// astroDisplay.Body = strconv.Itoa(i)
-		astroDisplay.WriteBody()
+	// 1_000 hz full steps - is the max (it can go a little more but that is good)
+	var i uint64
+	for i = 200; i < 1000; i++ {
+		period = 1e9 / i
+		s := (1e9 / 32.0876)
 
+		pwm.SetPeriod(period)
+
+		r := math.Mod(float64(i), 100)
+		if r == 0 {
+			astroDisplay.Body = fmt.Sprintf("index: %v", i)
+			astroDisplay.WriteBody()
+		}
+		time.Sleep(time.Millisecond * 10)
+
+		// astroDisplay.Body = fmt.Sprintf("p: %v", period)
+		// astroDisplay.WriteBody()
+		// time.Sleep(time.Second * 1)
+
+		// c := pwm.Period()
+		// astroDisplay.Body = fmt.Sprintf("c: %v", c)
+		// astroDisplay.WriteBody()
+		// time.Sleep(time.Second * 1)
 	}
+
 }

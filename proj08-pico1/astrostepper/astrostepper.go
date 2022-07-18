@@ -59,6 +59,7 @@ type RADriver struct {
 	// reference: http://www.astrofriend.eu/astronomy/astronomy-calculations/mount-gearbox-ratio/mount-gearbox-ratio.html
 	// Common worm drives are 130:1, 135:1, 144:1, 180:1, 435:1; thus use values of 130, 135, 144, 180 or 435 respectively
 	WormRatio int32
+
 	// Common primary gear ratios are from 1:1 to 75:1; thus use values 1 to 75 respectively
 	// This is the total ratio of all gears combined, for example:
 	// if you have a primary gearbox with a ratio of 12:1 and a secondary gearbox with a ration of 10:1 then set GearRatio to (12*10) or 120
@@ -92,7 +93,7 @@ type RADriver struct {
 	//           WormRatio           = 144 (144:1)
 	//           GearRatio           = 3   (48:16)
 	//                                 ============
-	//																	2_764_800 (system ration 400*16*144*3)
+	//																	2_764_800 (system ratio 400*16*144*3)
 	//
 	//     then: MotorPosition       = (Step * MaxMicroStepSetting)/MicroStepSetting
 	//           RAPosition          = MotorPosition * WormRatio * GearRatio
