@@ -4,6 +4,7 @@ package astroeq
 import (
 	"errors"
 	"machine"
+	"math"
 )
 
 // Microstep settings
@@ -34,7 +35,7 @@ type RADriver struct {
 
 	// The maximum PWM cycle in Hz that the motor can accept
 	// This is a physical properity of the motor, and for my nima17 0.9° this is around 1_000 Hz
-	MaxHz int32
+	maxHz int32
 
 	// Microstep Pins
 	//
@@ -65,8 +66,6 @@ type RADriver struct {
 	// This is the total ratio of all gears combined, for example:
 	// if you have a primary gearbox with a ratio of 12:1 and a secondary gearbox with a ration of 10:1 then set GearRatio to (12*10) or 120
 	GearRatio int32
-
-	raHz i
 }
 
 // Returns a new RADriver
@@ -74,6 +73,7 @@ func New(
 	step machine.Pin,
 	direction bool,
 	stepsPerRevolution int32,
+	maxHz int32,
 	microStep1 machine.Pin,
 	microStep2 machine.Pin,
 	microStep3 machine.Pin,
@@ -105,6 +105,7 @@ func New(
 		Step:                step,
 		Direction:           direction,
 		StepsPerRevolution:  stepsPerRevolution,
+		maxHz:               maxHz,
 		microStep1:          microStep1,
 		microStep2:          microStep2,
 		microStep3:          microStep3,
@@ -116,9 +117,16 @@ func New(
 
 func (ra *RADriver) Configure() {
 
-	// DEVTODO -  add PWM
+	configurePwmRA(ra.Step, 0)
 
+	//
+	// Set PWM Top for the RA
+	//
+	setPwmRATop(ra.Step)
+
+	//
 	// Microstepping
+	//
 	microStep1 := ra.microStep1
 	microStep2 := ra.microStep2
 	microStep3 := ra.microStep3
@@ -127,32 +135,11 @@ func (ra *RADriver) Configure() {
 	microStep3.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	// Default to microStepSetting of 16
-	ra.SetMicroStepSetting(16)
+	ra.setMicroStepSetting(16)
 
 }
 
-// Set todo
-func (ra *RADriver) RunAtSiderealRate() {
-	// The PWM cycle in Hz that will drive the system at a siderial rate, i.e. The RA
-	//
-	// For example:
-	//   Given:  StepsPerRevolution  = 400
-	//           MaxMicroStepSetting = 16
-	//           WormRatio           = 144 (144:1)
-	//           GearRatio           = 3   (48:16)
-	//                                 ============
-	//																	2_764_800 (system ratio 400*16*144*3)
-
-	const siderealDayInSeconds = 86_164.1
-	systemRatio := ra.StepsPerRevolution * ra.MaxMicroStepSetting * ra.WormRatio * ra.GearRatio
-
-	sideralHz := float64(systemRatio) / siderealDayInSeconds
-
-	period := uint64(math.Round(1e9 / sideralHz))
-
-}
-
-func (ra *RADriver) SetMicroStepSetting(ms int32) {
+func (ra *RADriver) setMicroStepSetting(ms int32) {
 
 	ra.microStepSetting = ms
 
@@ -189,5 +176,129 @@ func (ra *RADriver) SetMicroStepSetting(ms int32) {
 		ra.microStep2.High()
 		ra.microStep3.High()
 	}
+
+}
+
+// Set todo
+func (ra *RADriver) RunAtSiderealRate() {
+	// The PWM cycle in Hz that will drive the system at a siderial rate, i.e. The RA
+	//
+	// For example:
+	//   Given:  StepsPerRevolution  = 400
+	//           MaxMicroStepSetting = 16
+	//           WormRatio           = 144 (144:1)
+	//           GearRatio           = 3   (48:16)
+	//                                 ============
+	//																	2_764_800 (system ratio 400*16*144*3)
+
+	const siderealDayInSeconds = 86_164.1
+	// systemRatio := ra.StepsPerRevolution * ra.MaxMicroStepSetting * ra.WormRatio * ra.GearRatio
+
+	// DEVTODO hard code RA360 to complete in 1hr for testing
+	// sideralHz := float64(systemRatio) / siderealDayInSeconds
+
+	// const oneHourInSeconds = 3_600
+	// sideralHz := float64(systemRatio) / oneHourInSeconds
+	// period := uint64(math.Round(1e9 / sideralHz))
+	period := uint64(math.Round(1e9 / 900))
+
+	setPwmRAPeriod(ra.Step, period)
+
+}
+
+// set RA PWM period
+func configurePwmRA(pin machine.Pin, period uint64) {
+
+	pwmRA := machine.PWM0 //default
+
+	switch pin {
+	case 0, 1, 16, 17:
+		pwmRA = machine.PWM0
+	case 2, 3, 18, 19:
+		pwmRA = machine.PWM1
+	case 4, 5, 20, 21:
+		pwmRA = machine.PWM2
+	case 6, 7, 22, 23:
+		pwmRA = machine.PWM3
+	case 8, 9, 24, 25:
+		pwmRA = machine.PWM4
+	case 10, 11, 26, 27:
+		pwmRA = machine.PWM5
+	case 12, 13, 28, 29:
+		pwmRA = machine.PWM6
+	case 14, 15:
+		pwmRA = machine.PWM7
+	default:
+		pwmRA = machine.PWM0
+	}
+
+	pwmRA.Configure(machine.PWMConfig{
+		Period: period,
+	})
+
+}
+
+// set RA PWM period
+func setPwmRAPeriod(pin machine.Pin, period uint64) {
+
+	pwmRA := machine.PWM0 //default
+
+	switch pin {
+	case 0, 1, 16, 17:
+		pwmRA = machine.PWM0
+	case 2, 3, 18, 19:
+		pwmRA = machine.PWM1
+	case 4, 5, 20, 21:
+		pwmRA = machine.PWM2
+	case 6, 7, 22, 23:
+		pwmRA = machine.PWM3
+	case 8, 9, 24, 25:
+		pwmRA = machine.PWM4
+	case 10, 11, 26, 27:
+		pwmRA = machine.PWM5
+	case 12, 13, 28, 29:
+		pwmRA = machine.PWM6
+	case 14, 15:
+		pwmRA = machine.PWM7
+	default:
+		pwmRA = machine.PWM0
+	}
+
+	pwmRA.SetPeriod(period)
+
+}
+
+//
+// Configure the machine PWM for the RA
+// See https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf
+//     4.5.2. Programmer’s Model
+//
+func setPwmRATop(pin machine.Pin) {
+
+	pwmRA := machine.PWM0 //default
+
+	switch pin {
+	case 0, 1, 16, 17:
+		pwmRA = machine.PWM0
+	case 2, 3, 18, 19:
+		pwmRA = machine.PWM1
+	case 4, 5, 20, 21:
+		pwmRA = machine.PWM2
+	case 6, 7, 22, 23:
+		pwmRA = machine.PWM3
+	case 8, 9, 24, 25:
+		pwmRA = machine.PWM4
+	case 10, 11, 26, 27:
+		pwmRA = machine.PWM5
+	case 12, 13, 28, 29:
+		pwmRA = machine.PWM6
+	case 14, 15:
+		pwmRA = machine.PWM7
+	default:
+		pwmRA = machine.PWM0
+	}
+
+	chA, _ := pwmRA.Channel(pin)
+	pwmRA.Set(chA, pwmRA.Top()/2)
 
 }

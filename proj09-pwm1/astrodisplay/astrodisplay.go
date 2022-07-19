@@ -52,8 +52,8 @@ func (ad *AstroDisplay) WriteStatus() {
 	ad.Display.FillRectangle(0, 0, 128, 14, black)
 	ad.Display.DrawFastHLine(0, 127, 14, red)
 
+	// tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 10, ad.Status, red)
 	tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 10, ad.Status, red)
-
 }
 
 // Write the body content in middle of screen

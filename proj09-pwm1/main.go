@@ -2,13 +2,13 @@ package main
 
 import (
 	"aeg/astrodisplay"
+	"aeg/astroeq"
 	"machine"
 
 	// "math"
 
 	// "strconv"
 	"fmt"
-	"math"
 	"time"
 )
 
@@ -61,93 +61,46 @@ func main() {
 	/////////////////////////////////////////////////////////////////////////////
 	// motor
 	/////////////////////////////////////////////////////////////////////////////
+	raStep := machine.GP9
+	direction := true
+	var stepsPerRevolution int32 = 400
+	var maxHz int32 = 1000
+	var maxMicroStepSetting int32 = 16
+	var wormRatio int32 = 144
+	var gearRatio int32 = 3
 	microStep1 := machine.GP10
 	microStep2 := machine.GP11
 	microStep3 := machine.GP12
-	microStep1.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	microStep2.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	microStep3.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	microStep1.Low()
-	microStep2.Low()
-	microStep3.Low()
 
-	pinB := machine.GP9
-
-	// This program is specific to the Raspberry Pi Pico.
-	pinA := machine.LED
-	pwm := machine.PWM4 // Pin 25 (LED on pico) corresponds to PWM4.
-
-	// Configure the PWM with the given period.
-	// var period uint64 = 1e9
-	// var period uint64 = 1e11 + 500
-	// var period uint64 = 500
-	// var period uint64 = 1e9	display: 124_053_888
-	// var period uint64 = 1e5	display:     100_000
-	// var period uint64 = 1e4  display:      10_000
-	// var period uint64 = 1e3  display:       1_000
-
-	// maxTop := math.MaxUint16
-	// // start algorithm at 95% Top. This allows us to undershoot period with prescale.
-	// var period uint64 = uint64(90 * maxTop / 100)
-
-	// var period uint64 = 6.41753e10 // ????This should rotate the RA 360 in one day
-	// var period uint64 = 6.41753e10 / uint64(96) // ??? This should rotate the RA 360 in ~15min
-	// var period uint64 = 1e9 / uint64(48) // ra full turn in ~30min
-	// var period uint64 = 1e9 // 27 seconds 7.4 Hz (no ms @ 200spr)
-	// var period uint64 = 1e9 / 2 // 26.7 seconds (no ms @ 200spr)
-	// var period uint64 = 1e9 / 4 // 23.5 seconds (no ms @ 200spr)
-	// var period uint64 = 1e7 // 100hz ~ 2 seconds (no ms @ 200spr)
-	// var period uint64 = 1e8 // 10hz ~ 20 seconds (no ms @ 200spr)
-	// var period uint64 = 2e7 // 50hz ~ 4 seconds (no ms @ 200spr)
-	// var period uint64 = 2e7 // 50hz ~ 64 seconds (ms=16 @ 200spr)
-	// var period uint64 = 5.625e7
-	var period uint64 = 5.20833e6
-
-	// var period uint64 = 1e6 / 1
-	pwm.Configure(machine.PWMConfig{
-		Period: period,
-	})
-
-	chA, err := pwm.Channel(pinA)
-	chB, err := pwm.Channel(pinB)
-	if err != nil {
-		println(err.Error())
-		astroDisplay.Body = err.Error()
-		astroDisplay.WriteBody()
-		time.Sleep(time.Second * 30)
-		return
-	}
-
-	pwm.Set(chA, pwm.Top()/2)
-	pwm.Set(chB, pwm.Top()/2)
+	eq, _ := astroeq.New(
+		raStep,
+		direction,
+		stepsPerRevolution,
+		maxHz,
+		microStep1,
+		microStep2,
+		microStep3,
+		maxMicroStepSetting,
+		wormRatio,
+		gearRatio,
+	)
+	eq.Configure()
+	eq.RunAtSiderealRate()
 
 	time.Sleep(time.Second * 5)
 	astroDisplay.Status = "Run!"
 	astroDisplay.WriteStatus()
 
-	// 1_000 hz full steps - is the max (it can go a little more but that is good)
-	var i uint64
-	for i = 200; i < 1000; i++ {
-		period = 1e9 / i
-		s := (1e9 / 32.0876)
+	for {
 
-		pwm.SetPeriod(period)
+		dt := time.Now()
+		fmt.Println(dt.Format("15:04:05"))
 
-		r := math.Mod(float64(i), 100)
-		if r == 0 {
-			astroDisplay.Body = fmt.Sprintf("index: %v", i)
-			astroDisplay.WriteBody()
-		}
-		time.Sleep(time.Millisecond * 10)
+		astroDisplay.Body = fmt.Sprintf("%v", dt.Format("15:04:05"))
 
-		// astroDisplay.Body = fmt.Sprintf("p: %v", period)
-		// astroDisplay.WriteBody()
-		// time.Sleep(time.Second * 1)
+		astroDisplay.WriteBody()
+		time.Sleep(time.Second * 2)
 
-		// c := pwm.Period()
-		// astroDisplay.Body = fmt.Sprintf("c: %v", c)
-		// astroDisplay.WriteBody()
-		// time.Sleep(time.Second * 1)
 	}
 
 }
