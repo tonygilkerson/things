@@ -66,6 +66,11 @@ func (ad *AstroDisplay) WriteBody() {
 	// clear body
 	ad.Display.FillRectangle(0, 15, 128, 40, black)
 
-	tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 30, ad.Body, red)
+	// tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 30, ad.Body, red)
+	body := ad.Body + "\nxxx"
+	// tinyfont.WriteLine(&ad.Display, &tinyfont.Org01, 5, 30, ad.Body, red)
+	tinyfont.WriteLine(&ad.Display, &tinyfont.Org01, 5, 30, body, red)
+
+	// tinyfont.WriteLine(&ad.Display, &tinyfont.LineFeed, 5, 50, ad.Body, red)
 
 }

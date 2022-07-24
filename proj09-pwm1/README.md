@@ -12,7 +12,7 @@ next steps:
 
 ## References
 
-* [TinyGo Setup, How to debug on Pico](https://pragmatik.tech/tutorials/tinygo-pico-vscode/)
+* [TinyGo Setup, How to debug on Pico](https://pragmatik.tech/tutorials/tinygo-pico-vscode/) DEVTODO - maybe add a software section for installing plugins like the serial plugin on this reference
 * [CUI Devices Absolute Rotary Encoders](https://www.cuidevices.com/catalog/motion/rotary-encoders)
 * [Breadboard layout software (fritzing.org)](https://fritzing.org/learning/tutorials/building-circuit)
 * [TinyGo Interrupts (youtube)](https://www.youtube.com/watch?v=I5uVHBgOZQo)

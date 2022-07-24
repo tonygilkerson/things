@@ -15,8 +15,9 @@ func (d *Device) driver() {
 
 	for i := 0; i < 1000; i++ {
 		fmt.Print(".")
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 
+		// update position every so often
 		if math.Mod(float64(i), 10) == 0 {
 			d.position <- i
 		}
@@ -26,29 +27,32 @@ func (d *Device) driver() {
 }
 
 func (d *Device) display() {
-
 	for {
+		// Wait for a change in position
 		p := <-d.position
-
 		fmt.Printf(" %v ", p)
+	}
+}
 
-		// time.Sleep(500 * time.Millisecond)
-		runtime.Gosched() // yield to another goroutine
-
+func tick() {
+	for {
+		fmt.Printf("*")
+		time.Sleep(10 * time.Millisecond)
 	}
 }
 
 func main() {
-	runtime.GOMAXPROCS(1)
+	runtime.GOMAXPROCS(5)
 
 	fmt.Println("Start main")
 
 	device := Device{}
 	device.position = make(chan int)
 
+	go tick()
 	go device.driver()
 	go device.display()
-
-	time.Sleep(15 * time.Second)
+	fmt.Println("after goes")
+	time.Sleep(5 * time.Second)
 	fmt.Println("END main")
 }

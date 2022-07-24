@@ -19,19 +19,33 @@ import (
 																									machine.SPI0												bus
 	VCC																							3v3
 	GND																							GND
-	DIN	BLU - data in																GPIO 19, SPI0_SDO_PIN
-	CLK	YLW	- clock data in                         GPIO 18, SPI0_SCK_PIN
-	CS 	ORN - Chip select														GPIO 17, SPI0_CSn       						csPin
-	DC	GRN - Data/Cmd select (high=data,low=cmd)   GPIO 22 (any open pin)							dcPin
-	RST	WHT	- Reset (low=active)                    GPIO 26 (any open pin)							resetPin
-																									GPIO 27 (any open pin)							enPin
-																									GPIO 28 (any open pin)							rwPin
-	Motor Driver
-	----------------------------------------------
-	IN1                                             xx
-	IN2                                             xx
-	IN3                                             xx
-	IN4                                             xx
+	DIN	BLU - data in																GP19, SPI0_SDO_PIN
+	CLK	YLW	- clock data in                         GP18, SPI0_SCK_PIN
+	CS 	ORN - Chip select														GP17, SPI0_CSn       						    csPin
+	DC	GRN - Data/Cmd select (high=data,low=cmd)   GP22 (any open pin)							    dcPin
+	RST	WHT	- Reset (low=active)                    GP26 (any open pin)							    resetPin
+																									GP27 (any open pin)							    enPin
+																									GP28 (any open pin)							    rwPin
+
+  Motor Driver (A4988)																																NIMA17 Stepper motor
+	----------------------------------------------																			----------------------------------
+	pin01 GND																				GND
+	pin02 VDD																				5v
+	pin03 1B																						                                Motor 1B (color?)
+	pin04 1A																																						Motor 1A (color?)
+	pin05 2A                       																											Motor 2A (color?)
+	pin06 2B																																						Moror 2B (color?)
+	pin07 GND                                       GND
+	pin08 VMOT (7.2v power supply)
+	----
+	pin09 ENABLE
+	pin10 MS1                                       GP12
+	pin11 MS2                                       GP11
+	pin12 MS3                                       GP10
+	pin13 RESET (connect to SLEEP)
+	pin14 SLEEP (connect to RESET)
+	PIN15 STEP                                      GP9
+	PIN16 DIR                                       GP8
 
 */
 
@@ -58,9 +72,14 @@ func main() {
 	astroDisplay.Status = "Get Ready!"
 	astroDisplay.WriteStatus()
 
-	/////////////////////////////////////////////////////////////////////////////
+	//
 	// motor
-	/////////////////////////////////////////////////////////////////////////////
+	//
+
+	// Select the hardware PWM for the RA Driver
+	var raPWM astroeq.PWM
+	raPWM = machine.PWM4
+
 	raStep := machine.GP9
 	direction := true
 	var stepsPerRevolution int32 = 400
@@ -68,12 +87,13 @@ func main() {
 	var maxMicroStepSetting int32 = 16
 	var wormRatio int32 = 144
 	var gearRatio int32 = 3
-	microStep1 := machine.GP10
+	microStep1 := machine.GP12
 	microStep2 := machine.GP11
-	microStep3 := machine.GP12
+	microStep3 := machine.GP10
 
-	eq, _ := astroeq.New(
+	eq, _ := astroeq.NewRA(
 		raStep,
+		raPWM,
 		direction,
 		stepsPerRevolution,
 		maxHz,
@@ -85,7 +105,7 @@ func main() {
 		gearRatio,
 	)
 	eq.Configure()
-	eq.RunAtSiderealRate()
+	eq.RunAtHz(720.0)
 
 	time.Sleep(time.Second * 5)
 	astroDisplay.Status = "Run!"
@@ -95,10 +115,11 @@ func main() {
 
 		dt := time.Now()
 		fmt.Println(dt.Format("15:04:05"))
-
 		astroDisplay.Body = fmt.Sprintf("%v", dt.Format("15:04:05"))
+		// astroDisplay.Body = fmt.Sprintf("%v", eq.RunningHz)
 
 		astroDisplay.WriteBody()
+
 		time.Sleep(time.Second * 2)
 
 	}
