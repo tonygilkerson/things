@@ -164,3 +164,7 @@ Reference:
 
 * product page - [adafruit](https://www.adafruit.com/product/954)
 * If you are running Mac OS X, check [this tutorial page](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/software-installation-mac) with links to drivers for both PL2303 and CP2012
+
+## CUI Devices - AMT223B-V
+
+![amt productid](/img/amt-productid.png)
