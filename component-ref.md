@@ -167,4 +167,18 @@ Reference:
 
 ## CUI Devices - AMT223B-V
 
-![amt productid](/img/amt-productid.png)
+![amt223](img/AMT223B-V.png)
+![amt productid](img/amt-productid.png)
+
+* [Product Page CUI](https://www.cuidevices.com/product/motion/rotary-encoders/absolute/modular/amt22-v-kit/amt223b-v)
+* [Product Page Mouser](https://www.mouser.com/ProductDetail/CUI-Devices/AMT223B-V?qs=l7cgNqFNU1jjpjuNzTFAxw%3D%3D)
+* [Datasheet CUI](https://www.cuidevices.com/product/resource/amt22-v.pdf)
+* [CUI Resource Page](https://www.cuidevices.com/resources/resource-library?categories=motion&tags=All&itemsPerPage=9999)
+
+## AMT-PGRM-06C
+
+![cable](img/amt22-cable-pmg.png)
+
+* [Product Page CUI](https://www.cuidevices.com/product/motion/rotary-encoders/encoder-accessories/amt-cables/amt-pgrm-06c)
+* [Product Page Mouser](https://www.mouser.com/ProductDetail/CUI-Devices/AMT-PGRM-06C?qs=XeJtXLiO41RU2%252BvAgDDHyA%3D%3D)
+* [Datasheet CUI](https://www.cuidevices.com/product/resource/amt-pgrm.pdf)
