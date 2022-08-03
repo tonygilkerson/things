@@ -3,6 +3,7 @@ package main
 import (
 	"aeg/astrodisplay"
 	"aeg/astroeq"
+
 	"machine"
 
 	// "math"
@@ -10,6 +11,8 @@ import (
 	// "strconv"
 	"fmt"
 	"time"
+
+	"tinygo.org/x/drivers/ssd1351"
 )
 
 /*
@@ -51,12 +54,6 @@ import (
 
 func main() {
 
-	cs := machine.GP17  // GP17  SPI0_CSn
-	dc := machine.GP22  // just pick some gpio
-	rst := machine.GP26 // just pick some gpio
-	en := machine.GP27  // just pick some gpio
-	rw := machine.GP28  // just pick some gpio
-
 	machine.SPI0.Configure(machine.SPIConfig{
 		Frequency: 2000000,
 		LSBFirst:  false,
@@ -67,9 +64,29 @@ func main() {
 		SDI:       machine.SPI0_SDI_PIN, // GP16
 	})
 
-	astroDisplay := astrodisplay.New(*machine.SPI0, rst, dc, cs, en, rw)
+	cs := machine.GP17  // GP17  SPI0_CSn
+	dc := machine.GP22  // just pick some gpio
+	rst := machine.GP26 // just pick some gpio
+	en := machine.GP27  // just pick some gpio
+	rw := machine.GP28  // just pick some gpio
 
-	astroDisplay.Status = "Get Ready!"
+	display := ssd1351.New(machine.SPI0, rst, dc, cs, en, rw)
+	display.Configure(ssd1351.Config{
+		Width:        128,
+		Height:       128,
+		RowOffset:    0,
+		ColumnOffset: 0,
+	})
+
+	// display.Command(ssd1351.SET_REMAP_COLORDEPTH)
+	// display.Data(0x62)
+	// display.FillScreen(color.RGBA{0, 0, 0, 0})
+	// display.Tx([]byte("XXXXX     XXXXX"), false)
+	// time.Sleep(time.Second * 2)
+	// astroDisplay := astrodisplay.New(machine.SPI0, rst, dc, cs, en, rw)
+	astroDisplay := astrodisplay.New(display)
+
+	astroDisplay.SetStatus("Get Ready!")
 	astroDisplay.WriteStatus()
 
 	//
@@ -107,15 +124,16 @@ func main() {
 	eq.Configure()
 	eq.RunAtHz(720.0)
 
-	time.Sleep(time.Second * 5)
-	astroDisplay.Status = "Run!"
+	time.Sleep(time.Second * 2)
+	astroDisplay.SetStatus("Run!")
 	astroDisplay.WriteStatus()
 
 	for {
 
 		dt := time.Now()
 		fmt.Println(dt.Format("15:04:05"))
-		astroDisplay.Body = fmt.Sprintf("%v", dt.Format("15:04:05"))
+		body := fmt.Sprintf("%v", dt.Format("15:04:05"))
+		astroDisplay.SetBody(body)
 		// astroDisplay.Body = fmt.Sprintf("%v", eq.RunningHz)
 
 		astroDisplay.WriteBody()

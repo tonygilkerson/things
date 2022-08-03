@@ -175,6 +175,27 @@ Reference:
 * [Datasheet CUI](https://www.cuidevices.com/product/resource/amt22-v.pdf)
 * [CUI Resource Page](https://www.cuidevices.com/resources/resource-library?categories=motion&tags=All&itemsPerPage=9999)
 
+Encoder Interface Pinout Connetor
+
+Pin# | Function
+-----|---------
+ 1   | +5V
+ 2   | SCLK
+ 3   | MOSI
+ 4   | GND
+ 5   | MISO
+ 6   | Chip Select
+
+Operation
+
+The AMT22 encoder operates in two modes: programming, and **SPI mode**. To enter programming mode for use with
+AMT Viewpoint™ the slide on the bottom of the encoder must be moved to the programming position. Slide the switch
+to the left position before connecting encoder to AMT Viewpoint™. Once configuration in AMT Viewpoint™ is completed,
+disconnect encoder and return switch to the standard run mode position before connecting encoder to system. Switch must
+be in proper mode for programming or SPI before power is connected to device.
+
+![amt22 switch](img/am22-switch.png)
+
 ## AMT-PGRM-06C
 
 ![cable](img/amt22-cable-pmg.png)
