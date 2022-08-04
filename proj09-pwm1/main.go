@@ -54,37 +54,35 @@ import (
 
 func main() {
 
-	machine.SPI0.Configure(machine.SPIConfig{
-		Frequency: 2000000,
-		LSBFirst:  false,
-		Mode:      0,
-		DataBits:  8,
-		SCK:       machine.SPI0_SCK_PIN, // GP18
-		SDO:       machine.SPI0_SDO_PIN, // GP19
-		SDI:       machine.SPI0_SDI_PIN, // GP16
-	})
+	// machine.SPI0.Configure(machine.SPIConfig{
+	// 	Frequency: 2000000,
+	// 	LSBFirst:  false,
+	// 	Mode:      0,
+	// 	DataBits:  8,
+	// 	SCK:       machine.SPI0_SCK_PIN, // GP18
+	// 	SDO:       machine.SPI0_SDO_PIN, // GP19
+	// 	SDI:       machine.SPI0_SDI_PIN, // GP16
+	// })
 
+	var spi astrodisplay.SPI
+	spi = machine.SPI0
+
+	var display ssd1351.Device
 	cs := machine.GP17  // GP17  SPI0_CSn
 	dc := machine.GP22  // just pick some gpio
 	rst := machine.GP26 // just pick some gpio
 	en := machine.GP27  // just pick some gpio
 	rw := machine.GP28  // just pick some gpio
 
-	display := ssd1351.New(machine.SPI0, rst, dc, cs, en, rw)
-	display.Configure(ssd1351.Config{
-		Width:        128,
-		Height:       128,
-		RowOffset:    0,
-		ColumnOffset: 0,
-	})
+	// display := ssd1351.New(machine.SPI0, rst, dc, cs, en, rw)
+	// display.Configure(ssd1351.Config{
+	// 	Width:        128,
+	// 	Height:       128,
+	// 	RowOffset:    0,
+	// 	ColumnOffset: 0,
+	// })
 
-	// display.Command(ssd1351.SET_REMAP_COLORDEPTH)
-	// display.Data(0x62)
-	// display.FillScreen(color.RGBA{0, 0, 0, 0})
-	// display.Tx([]byte("XXXXX     XXXXX"), false)
-	// time.Sleep(time.Second * 2)
-	// astroDisplay := astrodisplay.New(machine.SPI0, rst, dc, cs, en, rw)
-	astroDisplay := astrodisplay.New(display)
+	astroDisplay := astrodisplay.New(spi, display, rst, dc, en, rw, cs)
 
 	astroDisplay.SetStatus("Get Ready!")
 	astroDisplay.WriteStatus()

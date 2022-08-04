@@ -3,6 +3,7 @@ package astrodisplay
 
 import (
 	"image/color"
+	"machine"
 	"time"
 
 	"tinygo.org/x/drivers/ssd1351"
@@ -10,24 +11,43 @@ import (
 	"tinygo.org/x/tinyfont/freemono"
 )
 
+// DEVTODO - add sync.Mutex to ensure only one client channel is active at a time
+
+type SPI interface {
+	Configure(config machine.SPIConfig) error
+	Transfer(b byte) (byte, error)
+	Tx(w []byte, r []byte) error
+}
+
 // Display
 type AstroDisplay struct {
 	status  string
 	body    string
 	display ssd1351.Device
+	spi     SPI
 }
 
 // New returns a new display
 // func New(spi *machine.SPI, rst, dc, cs, en, rw machine.Pin) AstroDisplay {
-func New(display ssd1351.Device) AstroDisplay {
+func New(spi SPI, display ssd1351.Device, rst, dc, en, rw, cs machine.Pin) AstroDisplay {
 
-	// display := ssd1351.New(spi, rst, dc, cs, en, rw)
-	// display.Configure(ssd1351.Config{
-	// 	Width:        128,
-	// 	Height:       128,
-	// 	RowOffset:    0,
-	// 	ColumnOffset: 0,
-	// })
+	spi.Configure(machine.SPIConfig{
+		Frequency: 2000000,
+		LSBFirst:  false,
+		Mode:      0,
+		DataBits:  8,
+		SCK:       machine.SPI0_SCK_PIN, // GP18
+		SDO:       machine.SPI0_SDO_PIN, // GP19
+		SDI:       machine.SPI0_SDI_PIN, // GP16
+	})
+
+	display = ssd1351.New(spi, rst, dc, cs, en, rw)
+	display.Configure(ssd1351.Config{
+		Width:        128,
+		Height:       128,
+		RowOffset:    0,
+		ColumnOffset: 0,
+	})
 
 	display.Command(ssd1351.SET_REMAP_COLORDEPTH)
 	display.Data(0x62)
