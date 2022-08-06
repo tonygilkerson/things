@@ -165,6 +165,12 @@ Reference:
 * product page - [adafruit](https://www.adafruit.com/product/954)
 * If you are running Mac OS X, check [this tutorial page](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/software-installation-mac) with links to drivers for both PL2303 and CP2012
 
+Pins:
+
+* Black: GND
+* White: UART0 TX (pin 1 - GP0 - on the Pico)
+* Green: UART0 RX (pin 2 - GP1 - on the Pico)
+
 ## CUI Devices - AMT223B-V
 
 ![amt223](img/AMT223B-V.png)
@@ -188,6 +194,9 @@ be in proper mode for programming or SPI before power is connected to device.
 See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/product/resource/sample-code/amt22)
 
 ![amt22 spi example](img/amt22-spi-example.png)
+
+> (this needs confirmed) While looking at the front the #1 pin is on the left. 
+
 
 ## AMT-PGRM-06C
 
