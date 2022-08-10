@@ -2,6 +2,7 @@ package main
 
 import (
 	"aeg/astrodisplay"
+	"aeg/astroenc"
 	"aeg/astroeq"
 
 	"machine"
@@ -57,9 +58,9 @@ import (
 
 func main() {
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	// START - test encoder
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//
+	// Configure SPI bus
+	//
 	machine.SPI0.Configure(machine.SPIConfig{
 		Frequency: 2000000,
 		LSBFirst:  false,
@@ -70,134 +71,31 @@ func main() {
 		SDI:       machine.SPI0_SDI_PIN, // GP16
 	})
 
-	csEncoder := machine.GP20 // GP16
-	csEncoder.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	csEncoder.High()
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// START - test encoder
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// SPI Commands
-	const AMT22_NOP byte = 0x00
-	const AMT22_RESET byte = 0x60
-	const AMT22_ZERO byte = 0x70
-
-	//Define special ascii characters
-	const NEWLINE byte = 0x0A
-	const TAB byte = 0x09
-
-	// We will use these define macros so we can write code once compatible with 12 or 14 bit encoders
-	const RES12 int32 = 12
-	const RES14 int32 = 14
+	raEncoder := astroenc.NewRA(machine.SPI0, machine.GP20, astroenc.RES14)
+	raEncoder.Configure()
+	raEncoder.ZeroRA()
 
 	i := 0
-	var b1, b2 byte
-
 	for {
 		i++
 		print(fmt.Sprintf("TRY: %v\n", i))
 		time.Sleep(time.Second * 2)
-
-		////////////////////////////////////////////////
-		// START reset
-		////////////////////////////////////////////////
-		println("reset encoder")
-		// byte 1
-		csEncoder.Low()
-		time.Sleep(time.Microsecond * 3)
-
-		b, _ := machine.SPI0.Transfer(AMT22_NOP)
-		b1 = b
-
-		time.Sleep(time.Microsecond * 3)
-
-		// byte 2
-		b, _ = machine.SPI0.Transfer(AMT22_ZERO)
-		b2 = b
-
-		time.Sleep(time.Microsecond * 3)
-		csEncoder.High()
-		////////////////////////////////////////////////
-		// END reset
-		////////////////////////////////////////////////
-
-		println("wait a sec for encoder reboot")
-		time.Sleep(time.Second * 1)
 		println("start get current position loop")
 
-		////////////////////////////////////////////////
-		// START current pos
-		////////////////////////////////////////////////
-		// byte 1
-		csEncoder.Low()
-		time.Sleep(time.Microsecond * 3)
+		r1, r2 := raEncoder.GetPositionRA()
 
-		b, _ = machine.SPI0.Transfer(AMT22_NOP)
-		b1 = b
-
-		time.Sleep(time.Microsecond * 3)
-
-		// byte 2
-		b, _ = machine.SPI0.Transfer(AMT22_NOP)
-		b2 = b
-
-		time.Sleep(time.Microsecond * 3)
-		csEncoder.High()
-		////////////////////////////////////////////////
-		// END current pos
-		////////////////////////////////////////////////
-
-		////////////////////////////////////////////////
-		// resultes
-		println("byte-1:", fmt.Sprintf("%08b - %v", b1, b1))
-		println("byte-2:", fmt.Sprintf("%08b - %v", b2, b2))
-		time.Sleep(time.Microsecond * 3)
+		println("byte-1:", fmt.Sprintf("%08b - %v", r1, r1))
+		println("byte-2:", fmt.Sprintf("%08b - %v", r2, r2))
 
 	}
 
-	// In the case of odd parity, For a given set of bits, if the count of bits with a value of 1 is even,
-	// the parity bit value is set to 1 making the total count of 1s in the whole set (including the parity bit) an odd number. If the count of bits with a value of 1 is odd, the count is already odd so the parity bit's value is 0
-	/*
-
-
-		Example 1:
-
-			byte-1: 10101011 - 171
-			byte-2: 10000000 - 128
-
-						kk hhhhhh llllllll
-						10 543210 76543210
-
-			full: 10 101011 10000000
-
-
-			The odd bits
-			h5 h3 h1 l7 l5 l3 l1
-			1  1  1  1  0  0  0       even=1 == k1
-
-			The even bits
-			h4 h2 h0 l6 l4 l2 l0
-			0  0  1  0  0  0  0        odd=0 == k0
-
-		Example 2:
-
-			   kk hhhhhh llllllll
-				 10 543210 76543210
-
-		full 01 100001 10101011
-		14      100001 10101011
-
-		The odd bits
-		h5 h3 h1 l7 l5 l3 l1
-		1  0  0  1  1  1  1        # of 1s is odd thus use 0 == k1
-
-		The even bits
-		h4 h2 h0 l6 l4 l2 l0
-		0  0  1  0  0  0  1        # of 1s is even thus use 1 == k0
-
-	*/
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	// END - test encoder
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	var spi astrodisplay.SPI
-	spi = machine.SPI0
 
 	var display ssd1351.Device
 	csDisplay := machine.GP17 // GP17
@@ -207,7 +105,8 @@ func main() {
 	en := machine.GP27  // just pick some gpio
 	rw := machine.GP28  // just pick some gpio
 
-	astroDisplay := astrodisplay.New(spi, display, rst, dc, en, rw, csDisplay)
+	astroDisplay := astrodisplay.New(machine.SPI0, display, rst, dc, en, rw, csDisplay)
+
 	astroDisplay.SetStatus("Get Ready!")
 	astroDisplay.WriteStatus()
 
