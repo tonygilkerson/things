@@ -82,14 +82,19 @@ func main() {
 	i := 0
 	for {
 		i++
-		print(fmt.Sprintf("TRY: %v\n", i))
+		print(fmt.Sprintf("TRY------------------------------------------: %v\n", i))
 		time.Sleep(time.Second * 2)
 		println("start get current position loop")
 
-		r1, r2 := raEncoder.GetPositionRA()
+		position, err := raEncoder.GetPositionRA()
 
-		println("byte-1:", fmt.Sprintf("%08b - %v", r1, r1))
-		println("byte-2:", fmt.Sprintf("%08b - %v", r2, r2))
+		println("position: ", position)
+
+		if err == nil {
+			println("position: ", position)
+		} else {
+			println("Error getting position", fmt.Sprintf("%v", err))
+		}
 
 	}
 
