@@ -51,8 +51,8 @@ import (
 	pin12 MS3                                       GP10
 	pin13 RESET (connect to SLEEP)
 	pin14 SLEEP (connect to RESET)
-	PIN15 STEP                                      GP9
-	PIN16 DIR                                       GP8
+	PIN15 STEP                                      GP7 (TODO find new pin so that I can use UART1 maybe GP5)
+	PIN16 DIR                                       GP6 (TODO find new pin so that I can use UART1 maybe GP4)
 
 */
 
@@ -71,6 +71,42 @@ func main() {
 		SDI:       machine.SPI0_SDI_PIN, // GP16
 	})
 
+	// run light
+	led := machine.LED
+	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	led.High()
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// START - uart encoder
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// cofig uart
+	uart := machine.UART0
+	tx := machine.UART0_TX_PIN
+	rx := machine.UART0_RX_PIN
+	uart.Configure(machine.UARTConfig{TX: tx, RX: rx})
+
+	for {
+		if uart.Buffered() > 0 {
+			print("hit\n")
+			data, _ := uart.ReadByte()
+			lastSaid := string(data)
+			print(fmt.Sprintf("echo: string=%v, bytes=%v\n", lastSaid, data))
+			//uart.WriteByte(data)
+			time.Sleep(10 * time.Millisecond)
+		} else {
+			print(".")
+			// asciiStr := "ABC"
+			// asciiBytes := []byte(asciiStr)
+			// uart.WriteByte(asciiBytes[1])
+			time.Sleep(2 * time.Second)
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// END - uart encoder
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	// START - test encoder
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +119,7 @@ func main() {
 	for {
 		i++
 		print(fmt.Sprintf("TRY------------------------------------------: %v\n", i))
-		time.Sleep(time.Second * 2)
+		time.Sleep(time.Second * 3)
 		println("start get current position loop")
 
 		position, err := raEncoder.GetPositionRA()
@@ -105,10 +141,10 @@ func main() {
 	var display ssd1351.Device
 	csDisplay := machine.GP17 // GP17
 
-	dc := machine.GP22  // just pick some gpio
-	rst := machine.GP26 // just pick some gpio
-	en := machine.GP27  // just pick some gpio
-	rw := machine.GP28  // just pick some gpio
+	dc := machine.GP22
+	rst := machine.GP26
+	en := machine.GP27
+	rw := machine.GP28
 
 	astroDisplay := astrodisplay.New(machine.SPI0, display, rst, dc, en, rw, csDisplay)
 
@@ -123,8 +159,8 @@ func main() {
 	var raPWM astroeq.PWM
 	raPWM = machine.PWM4
 
-	raStep := machine.GP9
 	direction := true
+	raStep := machine.GP9
 	var stepsPerRevolution int32 = 400
 	var maxHz int32 = 1000
 	var maxMicroStepSetting int32 = 16

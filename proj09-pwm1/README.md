@@ -17,3 +17,4 @@ next steps:
 * [Breadboard layout software (fritzing.org)](https://fritzing.org/learning/tutorials/building-circuit)
 * [TinyGo Interrupts (youtube)](https://www.youtube.com/watch?v=I5uVHBgOZQo)
 * [pragmatik.tec](https://pragmatik.tech/)
+* `brew install minicom` - serial monitor
