@@ -13,7 +13,7 @@ This repo will have several subfolders each containing the source code and doc f
 ## Reference
 
 * [Component Reference](component-ref.md)
-* [MCUs](mcu-ref.md)
+* [Microcontroller Reference](microcontroller-ref.md)
 
 ## Ideas for future projects
 

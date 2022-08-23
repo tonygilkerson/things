@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"machine"
 	"time"
 )
@@ -13,6 +14,9 @@ func main() {
 	// var pin machine.Pin = 25 // pico
 	pin := machine.D12 // arduino-nano33
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	e := errors.New("test error")
+	print(e)
 
 	for {
 		pin.Low()

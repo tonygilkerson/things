@@ -88,6 +88,7 @@ func NewRA(
 	stepPin machine.Pin,
 	pwm PWM,
 	direction bool,
+	directionPin machine.Pin,
 	stepsPerRevolution int32,
 	maxHz int32,
 	microStep1 machine.Pin,
@@ -119,6 +120,7 @@ func NewRA(
 		stepPin:             stepPin,
 		pwm:                 pwm,
 		direction:           direction,
+		directionPin:        directionPin,
 		stepsPerRevolution:  stepsPerRevolution,
 		maxHz:               maxHz,
 		microStep1:          microStep1,
@@ -200,16 +202,15 @@ func (ra *RADriver) setMicroStepSetting(ms int32) {
 //
 // To compute the PWM cycle that is needed to drive the system at a siderial rate, for example given:
 //
-//  stepsPerRevolution  = 400
-//  maxMicroStepSetting = 16
-//  wormRatio           = 144 (144:1)
-//  gearRatio           = 3   (48:16)
-//                      ============
-//		    								2_764_800 (system ratio 400*16*144*3)
+//	 stepsPerRevolution  = 400
+//	 maxMicroStepSetting = 16
+//	 wormRatio           = 144 (144:1)
+//	 gearRatio           = 3   (48:16)
+//	                     ============
+//			    								2_764_800 (system ratio 400*16*144*3)
 //
-//  The cycle Hz = system ration / number of seconds in a sideral day
-//  The cycle perod = 1e9 / Hz
-//
+//	 The cycle Hz = system ration / number of seconds in a sideral day
+//	 The cycle perod = 1e9 / Hz
 func (ra *RADriver) RunAtSiderealRate() {
 
 	systemRatio := ra.stepsPerRevolution * ra.maxMicroStepSetting * ra.wormRatio * ra.gearRatio
