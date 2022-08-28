@@ -2,9 +2,11 @@
 package astroeq
 
 import (
+	"aeg/astroenc"
 	"errors"
 	"machine"
 	"math"
+	"time"
 )
 
 // Microstep settings
@@ -81,10 +83,16 @@ type RADriver struct {
 	// This is the total ratio of all gears combined, for example:
 	// if you have a primary gearbox with a ratio of 12:1 and a secondary gearbox with a ration of 10:1 then set GearRatio to (12*10) or 120
 	gearRatio int32
+
+	// RA Encoder
+	encoder astroenc.RAEncoder
+
+	// RA Encoder
+	position uint16
 }
 
 // Returns a new RADriver
-func NewRA(
+func NewRADriver(
 	stepPin machine.Pin,
 	pwm PWM,
 	direction bool,
@@ -97,6 +105,8 @@ func NewRA(
 	maxMicroStepSetting int32,
 	wormRatio int32,
 	gearRatio int32,
+	encoderSPI machine.SPI,
+	encoderCS machine.Pin,
 
 ) (RADriver, error) {
 
@@ -116,6 +126,8 @@ func NewRA(
 		return RADriver{}, errors.New("gearRatio must be greater than 0, use 1 if not using a gearbox, typical values between 1 and 75")
 	}
 
+	encoder := astroenc.NewRA(encoderSPI, encoderCS, astroenc.RES14)
+
 	return RADriver{
 		stepPin:             stepPin,
 		pwm:                 pwm,
@@ -123,12 +135,15 @@ func NewRA(
 		directionPin:        directionPin,
 		stepsPerRevolution:  stepsPerRevolution,
 		maxHz:               maxHz,
+		runningHz:           0,
 		microStep1:          microStep1,
 		microStep2:          microStep2,
 		microStep3:          microStep3,
+		microStepSetting:    maxMicroStepSetting,
 		maxMicroStepSetting: maxMicroStepSetting,
 		wormRatio:           wormRatio,
 		gearRatio:           gearRatio,
+		encoder:             encoder,
 	}, nil
 }
 
@@ -155,6 +170,13 @@ func (ra *RADriver) Configure() {
 
 	// Default to microStepSetting of 16
 	ra.setMicroStepSetting(16)
+
+	// RA Encoder
+	ra.encoder.Configure()
+	ra.encoder.ZeroRA()
+
+	// Start go routine to monitor position
+	go ra.monitorPosition()
 
 }
 
@@ -233,4 +255,22 @@ func (ra *RADriver) RunAtHz(hz float64) {
 
 	// Set period for hardware PWM
 	ra.pwm.SetPeriod(period)
+}
+
+// DEVTODO - add go routine to poll the encoder position
+func (ra *RADriver) monitorPosition() {
+
+	for {
+		position, err := ra.encoder.GetPositionRA()
+		if err == nil {
+			ra.position = position
+		} else {
+			println("Error getting position")
+		}
+		time.Sleep(time.Second * 1) //DEVTODO - make this smaller
+	}
+}
+
+func (ra *RADriver) GetPosition() uint16 {
+	return ra.position
 }

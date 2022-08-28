@@ -58,9 +58,6 @@ Package Included:
 ## 1.5inch RGB OLED Display Module, 65K RGB Colors, 128×128, SPI
 
 * [Product Page](https://www.waveshare.com/1.5inch-rgb-oled-module.htm)
-* [Data Sheet](https://components101.com/sites/default/files/component_datasheet/XL6009-Datasheet_0.pdf)
-* [How to use](https://components101.com/modules/xl6009-dc-dc-step-down-voltage-regulator-module)
-* [dronebotworkshop Reference](https://dronebotworkshop.com/powering-your-projects/)
 
 ![1.5inch-rgb-oled-module-3_2](img/1.5inch-rgb-oled-module-3_2.jpg)
 ![1.5inch-RGB-OLED-Module-details](img/1.5inch-RGB-OLED-Module-details.jpg)
@@ -68,6 +65,10 @@ Package Included:
 ---
 
 ## Adjustable DC-DC Buck Boost Converter Automatic Wide Voltage Regulator XL6009 DC to DC 5-32 V to 1.25-35 V Voltage Module
+
+* [Data Sheet](https://components101.com/sites/default/files/component_datasheet/XL6009-Datasheet_0.pdf)
+* [How to use](https://components101.com/modules/xl6009-dc-dc-step-down-voltage-regulator-module)
+* [dronebotworkshop Reference](https://dronebotworkshop.com/powering-your-projects/)
 
 ![n17](img/71DNEUuQTkL._AC_SX679_.jpg)
 

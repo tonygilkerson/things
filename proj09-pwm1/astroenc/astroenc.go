@@ -19,10 +19,10 @@ const RES14 int8 = 14
 type RAEncoder struct {
 	cs         machine.Pin
 	resolution int8
-	spi        *machine.SPI
+	spi        machine.SPI
 }
 
-func NewRA(spi *machine.SPI, cs machine.Pin, resolution int8) RAEncoder {
+func NewRA(spi machine.SPI, cs machine.Pin, resolution int8) RAEncoder {
 
 	return RAEncoder{
 		spi:        spi,
