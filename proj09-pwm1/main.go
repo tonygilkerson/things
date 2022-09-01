@@ -61,7 +61,7 @@ func main() {
 	// Configure SPI bus
 	//
 	machine.SPI0.Configure(machine.SPIConfig{
-		Frequency: 2000000,
+		Frequency: 115200,
 		LSBFirst:  false,
 		Mode:      0,
 		DataBits:  8,
@@ -106,34 +106,7 @@ func main() {
 	// END - uart
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	// START - test encoder
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// raEncoder := astroenc.NewRA(machine.SPI0, machine.GP20, astroenc.RES14)
-	// raEncoder.Configure()
-	// raEncoder.ZeroRA()
-
-	// i := 0
-	// // for {
-	// i++
-	// print(fmt.Sprintf("TRY------------------------------------------: %v\n", i))
-	// time.Sleep(time.Second * 3)
-	// println("start get current position loop")
-
-	// position, err := raEncoder.GetPositionRA()
-
-	// if err == nil {
-	// 	println("position: ", position)
-	// } else {
-	// 	println("Error getting position")
-	// }
-
-	// }
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	// END - test encoder
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	var display ssd1351.Device
 	displayCS := machine.GP17
 
@@ -164,8 +137,9 @@ func main() {
 	raPWM = machine.PWM4
 
 	raDirection := true
-	raDirectionPin := machine.GP9
-	raStep := machine.GP8
+	raDirectionPin := machine.GP8
+
+	raStep := machine.GP9
 	var raStepsPerRevolution int32 = 400
 	var raMaxHz int32 = 1000
 	var raMaxMicroStepSetting int32 = 16
@@ -194,7 +168,7 @@ func main() {
 		raEncoderCS,
 	)
 	eq.Configure()
-	eq.RunAtHz(720.0)
+	eq.RunAtHz(300.0)
 
 	time.Sleep(time.Second * 1)
 	astroDisplay.SetStatus("Run!")

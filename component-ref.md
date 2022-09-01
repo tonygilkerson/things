@@ -58,6 +58,8 @@ Package Included:
 ## 1.5inch RGB OLED Display Module, 65K RGB Colors, 128×128, SPI
 
 * [Product Page](https://www.waveshare.com/1.5inch-rgb-oled-module.htm)
+* [Data Sheet](https://www.waveshare.com/w/upload/a/a7/SSD1351-Revision_1.5.pdf)
+* [Wiki](https://www.waveshare.com/wiki/1.5inch_RGB_OLED_Module)
 
 ![1.5inch-rgb-oled-module-3_2](img/1.5inch-rgb-oled-module-3_2.jpg)
 ![1.5inch-RGB-OLED-Module-details](img/1.5inch-RGB-OLED-Module-details.jpg)

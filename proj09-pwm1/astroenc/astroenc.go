@@ -5,6 +5,7 @@ package astroenc
 import (
 	"errors"
 	"machine"
+	"math"
 	"time"
 )
 
@@ -14,12 +15,16 @@ const AMT22_RESET byte = 0x60
 const AMT22_ZERO byte = 0x70
 const RES12 int8 = 12
 const RES14 int8 = 14
+const MAX_ENCODER_READING uint32 = 16_384
 
 // Encoder
 type RAEncoder struct {
-	cs         machine.Pin
-	resolution int8
-	spi        machine.SPI
+	cs                     machine.Pin
+	resolution             int8
+	spi                    machine.SPI
+	previousEncoderReading uint32
+	raPosition             uint32
+	rotationCount          int16
 }
 
 func NewRA(spi machine.SPI, cs machine.Pin, resolution int8) RAEncoder {
@@ -48,14 +53,16 @@ func (ra *RAEncoder) Configure() {
 func (ra *RAEncoder) ZeroRA() {
 
 	ra.WriteRead(AMT22_NOP, AMT22_ZERO)
+	ra.raPosition = 0
 
 	// allow time to reset
 	time.Sleep(time.Millisecond * 240)
 
 }
 
-func (ra *RAEncoder) GetPositionRA() (position uint16, err error) {
+func (ra *RAEncoder) GetPositionRA() (position uint32, err error) {
 
+	var encoderReading uint16
 	r1, r2 := ra.WriteRead(AMT22_NOP, AMT22_NOP)
 
 	// Put r1 into into the upper 8 bits
@@ -64,15 +71,44 @@ func (ra *RAEncoder) GetPositionRA() (position uint16, err error) {
 
 	// Put r2 into into the upper 8 bits
 	responseLower := uint16(r2)
-	responseLower = responseLower
 
 	// Combine upper and lowe into the same byte
 	response := responseUpper | responseLower
 
 	if parityCheck(response) == true {
-		// Use the lower 14 bits for the position
-		position = response & 0x3FFF
-		return position, nil
+		// Use the lower 14 bits for the encoderPosition
+		encoderReading = response & 0x3FFF
+
+		// DEVTODO - need to add a direction button so I can test going back and forth beyond the max position
+
+		// Check if the difference between current and previous position is large
+		// If so then we must have made a full rotation
+		if math.Abs(float64(ra.previousEncoderReading) - float64(encoderReading)) > float64(MAX_ENCODER_READING/2) {
+
+			// Next check to see if we are going forward or backwards
+			if uint32(encoderReading) < (MAX_ENCODER_READING/2) && ra.previousEncoderReading > (MAX_ENCODER_READING/2) {
+				// the encoder has moved beyond it's max in the "forward" direction, if so add to the rotationCount
+				ra.rotationCount++
+			} else if uint32(encoderReading) > (MAX_ENCODER_READING/2) && ra.previousEncoderReading < (MAX_ENCODER_READING/2) {
+				// the encoder has moved beyond it's min in the "backward" direction, if so subtract from the rotationCount
+				ra.rotationCount--
+			}
+
+	  }
+
+		// It does not make sense to go negative
+		if ra.rotationCount < 0 {
+			ra.rotationCount = 0
+		}
+
+		// Save ra position and its previous position
+		ra.raPosition = uint32(encoderReading) + (uint32(ra.rotationCount) * MAX_ENCODER_READING)
+		ra.previousEncoderReading = uint32(encoderReading)
+
+		println("[GetPositionRA] encoderReading: ", encoderReading, " ra.rotationCount: ", ra.rotationCount , " ra.raPosition: ", ra.raPosition)
+		return ra.raPosition, nil
+
+
 	} else {
 		return 0, errors.New("Bad parity check")
 	}

@@ -88,7 +88,7 @@ type RADriver struct {
 	encoder astroenc.RAEncoder
 
 	// RA Encoder
-	position uint16
+	position uint32
 }
 
 // Returns a new RADriver
@@ -170,6 +170,15 @@ func (ra *RADriver) Configure() {
 
 	// Default to microStepSetting of 16
 	ra.setMicroStepSetting(16)
+
+	// Direction
+	ra.directionPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	if ra.direction {
+		ra.directionPin.High()
+	} else {
+		ra.directionPin.Low()
+	}
+
 
 	// RA Encoder
 	ra.encoder.Configure()
@@ -257,7 +266,6 @@ func (ra *RADriver) RunAtHz(hz float64) {
 	ra.pwm.SetPeriod(period)
 }
 
-// DEVTODO - add go routine to poll the encoder position
 func (ra *RADriver) monitorPosition() {
 
 	for {
@@ -267,10 +275,10 @@ func (ra *RADriver) monitorPosition() {
 		} else {
 			println("Error getting position")
 		}
-		time.Sleep(time.Second * 1) //DEVTODO - make this smaller
+		time.Sleep(time.Millisecond * 500) //DEVTODO - not sure if this is too short or too long?
 	}
 }
 
-func (ra *RADriver) GetPosition() uint16 {
+func (ra *RADriver) GetPosition() uint32 {
 	return ra.position
 }
