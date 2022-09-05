@@ -275,7 +275,7 @@ func (ra *RADriver) monitorPosition() {
 		} else {
 			println("Error getting position")
 		}
-		time.Sleep(time.Millisecond * 500) //DEVTODO - not sure if this is too short or too long?
+		time.Sleep(time.Millisecond * 700) //DEVTODO - not sure if this is too short or too long?
 	}
 }
 

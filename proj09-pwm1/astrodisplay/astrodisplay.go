@@ -97,8 +97,8 @@ func (ad *AstroDisplay) WriteBody() {
 
 	// tinyfont.WriteLine(&ad.Display, &freemono.Regular9pt7b, 5, 30, ad.Body, red)
 	// tinyfont.WriteLine(&ad.Display, &tinyfont.Org01, 5, 30, ad.Body, red)
-	tinyfont.WriteLine(ad.display, &tinyfont.Org01, 5, 30, ad.prevBody, black)
-	tinyfont.WriteLine(ad.display, &tinyfont.Org01, 5, 30, ad.body, red)
+	tinyfont.WriteLine(ad.display, &freemono.Regular9pt7b, 5, 30, ad.prevBody, black)
+	tinyfont.WriteLine(ad.display, &freemono.Regular9pt7b, 5, 30, ad.body, red)
 
 	// tinyfont.WriteLine(&ad.Display, &tinyfont.LineFeed, 5, 50, ad.Body, red)
 

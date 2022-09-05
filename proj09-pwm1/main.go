@@ -168,7 +168,7 @@ func main() {
 		raEncoderCS,
 	)
 	eq.Configure()
-	eq.RunAtHz(300.0)
+	eq.RunAtHz(700.0)
 
 	time.Sleep(time.Second * 1)
 	astroDisplay.SetStatus("Run!")
@@ -180,18 +180,34 @@ func main() {
 		// fmt.Println(dt.Format("15:04:05"))
 		// body := fmt.Sprintf("%v", dt.Format("15:04:05"))
 		position := eq.GetPosition()
-		body := fmt.Sprintf("pos: %v",position )
+		body := fmt.Sprintf(" %v",position )
 		astroDisplay.SetBody(body)
-		// astroDisplay.Body = fmt.Sprintf("%v", eq.RunningHz)
-
 		astroDisplay.WriteBody()
+		println("[main] position: ", position)
+
 
 		// uart
 		asciiBytes := []byte(body + "\n")
 		uart.Write(asciiBytes)
 
-		time.Sleep(time.Second * 2)
+		time.Sleep(time.Millisecond * 500)
 
+		//
+		// Tesing to see if I can count one RA rotation
+		//
+		// The motor and encoder rotate together so one full turn of the motor is one full turn of the encoder
+		// The encoder positions are from 0 to 2^14 (16_384)
+		// So we should be able to just multiple by the gear ratios:
+		// 16_384 (1 motor turn) * 3 (main gear) * 144 (worm gear) = 7_077_888
+	  if position >= 7_077_888 {
+			break
+		}
 	}
 
+	// Done
+	astroDisplay.SetBody("Done!")
+	astroDisplay.WriteBody()
+	println("[main] Done!")
+
+	
 }

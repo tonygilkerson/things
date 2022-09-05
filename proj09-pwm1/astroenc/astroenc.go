@@ -105,7 +105,7 @@ func (ra *RAEncoder) GetPositionRA() (position uint32, err error) {
 		ra.raPosition = uint32(encoderReading) + (uint32(ra.rotationCount) * MAX_ENCODER_READING)
 		ra.previousEncoderReading = uint32(encoderReading)
 
-		println("[GetPositionRA] encoderReading: ", encoderReading, " ra.rotationCount: ", ra.rotationCount , " ra.raPosition: ", ra.raPosition)
+		// println("[GetPositionRA] encoderReading: ", encoderReading, " ra.rotationCount: ", ra.rotationCount , " ra.raPosition: ", ra.raPosition)
 		return ra.raPosition, nil
 
 
