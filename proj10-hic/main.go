@@ -22,7 +22,7 @@ func main() {
 	led.High()
 
 	//
-	// If any key is pressed record the cooresponding pin
+	// If any key is pressed record the corresponding pin
 	//
 	var keyPressed machine.Pin = machine.GP0
 
@@ -33,9 +33,30 @@ func main() {
 	zeroKey := machine.GP3
 	scrollUpKey := machine.GP4
 
+	sevenKey := machine.GP5
+	eightKey := machine.GP6
+	nineKey := machine.GP7
+	
+	fourKey := machine.GP8
+	fiveKey := machine.GP9
+	sixKey := machine.GP10
+	
+	oneKey := machine.GP11
+	twoKey := machine.GP12
+	threeKey := machine.GP13
+	
 	scrollDnKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	zeroKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	scrollUpKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	sevenKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	eightKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	nineKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	fourKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	fiveKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	sixKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	oneKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	twoKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	threeKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
 	scrollDnKey.SetInterrupt(machine.PinFalling,
 		func(p machine.Pin) {
@@ -51,6 +72,42 @@ func main() {
 		func(p machine.Pin) {
 			keyPressed = p
 		})
+	sevenKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	eightKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	nineKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	fourKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	fiveKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	sixKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	oneKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	twoKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
+	threeKey.SetInterrupt(machine.PinFalling,
+		func(p machine.Pin) {
+			keyPressed = p
+		})
 
 	fmt.Println("Get ready...")
 
@@ -61,15 +118,14 @@ func main() {
 		if keyPressed != 0 {
 
 			//
-			//  After a small delay if the key pressed has not chaged and
-			//  is still on then consider it "pressed"
+			//  After a small delay if the key pressed has not changed, consider it "pressed"
 			//
 			key := keyPressed
-			time.Sleep(time.Millisecond * 40)
-			// if key == keyPressed && keyPressed.Get() {
+			time.Sleep(time.Millisecond * 100)
+
 			if key == keyPressed {
 				keyPressed = 0 //reset for next key press
-				fmt.Printf("\npin %v\n", key)
+				fmt.Printf("%v ", key)
 			}
 		}
 		// fmt.Printf(".")
