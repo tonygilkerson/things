@@ -36,15 +36,24 @@ func main() {
 	sevenKey := machine.GP5
 	eightKey := machine.GP6
 	nineKey := machine.GP7
-	
+
 	fourKey := machine.GP8
 	fiveKey := machine.GP9
 	sixKey := machine.GP10
-	
+
 	oneKey := machine.GP11
 	twoKey := machine.GP12
 	threeKey := machine.GP13
+
+	rightKey := machine.GP14
+	leftKey := machine.GP15
+	upKey := machine.GP16
+	downKey := machine.GP17
 	
+	escKey := machine.GP18
+	setupKey := machine.GP19
+	enterKey := machine.GP20
+
 	scrollDnKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	zeroKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	scrollUpKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
@@ -57,57 +66,33 @@ func main() {
 	oneKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	twoKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	threeKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	rightKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	leftKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	upKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	downKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	escKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	setupKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	enterKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
-	scrollDnKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-
-	zeroKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-
-	scrollUpKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	sevenKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	eightKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	nineKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	fourKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	fiveKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	sixKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	oneKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	twoKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
-	threeKey.SetInterrupt(machine.PinFalling,
-		func(p machine.Pin) {
-			keyPressed = p
-		})
+	scrollDnKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	zeroKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	scrollUpKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	sevenKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	eightKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	nineKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	fourKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	fiveKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	sixKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	oneKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	twoKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	threeKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	rightKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	leftKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	upKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	downKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	escKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	setupKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	enterKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
 
 	fmt.Println("Get ready...")
 
