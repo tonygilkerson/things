@@ -6,6 +6,20 @@ import (
 	"time"
 )
 
+var lastPress time.Time
+
+func debounce() bool {
+
+	if time.Since(lastPress) < 200*time.Millisecond {
+		return false
+	} else {
+		lastPress = time.Now()
+		return true
+	}
+
+
+}
+
 func main() {
 
 	// run light
@@ -27,7 +41,7 @@ func main() {
 	var keyPressed machine.Pin = machine.GP0
 
 	//
-	// kepad keys
+	// keypad keys
 	//
 	scrollDnKey := machine.GP2
 	zeroKey := machine.GP3
@@ -49,7 +63,7 @@ func main() {
 	leftKey := machine.GP15
 	upKey := machine.GP16
 	downKey := machine.GP17
-	
+
 	escKey := machine.GP18
 	setupKey := machine.GP19
 	enterKey := machine.GP20
@@ -74,7 +88,13 @@ func main() {
 	setupKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 	enterKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
-	scrollDnKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	// scrollDnKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
+	scrollDnKey.SetInterrupt(machine.PinFalling, func(machine.Pin){
+		if debounce() {
+			fmt.Printf(" scrollDnKey ")
+		}	
+	})
+
 	zeroKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
 	scrollUpKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
 	sevenKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
@@ -94,6 +114,16 @@ func main() {
 	setupKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
 	enterKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
 
+	// // config uart
+	// uart := machine.UART0
+	// tx := machine.UART0_TX_PIN
+	// rx := machine.UART0_RX_PIN
+	// uart.Configure(machine.UARTConfig{
+	// 	BaudRate: 9600,
+	// 	TX:       tx,
+	// 	RX:       rx,
+	// })
+
 	fmt.Println("Get ready...")
 
 	// Main loop
@@ -111,10 +141,27 @@ func main() {
 			if key == keyPressed {
 				keyPressed = 0 //reset for next key press
 				fmt.Printf("%v ", key)
+
+				// UART
+				//
+				// if uart.Buffered() > 0 {
+				// 	data, _ := uart.ReadByte()
+				// 	lastSaid := string(data)
+				// 	print(fmt.Sprintf("Clay: string=%v, bytes=%v\n", lastSaid, data))
+				// 	//uart.WriteByte(data)
+				// 	time.Sleep(10 * time.Millisecond)
+				// } else {
+				// 	asciiStr := fmt.Sprintf("%v",key)
+				// 	asciiBytes := []byte(asciiStr)
+				// 	fmt.Printf("\nSend to Clay: [%v]\n",asciiStr)
+				// 	uart.WriteByte(asciiBytes[0])
+				// 	time.Sleep(1 * time.Second)
+				// }
+
 			}
 		}
-		// fmt.Printf(".")
-		time.Sleep(time.Millisecond * 100)
+		fmt.Printf(". ")
+		time.Sleep(time.Millisecond * 500)
 	}
 
 }
