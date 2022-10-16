@@ -35,6 +35,10 @@ func main() {
 	}
 	led.High()
 
+
+	machine.I2C
+
+
 	//
 	// If any key is pressed record the corresponding pin
 	//

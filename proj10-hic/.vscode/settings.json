@@ -1,7 +1,9 @@
 {
   "go.toolsEnvVars": {
-    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-d32d2b37523e5804a1ab8db6d3b6ac5d1313dc0c5d49dbb8ff01b88764193f1e",
-    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,pico,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb"
+    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-46c0e34d02815d8cece54b062ba5acee43f0173da7a340d0fb4ab51bc13d2913",
+    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,pico,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb",
+    "GOOS": "linux",
+    "GOARCH": "arm"
   },
   "cSpell.words": [
     "uart"
