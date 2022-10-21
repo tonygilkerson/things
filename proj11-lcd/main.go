@@ -9,6 +9,7 @@ import (
 
 	"tinygo.org/x/drivers/st7789"
 	"tinygo.org/x/tinyfont"
+	"tinygo.org/x/tinyfont/freemono"
 )
 
 func main() {
@@ -37,7 +38,7 @@ func main() {
 		DataBits:  0,
 		SCK:       machine.GP10,
 		SDO:       machine.GP11,
-		SDI:       machine.GP28,
+		SDI:       machine.GP28, // I don't think this is actually used for LCD, just assign to any open pin
 	})
 
 	display := st7789.New(machine.SPI1,
@@ -63,29 +64,43 @@ func main() {
 	width, height := display.Size()
 	fmt.Printf("width: %v, height: %v\n",width, height)
 
-	red := color.RGBA{255, 0, 0, 255}
-	black := color.RGBA{0, 0, 0, 255}
+	red := color.RGBA{126, 0, 0, 255}
+	// red := color.RGBA{255, 0, 0, 255}
+	// black := color.RGBA{0, 0, 0, 255}
 	// white := color.RGBA{255, 255, 255, 255}
 	// blue := color.RGBA{0, 0, 255, 255}
 	// green := color.RGBA{0, 255, 0, 255}
 
 	for {
-		display.FillScreen(black)
-		fmt.Printf("FillScreen(black)\n")
-		time.Sleep(time.Second * 1)
+
+		cls(&display)
 		
-		paintScreen(red, &display,10)
-		time.Sleep(time.Second * 3)
+		// paintScreen(red, &display,10)
+		// time.Sleep(time.Second * 3)
 
-		paintScreen(black, &display,10)
-		time.Sleep(time.Second * 3)
+		// cls(&display)
+		// tinyfont.WriteLine(&display,&freemono.Regular9pt7b,10,10,"123456789-123456789-1234567x",red)
+		// time.Sleep(time.Second * 5)
 
-		// tinyfont.WriteLine(&display,&freemono.Regular18pt7b,10,80,"Tony Gilkerson",red)
-		tinyfont.WriteLine(&display,&tinyfont.Org01,20,20,"AAAAAAAAA",red)
-		tinyfont.WriteLine(&display,&tinyfont.Org01,20,40,"BBBBBBBBBB",red)
-		tinyfont.WriteLine(&display,&tinyfont.Org01,20,100,"CCCCCCCCCC",red)
-
+		cls(&display)
+		// tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,20,"123456789-123456789-x",red)
+		tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,20,"freemono.Regular12pt7b",red)
 		time.Sleep(time.Second * 5)
+		
+		//display.EnableBacklight(false)
+
+		// at this font the screen can hold 10 lines 21 character across 
+		cls(&display)
+		tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,20,"123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\na23456789-123456789-x\nB23456789-123456789-x",red)
+		time.Sleep(time.Second * 5)
+		
+
+		//display.EnableBacklight(true)
+
+		cls(&display)
+		tinyfont.WriteLine(&display,&freemono.Regular18pt7b,10,30,"123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X",red)
+		time.Sleep(time.Second * 5)
+
 		
 	}
 
@@ -114,4 +129,10 @@ func paintScreen(c color.RGBA, d *st7789.Device, s int16) {
 			d.FillRectangle(x, y, s, s, c)
 		}
 	}
+}
+
+func cls (d *st7789.Device){
+	black := color.RGBA{0, 0, 0, 255}
+	d.FillScreen(black)
+	fmt.Printf("FillScreen(black)\n")
 }
