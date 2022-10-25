@@ -11,14 +11,7 @@ func main() {
 
 	// run light
 	runLight()
-
 	fmt.Printf("start")
-
-	// // config uart
-	// uart := machine.UART0
-	// tx := machine.UART0_TX_PIN
-	// rx := machine.UART0_RX_PIN
-	// uart.Configure(machine.UARTConfig{TX: tx, RX: rx})
 
 	mb, _ := msg.NewBroker(
 		machine.UART0,
@@ -29,26 +22,22 @@ func main() {
 		machine.UART1_RX_PIN,
 	)
 	mb.Configure()
-	mb.AddSubscription(msg.STAT | msg.RA_ENCODER_POSITION)
-	mb.ListenForSubscriptions()
+
+	fooCh := make(chan msg.FooMsg)
+	barCh := make(chan msg.BarMsg)
+
+	mb.SetFooCh(fooCh)
+	mb.SetBarCh(barCh)
+
+	go fooConsumer(fooCh)
+	go barConsumer(barCh)
+
+	mb.SubscriptionReader()
 
 	for {
 
-		// for {
-		// if uart.Buffered() > 0 {
-
-		// 	data, _ := uart.ReadByte()
-		// 	dataString := string(data)
-		// 	fmt.Printf("From UART0: %v\n", dataString)
-		// }
-		// else {
-		// 	print(".")
-		// 	asciiStr := "ABC"
-		// 	asciiBytes := []byte(asciiStr)
-		// 	uart.WriteByte(asciiBytes[])
-		// 	time.Sleep(1 * time.Second)
-		// }
-		time.Sleep(time.Second * 3000)
+		fmt.Println("heart beat")
+		time.Sleep(time.Second * 10)
 	}
 
 }
@@ -67,4 +56,17 @@ func runLight() {
 		time.Sleep(time.Millisecond * 100)
 	}
 	led.High()
+}
+
+func fooConsumer(c chan msg.FooMsg) {
+
+	for m := range c {
+		fmt.Printf("[fooConsumer] - Kind: [%s], name: [%s]\n", m.Kind, m.Name)
+	}
+}
+func barConsumer(c chan msg.BarMsg) {
+
+	for m := range c {
+		fmt.Printf("[barConsumer] - Kind: [%s], a: [%s], b: [%s], c: [%s]\n", m.Kind, m.Aaa, m.Bbb, m.Ccc)
+	}
 }
