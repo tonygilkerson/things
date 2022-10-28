@@ -23,17 +23,32 @@ func main() {
 	)
 	mb.Configure()
 
+	//
+	// Create subscription channels
+	//
 	fooCh := make(chan msg.FooMsg)
 	barCh := make(chan msg.BarMsg)
 
+	//
+	// Register the channels with the broker
+	//
 	mb.SetFooCh(fooCh)
 	mb.SetBarCh(barCh)
 
-	go fooConsumer(fooCh)
+	//
+	// Start the message consumers
+	//
+	go fooConsumer(fooCh,mb)
 	go barConsumer(barCh)
 
+	//
+	// Start the subscription reader, it will read from the the UARTS
+	//
 	mb.SubscriptionReader()
 
+	//
+	// Do something to keep the main routine from ending
+	//
 	for {
 
 		fmt.Println("heart beat")
@@ -41,6 +56,7 @@ func main() {
 	}
 
 }
+
 
 func runLight() {
 
@@ -58,10 +74,13 @@ func runLight() {
 	led.High()
 }
 
-func fooConsumer(c chan msg.FooMsg) {
+func fooConsumer(c chan msg.FooMsg, mb msg.MsgBroker) {
 
 	for m := range c {
 		fmt.Printf("[fooConsumer] - Kind: [%s], name: [%s]\n", m.Kind, m.Name)
+		fmt.Printf("[fooConsumer] - echo Publish Kind: [%s], name: [%s]\n", m.Kind, m.Name)
+		m.Name = "I am being echoed"
+		mb.PublishFoo(m)
 	}
 }
 func barConsumer(c chan msg.BarMsg) {

@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-type Topic uint64 // For a total of 64 Topics possible, If I need more than that then I will need to do something else
-
 type FooMsg struct {
 	Kind string
 	Name string
@@ -29,9 +27,8 @@ type MsgBroker struct {
 	uartDnTxPin machine.Pin
 	uartDnRxPin machine.Pin
 
-	subscriptions []Topic
-	fooCh         chan FooMsg
-	barCh         chan BarMsg
+	fooCh chan FooMsg
+	barCh chan BarMsg
 }
 
 func NewBroker(
@@ -113,7 +110,7 @@ func (mb *MsgBroker) SubscriptionReader() {
 				}
 
 			}
-			
+
 			//
 			// At this point we have an entire message, so dispatch it!
 			//
@@ -129,13 +126,13 @@ func (mb *MsgBroker) DispatchMessage(msgParts []string) {
 	switch msgParts[0] {
 	case "Foo":
 		fmt.Println("[DispatchMessage] - Foo")
-		msg := makeFoo(msgParts)
+		msg := unmarshallFoo(msgParts)
 		if mb.fooCh != nil {
 			mb.fooCh <- *msg
 		}
 	case "Bar":
 		fmt.Println("[DispatchMessage] - Bar")
-		msg := makeBar(msgParts)
+		msg := unmarshallBar(msgParts)
 		if mb.barCh != nil {
 			mb.barCh <- *msg
 		}
@@ -145,7 +142,42 @@ func (mb *MsgBroker) DispatchMessage(msgParts []string) {
 
 }
 
-func makeFoo(msgParts []string) *FooMsg {
+func (mb *MsgBroker) PublishFoo(f FooMsg) {
+
+	var msg string
+	msg = "^"
+	msg = msg + f.Kind
+	msg = msg + "|" +  f.Name
+	msg = msg + "~"
+
+	if mb.uartUp != nil {
+		mb.uartUp.Write([]byte(msg))
+	}
+	if mb.uartDn != nil {
+		mb.uartDn.Write([]byte(msg))
+	}
+
+}
+
+func (mb *MsgBroker) PublishBar(b BarMsg) {
+
+	var msg string
+	msg = "^"
+	msg = msg + "|" + b.Kind 
+	msg = msg + "|" +  b.Aaa
+	msg = msg + "|" +  b.Bbb
+	msg = msg + "|" +  b.Ccc
+	msg = msg + "~"
+
+	if mb.uartUp != nil {
+		mb.uartUp.Write([]byte(msg))
+	}
+	if mb.uartDn != nil {
+		mb.uartDn.Write([]byte(msg))
+	}
+}
+
+func unmarshallFoo(msgParts []string) *FooMsg {
 
 	msg := new(FooMsg)
 
@@ -159,7 +191,7 @@ func makeFoo(msgParts []string) *FooMsg {
 	return msg
 }
 
-func makeBar(msgParts []string) *BarMsg {
+func unmarshallBar(msgParts []string) *BarMsg {
 
 	msg := new(BarMsg)
 
