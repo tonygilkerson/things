@@ -3,6 +3,7 @@ package msg
 import (
 	"fmt"
 	"machine"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -16,6 +17,10 @@ type BarMsg struct {
 	Aaa  string
 	Bbb  string
 	Ccc  string
+}
+
+type Msg interface {
+	FooMsg | BarMsg
 }
 
 type MsgBroker struct {
@@ -142,12 +147,41 @@ func (mb *MsgBroker) DispatchMessage(msgParts []string) {
 
 }
 
+func PublishMsg[M Msg](m M, mb MsgBroker) {
+
+	//
+	// reflect to get message properties
+	//
+	msg := reflect.ValueOf(&m).Elem()
+
+	//
+	// Create msgStr
+	//
+	msgStr := fmt.Sprintf("^%v", msg.Field(0).Interface())
+	for i := 1; i < msg.NumField(); i++ {
+		msgStr = msgStr + fmt.Sprintf(",%v", msg.Field(i).Interface())
+	}
+	msgStr = msgStr + "~"
+
+
+	//
+	// Write to uart
+	//
+	if mb.uartUp != nil {
+		mb.uartUp.Write([]byte(msgStr))
+	}
+	if mb.uartDn != nil {
+		mb.uartDn.Write([]byte(msgStr))
+	}
+
+}
+
 func (mb *MsgBroker) PublishFoo(f FooMsg) {
 
 	var msg string
 	msg = "^"
 	msg = msg + f.Kind
-	msg = msg + "|" +  f.Name
+	msg = msg + "|" + f.Name
 	msg = msg + "~"
 
 	if mb.uartUp != nil {
@@ -163,10 +197,10 @@ func (mb *MsgBroker) PublishBar(b BarMsg) {
 
 	var msg string
 	msg = "^"
-	msg = msg + "|" + b.Kind 
-	msg = msg + "|" +  b.Aaa
-	msg = msg + "|" +  b.Bbb
-	msg = msg + "|" +  b.Ccc
+	msg = msg + "|" + b.Kind
+	msg = msg + "|" + b.Aaa
+	msg = msg + "|" + b.Bbb
+	msg = msg + "|" + b.Ccc
 	msg = msg + "~"
 
 	if mb.uartUp != nil {
