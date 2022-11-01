@@ -8,12 +8,18 @@ import (
 	"time"
 )
 
+type MsgKind string
+
+const (
+	Foo MsgKind = "Foo"
+	Bar         = "Bar"
+)
 type FooMsg struct {
-	Kind string
+	Kind MsgKind
 	Name string
 }
 type BarMsg struct {
-	Kind string
+	Kind MsgKind
 	Aaa  string
 	Bbb  string
 	Ccc  string
@@ -129,13 +135,13 @@ func (mb *MsgBroker) SubscriptionReader() {
 func (mb *MsgBroker) DispatchMessage(msgParts []string) {
 
 	switch msgParts[0] {
-	case "Foo":
+	case string(Foo):
 		fmt.Println("[DispatchMessage] - Foo")
 		msg := unmarshallFoo(msgParts)
 		if mb.fooCh != nil {
 			mb.fooCh <- *msg
 		}
-	case "Bar":
+	case Bar:
 		fmt.Println("[DispatchMessage] - Bar")
 		msg := unmarshallBar(msgParts)
 		if mb.barCh != nil {
@@ -176,47 +182,12 @@ func PublishMsg[M Msg](m M, mb MsgBroker) {
 
 }
 
-func (mb *MsgBroker) PublishFoo(f FooMsg) {
-
-	var msg string
-	msg = "^"
-	msg = msg + f.Kind
-	msg = msg + "|" + f.Name
-	msg = msg + "~"
-
-	if mb.uartUp != nil {
-		mb.uartUp.Write([]byte(msg))
-	}
-	if mb.uartDn != nil {
-		mb.uartDn.Write([]byte(msg))
-	}
-
-}
-
-func (mb *MsgBroker) PublishBar(b BarMsg) {
-
-	var msg string
-	msg = "^"
-	msg = msg + "|" + b.Kind
-	msg = msg + "|" + b.Aaa
-	msg = msg + "|" + b.Bbb
-	msg = msg + "|" + b.Ccc
-	msg = msg + "~"
-
-	if mb.uartUp != nil {
-		mb.uartUp.Write([]byte(msg))
-	}
-	if mb.uartDn != nil {
-		mb.uartDn.Write([]byte(msg))
-	}
-}
-
 func unmarshallFoo(msgParts []string) *FooMsg {
 
 	msg := new(FooMsg)
 
 	if len(msgParts) > 0 {
-		msg.Kind = msgParts[0]
+		msg.Kind = Foo
 	}
 	if len(msgParts) > 1 {
 		msg.Name = msgParts[1]
@@ -230,7 +201,7 @@ func unmarshallBar(msgParts []string) *BarMsg {
 	msg := new(BarMsg)
 
 	if len(msgParts) > 0 {
-		msg.Kind = msgParts[0]
+		msg.Kind = Bar
 	}
 	if len(msgParts) > 1 {
 		msg.Aaa = msgParts[1]

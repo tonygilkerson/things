@@ -55,7 +55,7 @@ func main() {
 		time.Sleep(time.Second * 10)
 
 		var foo msg.FooMsg
-		foo.Kind = "Foo"
+		foo.Kind = msg.Foo
 		foo.Name = "PublishMe"
 		msg.PublishMsg(foo,mb)
 	}
