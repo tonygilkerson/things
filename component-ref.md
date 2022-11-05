@@ -200,7 +200,6 @@ See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/pro
 
 > (this needs confirmed) While looking at the front the #1 pin is on the left. 
 
-
 ## AMT-PGRM-06C
 
 ![cable](img/amt22-cable-pmg.png)
@@ -208,3 +207,10 @@ See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/pro
 * [Product Page CUI](https://www.cuidevices.com/product/motion/rotary-encoders/encoder-accessories/amt-cables/amt-pgrm-06c)
 * [Product Page Mouser](https://www.mouser.com/ProductDetail/CUI-Devices/AMT-PGRM-06C?qs=XeJtXLiO41RU2%252BvAgDDHyA%3D%3D)
 * [Datasheet CUI](https://www.cuidevices.com/product/resource/amt-pgrm.pdf)
+
+## 2inch LCD Display Module For Raspberry Pi Pico, 65K RGB Colors, 320×240 Pixels, SPI Interface
+
+![lcd](img/2inch-LCD-display.png)
+
+![lcd wireing](img/2inch-LCD-display-wireing.png)
+* [Product Page Waveshare](https://www.waveshare.com/pico-lcd-2.htm)

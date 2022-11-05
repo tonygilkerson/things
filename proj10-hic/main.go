@@ -2,9 +2,54 @@ package main
 
 import (
 	"fmt"
+	"image/color"
 	"machine"
 	"time"
+
+	"tinygo.org/x/drivers/ssd1351"
+	"tinygo.org/x/tinyfont"
+	"tinygo.org/x/tinyfont/freemono"
 )
+
+/*
+
+This has not worked yet... dont trust it!
+
+	Pico									OLED 																						ssd1351 						keypad						UART
+	---------------------	-------------------------------------------			-----------------		----------------	-------------
+	3v3										VCC
+	GP0 																																																				UART0 TX
+	GP1 																																																				UART0 RX
+	GP2 																																											scrollDnKey
+	GP3 																																											zeroKey
+	GP4 																																											scrollUpKey
+	GP5 																																											sevenKey
+	GP6 																																											eightKey
+	GP7 																																											nineKey
+	GP8 																																											fourKey
+	GP9 																																											fiveKey
+	GP10 																																											sixKey
+	GP11 																																											oneKey
+	GP12 																																											twoKey
+	GP13 																																											threeKey
+	GP14 																																											rightKey
+	GP15 																																											leftKey
+	GP16 									SPI0_SDI_PIN (not used)
+	GP17 																																											downKey
+	GP18 									CLK	- clock input (SPI0_SCK_PIN)
+	GP19 									DIN	- data in     (SPI0_SDO_PIN)
+	GP20 																																											enterKey
+	GP21																																											upKey (move from 16)
+	GP22																																											escKey   (move from 18)
+	GP26																																											setupKey (move from 19)
+	GP27									CS 	- Chip select																csPin
+	GP28									DC	- Data/Cmd (high=data,low=cmd)							dcPin
+												RST	WHT	- Reset (low=active)										resetPin
+																																				enPin
+			 																																	rwPin
+																																				bus (machine.SPI0)
+												https://www.waveshare.com/product/displays/oled/pico-oled-2.23.htm
+*/
 
 var lastPress time.Time
 
@@ -17,27 +62,65 @@ func debounce() bool {
 		return true
 	}
 
-
 }
 
 func main() {
 
 	// run light
-	led := machine.LED
-	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	runLight()
 
-	// blink run light for a bit seconds so I can tell it is starting
-	for i := 0; i < 25; i++ {
-		led.High()
-		time.Sleep(time.Millisecond * 100)
-		led.Low()
-		time.Sleep(time.Millisecond * 100)
-	}
-	led.High()
+	////////////////////////////////////////////////////////////////
+	// START display test
+	///////////////////////////////////////////////////////////////
 
+	//
+	// SPI for Display
+	//
+	machine.SPI0.Configure(machine.SPIConfig{
+		Frequency: 2000000,
+		LSBFirst:  false,
+		Mode:      0,
+		DataBits:  8,
+		SCK:       machine.SPI0_SCK_PIN, // GP18
+		SDO:       machine.SPI0_SDO_PIN, // GP19
+		SDI:       machine.SPI0_SDI_PIN, // GP16
+	})
 
-	machine.I2C
+	var rst machine.Pin // ran out of pins
+	dc := machine.Pin(28)
+	cs := machine.Pin(27)
+	var en machine.Pin // ran out of pins
+	var rw machine.Pin // ran out of pins
 
+	display := ssd1351.New(machine.SPI0, rst, dc, cs, en, rw)
+
+	display.Configure(ssd1351.Config{
+		Width:        128,
+		Height:       128,
+		RowOffset:    0,
+		ColumnOffset: 0,
+	})
+
+	// not sure if this is needed
+	display.Command(ssd1351.SET_REMAP_COLORDEPTH)
+	display.Data(0x62)
+
+	display.FillScreen(color.RGBA{0, 0, 0, 0})
+
+	red := color.RGBA{0, 0, 255, 255}
+
+	// tinyfont.WriteLine(&display, &freemono.Regular18pt7b, 5, 5, "123456789", red)
+	tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 15, "Line 0001", red)
+	display.FillRectangle(3,20,125,1,red)
+	tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 40, "Line 0002", red)
+	display.FillRectangle(3,45,124,1,red)
+	tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 65, "Line 0003", red)
+	display.FillRectangle(3,70,123,1,red)
+	
+
+	////////////////////////////////////////////////////////////////
+	// END display test
+	///////////////////////////////////////////////////////////////
 
 	//
 	// If any key is pressed record the corresponding pin
@@ -93,10 +176,10 @@ func main() {
 	enterKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
 	// scrollDnKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
-	scrollDnKey.SetInterrupt(machine.PinFalling, func(machine.Pin){
+	scrollDnKey.SetInterrupt(machine.PinFalling, func(machine.Pin) {
 		if debounce() {
 			fmt.Printf(" scrollDnKey ")
-		}	
+		}
 	})
 
 	zeroKey.SetInterrupt(machine.PinFalling, func(p machine.Pin) { keyPressed = p })
@@ -168,4 +251,20 @@ func main() {
 		time.Sleep(time.Millisecond * 500)
 	}
 
+}
+
+func runLight() {
+
+	// run light
+	led := machine.LED
+	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	// blink run light for a bit seconds so I can tell it is starting
+	for i := 0; i < 10; i++ {
+		led.High()
+		time.Sleep(time.Millisecond * 100)
+		led.Low()
+		time.Sleep(time.Millisecond * 100)
+	}
+	led.High()
 }
