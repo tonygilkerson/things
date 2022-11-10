@@ -109,11 +109,15 @@ func main() {
 
 	red := color.RGBA{0, 0, 255, 255}
 
-	// tinyfont.WriteLine(&display, &freemono.Regular18pt7b, 5, 5, "123456789", red)
+	// tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 15, "123456789", red)
+	// display.FillRectangle(0,0,125,1,red)
+
 	tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 15, "Line 0001", red)
 	display.FillRectangle(3,20,125,1,red)
+
 	tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 40, "Line 0002", red)
 	display.FillRectangle(3,45,124,1,red)
+
 	tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 3, 65, "Line 0003", red)
 	display.FillRectangle(3,70,123,1,red)
 	
@@ -148,11 +152,11 @@ func main() {
 
 	rightKey := machine.GP14
 	leftKey := machine.GP15
-	upKey := machine.GP16
+	upKey := machine.GP21
 	downKey := machine.GP17
 
-	escKey := machine.GP18
-	setupKey := machine.GP19
+	escKey := machine.GP22
+	setupKey := machine.GP26
 	enterKey := machine.GP20
 
 	scrollDnKey.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
