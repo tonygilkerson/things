@@ -64,8 +64,8 @@ func main() {
 	width, height := display.Size()
 	fmt.Printf("width: %v, height: %v\n",width, height)
 
-	red := color.RGBA{126, 0, 0, 255}
-	// red := color.RGBA{255, 0, 0, 255}
+	// red := color.RGBA{126, 0, 0, 255} // dim
+	red := color.RGBA{255, 0, 0, 255}
 	// black := color.RGBA{0, 0, 0, 255}
 	// white := color.RGBA{255, 255, 255, 255}
 	// blue := color.RGBA{0, 0, 255, 255}

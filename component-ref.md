@@ -214,3 +214,10 @@ See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/pro
 
 ![lcd wireing](img/2inch-LCD-display-wireing.png)
 * [Product Page Waveshare](https://www.waveshare.com/pico-lcd-2.htm)
+
+## TMC2208 Motor Driver
+
+![pin](/img/tmc2208-pin.jpg)
+![wire](/img/tmc2208-wire.jpg)
+
+* [Datasheet](https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_datasheet_Rev1.09.pdf)
