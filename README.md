@@ -20,5 +20,3 @@ This repo will have several subfolders each containing the source code and doc f
 * [TryBotics](https://trybotics.com/project/tinygo-on-arduino-uno-an-introduction-6130f6) - has a good list of prjects
 * [Astro Tracker](https://learn.adafruit.com/diy-robotic-sky-tracking-astrophotography-mount) - a DIY Robotic Sky Tracking Astrophotography Mount 
 
-
-test
