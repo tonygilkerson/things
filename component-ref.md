@@ -222,27 +222,10 @@ See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/pro
 
 * [Datasheet](https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC220x_TMC2224_datasheet_Rev1.09.pdf)
 
-## LoRa-E5 Dev Kit
+## ST-Link V2
 
+ST-Link-Compatible Programmer & Emulator / Debugging dongle
 
-![lora-e5](img/lora-e5-dev-kit.jpg)
+![st-link v2](img/st-link-v2.jpg)
 
-![lora-e5-pins](img/lora-e5-dev-kit-pins.jpg)
-
-| Parameters          | Specifications                                                     |
-| ------------------- | ------------------------------------------------------------------ |
-| Size                | Wio-E5 Dev Board: 85.6*54mm  Package: 200*130*50mm                 |
-| Voltage - supply    | 3-5V (Battery) / 5V(USB Type C)                                    |
-| Voltage - output    | EN 3V3 / 5V                                                        |
-| Power - output      | Up to +20.8dBm at 3.3V                                             |
-| Frequency           | EU868 / US915 / AU915 / AS923 / KR920 / IN865                      |
-| Protocol            | Long Range                                                         |
-| Sensitivity         | -116.5dBm ~ -136dBm                                                |
-| interfaces          | USB Type C / JST2.0 / Grove*3(IIC*2/UART*1) / RS485 / SMA-K / IPEX |
-| modulation          | Long Range , (G)FSK, (G)MSK, BPSK                                  |
-| working temperature | -40℃ ~ 85℃                                                         |
-| current             | Wio-E5 module sleep current as low as 2.1uA (WOR mode)             |
-
-* [Product Page](https://www.seeedstudio.com/LoRa-E5-Dev-Kit-p-4868.html)
-* [Data Sheet](https://www.seeedstudio.com/LoRa-E5-Dev-Kit-p-4868.html)
-* [wiki](https://wiki.seeedstudio.com/LoRa_E5_Dev_Board/)
+* [product page](https://www.adafruit.com/product/2548)

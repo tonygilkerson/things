@@ -63,3 +63,27 @@ Product Desecription:
 
 ![M5Stickc Plus ESP32](img/M5Stick-Plus-ESP32.webp)
 
+## LoRa-E5 Dev Kit
+
+![lora-e5](img/lora-e5-dev-kit.jpg)
+
+![lora-e5-pins](img/lora-e5-dev-kit-pins.jpg)
+
+| Parameters          | Specifications                                                     |
+| ------------------- | ------------------------------------------------------------------ |
+| Size                | Wio-E5 Dev Board: 85.6*54mm  Package: 200*130*50mm                 |
+| Voltage - supply    | 3-5V (Battery) / 5V(USB Type C)                                    |
+| Voltage - output    | EN 3V3 / 5V                                                        |
+| Power - output      | Up to +20.8dBm at 3.3V                                             |
+| Frequency           | EU868 / US915 / AU915 / AS923 / KR920 / IN865                      |
+| Protocol            | Long Range                                                         |
+| Sensitivity         | -116.5dBm ~ -136dBm                                                |
+| interfaces          | USB Type C / JST2.0 / Grove*3(IIC*2/UART*1) / RS485 / SMA-K / IPEX |
+| modulation          | Long Range , (G)FSK, (G)MSK, BPSK                                  |
+| working temperature | -40℃ ~ 85℃                                                         |
+| current             | Wio-E5 module sleep current as low as 2.1uA (WOR mode)             |
+
+* [Product Page](https://www.seeedstudio.com/LoRa-E5-Dev-Kit-p-4868.html)
+* [Data Sheet](https://files.seeedstudio.com/products/317990687/res/STM32WLE5JC%20Datasheet.pdf)
+* [Dev Board wiki](https://wiki.seeedstudio.com/LoRa_E5_Dev_Board/)
+* [Wio-E5 STM32WLE5JC Module wiki](https://wiki.seeedstudio.com/LoRa-E5_STM32WLE5JC_Module/)
