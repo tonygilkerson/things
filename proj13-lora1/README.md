@@ -32,7 +32,9 @@ Programs are loaded onto the LoRa-E5 with an STLink hardware programmer, using t
 
 * Install the *openocd* CLI on your workstation
 * Connect the *ST-Link dongle* to the LoRa-E5 board
-* Plug the *ST-Link dongle* into your workstation’s USB port (DO NOT plug in the LoRa-E5's USB cable at the same time)
+* Plug the *ST-Link dongle* into your workstation’s USB port
+  * DO NOT plug in the LoRa-E5's USB cable at the same time
+  * Press the **Boot** button on the LoRa-E5 board just before you plug it in. Keep it pressed for several seconds then let go
 * Unlock your LoRa-E5 board using an *openocd* command
 * Power cycle your LoRa-E5 by unplugging it from all power sources
 * Plug the *ST-Link dongle* into your workstation’s USB port
@@ -47,6 +49,7 @@ The detaild commands for this process is described below.
 brew install openocd
 
 # Connect components: LoRa-E5 <---> ST-LINK <---> Workstation
+# Press Boot button just before you apply power, hold for a few seconds 
 # Unlock your LoRa-E5 board
 openocd -f /usr/local/Cellar/open-ocd/0.12.0/share/openocd/scripts/interface/stlink.cfg  \
         -f /usr/local/Cellar/open-ocd/0.12.0/share/openocd/scripts/target/stm32wlx.cfg \

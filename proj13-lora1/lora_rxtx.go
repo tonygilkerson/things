@@ -18,13 +18,13 @@ const (
 
 var (
 	loraRadio *sx126x.Device
-	txmsg     = []byte("Hello TinyGO")
+	txmsg     = []byte("Hi from Teresa")
 )
 
 func main() {
 	time.Sleep(3 * time.Second)
 
-	println("\n# TinyGo Lora RX/TX test")
+	println("\n# TinyGo Lora RX/TX test - from Teresa")
 	println("# ----------------------")
 	machine.LED.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	loraConf := lora.Config{
-		Freq:           lora.MHz_868_1,
+		Freq:           lora.MHz_868_1,,
 		Bw:             lora.Bandwidth_125_0,
 		Sf:             lora.SpreadingFactor9,
 		Cr:             lora.CodingRate4_7,
