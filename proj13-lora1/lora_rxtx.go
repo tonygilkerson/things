@@ -28,6 +28,9 @@ func main() {
 	println("# ----------------------")
 	machine.LED.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
+	// run light
+  runLight()
+
 	// Create the driver
 	loraRadio = sx126x.New(spi)
 	loraRadio.SetDeviceType(sx126x.DEVICE_TYPE_SX1262)
@@ -42,7 +45,7 @@ func main() {
 	}
 
 	loraConf := lora.Config{
-		Freq:           lora.MHz_868_1,,
+		Freq:           lora.MHz_868_1,
 		Bw:             lora.Bandwidth_125_0,
 		Sf:             lora.SpreadingFactor9,
 		Cr:             lora.CodingRate4_7,
@@ -68,6 +71,7 @@ func main() {
 				println("RX Error: ", err)
 			} else if buf != nil {
 				println("Packet Received: len=", len(buf), string(buf))
+				runLight()
 			}
 		}
 		println("main: End Lora RX")
@@ -79,4 +83,21 @@ func main() {
 		count++
 	}
 
+}
+
+func runLight() {
+
+	// run light
+	led := machine.LED
+
+	// blink run light for a bit seconds so I can tell it is starting
+	for i := 0; i < 5; i++ {
+		led.High()
+		println("DEBUG LED high")
+		time.Sleep(time.Millisecond * 500)
+		led.Low()
+		println("DEBUG LED low")
+		time.Sleep(time.Millisecond * 500)
+	}
+	led.High()
 }

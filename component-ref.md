@@ -229,3 +229,63 @@ ST-Link-Compatible Programmer & Emulator / Debugging dongle
 ![st-link v2](img/st-link-v2.jpg)
 
 * [product page](https://www.adafruit.com/product/2548)
+
+## Adafruit VL53L1X Time of Flight Distance Sensor - ~30 to 4000mm - STEMMA QT / Qwiic
+
+The Adafruit VL53L1X Time of Flight Distance Sensor (also known as VL53L1CX) is a Time of Flight distance sensor that has a massive 4 meter range and LIDAR-like precision.
+
+![tof1](img/Adafruit-VL53L1X-tof-sensor.jpg)
+
+![tof1](img/Adafruit-VL53L1X-tof-sensor2.jpg)
+
+References
+
+* [product page](https://www.adafruit.com/product/3967)
+* [pin outs](https://learn.adafruit.com/adafruit-vl53l1x/pinouts)
+* [learn](https://learn.adafruit.com/adafruit-vl53l1x)
+
+For the STEMMA QT cables, we follow the Qwiic convention ([ref](https://learn.adafruit.com/introducing-adafruit-stemma-qt/technical-specs)):
+
+1. Black for GND
+2. Red for V+
+3. Blue for SDA
+4. Yellow for SCL
+
+Details
+
+* Emitter: 940 nm invisible laser (Class1)
+* SPAD (single photon avalanche diode) receiving array with integrated lens
+* FlightSense™ ranging sensor for fast and accurate long distance ranging
+* Up to 400 cm distance measurement
+* Up to 50 Hz ranging frequency
+* Typical full field-of-view (FoV): 27 °
+* Programmable region-of-interest (ROI) size on the receiving array, allowing the sensor FoV to be reduced
+* Programmable ROI position on the receiving array, providing multizone operation control from the host
+* Can be hidden behind many cover window materials
+* I²C interface (up to 400 kHz)
+* Shutdown and interrupt pins
+* Default I2C address 0x29 (can be changed in software by using shutdown pin to disable other sensors on the same bus)
+
+## Adafruit Universal USB / DC / Solar Lithium Ion/Polymer charger - bq24074
+
+![charger](img/Adafruit-charger-bq24074.jpg)
+
+>There is no 'Done' LED - when the CHG LED turns off, thats how you know charging is complete
+
+This charger is the only one you need to keep all your Lithium Polymer (LiPoly) or Lithium Ion (LiIon) rechargeable batteries topped up.
+
+* [product page](https://www.adafruit.com/product/4755)
+* [learn](https://learn.adafruit.com/adafruit-bq24074-universal-usb-dc-solar-charger-breakout)
+
+## Pico Display Pack
+
+![piaco display pack](img/pico-display-pack.jpg)
+
+![pins](img/pico-display-pack-pins.jpg)
+
+* [product page](https://shop.pimoroni.com/products/pico-display-pack)
+
+Details
+
+* Driver: ST7789
+* 1.14” 240x135 pixel IPS LCD screen
