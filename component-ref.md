@@ -54,7 +54,6 @@ Package Included:
 
 ---
 
-
 ## 1.5inch RGB OLED Display Module, 65K RGB Colors, 128×128, SPI
 
 * [Product Page](https://www.waveshare.com/1.5inch-rgb-oled-module.htm)
@@ -198,7 +197,7 @@ See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/pro
 
 ![amt22 spi example](img/amt22-spi-example.png)
 
-> (this needs confirmed) While looking at the front the #1 pin is on the left. 
+> (this needs confirmed) While looking at the front the #1 pin is on the left.
 
 ## AMT-PGRM-06C
 
@@ -213,6 +212,7 @@ See also [AMT22 Arduino SPI Sample Code Tutorial](https://www.cuidevices.com/pro
 ![lcd](img/2inch-LCD-display.png)
 
 ![lcd wireing](img/2inch-LCD-display-wireing.png)
+
 * [Product Page Waveshare](https://www.waveshare.com/pico-lcd-2.htm)
 
 ## TMC2208 Motor Driver
@@ -289,3 +289,11 @@ Details
 
 * Driver: ST7789
 * 1.14” 240x135 pixel IPS LCD screen
+
+## Adafruit Triple-axis Magnetometer - MMC5603 - STEMMA QT / Qwiic
+
+![mag](img/Magnetometer-MMC5603.jpg)
+> see Tinygo LIS2MDL driver
+
+* [product page](https://adafru.it/5579)
+* [learn page](https://learn.adafruit.com/adafruit-mmc5603-triple-axis-magnetometer)
