@@ -1,4 +1,5 @@
 package fsm
+// REF: https://venilnoronha.io/a-simple-state-machine-framework-in-go
 
 import (
 	"errors"
