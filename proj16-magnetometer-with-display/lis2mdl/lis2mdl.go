@@ -5,7 +5,6 @@
 package lis2mdl // import "tinygo.org/x/drivers/lis2mdl"
 
 import (
-	"fmt"
 	"math"
 	"time"
 
@@ -33,7 +32,6 @@ type Configuration struct {
 //
 // This function only creates the Device object, it does not touch the device.
 func New(bus drivers.I2C) Device {
-	fmt.Printf("[DEBUG] ADDRESS: [%X]\n", ADDRESS)
 	return Device{bus: bus, Address: ADDRESS}
 }
 
@@ -41,9 +39,7 @@ func New(bus drivers.I2C) Device {
 func (d *Device) Connected() bool {
 	data := []byte{0}
 	d.bus.ReadRegister(uint8(d.Address), WHO_AM_I, data)
-	fmt.Printf("[DEBUG] WHO_AM_I: 0x%X, %d \n", data[0],data[0])
-	// return data[0] == 0x40
-	return data[0] == 0x4
+	return data[0] == 0x40
 }
 
 // Configure sets up the LIS2MDL device for communication.
@@ -70,41 +66,25 @@ func (d *Device) Configure(cfg Configuration) {
 
 	// reset
 	cmd[0] = byte(1 << 5)
-	err := d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
-	if err != nil {
-		fmt.Printf("[Configure] reset error: %v", err)
-	}
+	d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
 	time.Sleep(100 * time.Millisecond)
 
 	// reboot
 	cmd[0] = byte(1 << 6)
-	err = d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
-	if err != nil {
-		fmt.Printf("[Configure] reboot error: %v", err)
-	}
+	d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
 	time.Sleep(100 * time.Millisecond)
 
 	// bdu
 	cmd[0] = byte(1 << 4)
-	err = d.bus.WriteRegister(uint8(d.Address), CFG_REG_C, cmd)
-	if err != nil {
-		fmt.Printf("[Configure] bdu error: %v", err)
-	}
+	d.bus.WriteRegister(uint8(d.Address), CFG_REG_C, cmd)
 
 	// Temperature compensation is on for magnetic sensor (0x80)
 	cmd[0] = byte(0x80)
-	err = d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
-	if err != nil {
-		fmt.Printf("[Configure] reset error: %v", err)
-	}
+	d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
 
 	// speed
 	cmd[0] = byte(0x80 | d.DataRate)
-	err = d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
-	if err != nil {
-		fmt.Printf("[Configure] speed error: %v", err)
-	}
-
+	d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
 }
 
 // ReadMagneticField reads the current magnetic field from the device and returns
@@ -113,17 +93,11 @@ func (d *Device) ReadMagneticField() (x int32, y int32, z int32) {
 	// turn back on read mode, even though it is supposed to be continuous?
 	cmd := []byte{0}
 	cmd[0] = byte(0x80 | d.PowerMode<<4 | d.DataRate<<2 | d.SystemMode)
-	err := d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
-	if err != nil {
-		fmt.Printf("[ReadMagneticField] WriteRegister error: %v", err)
-	}	
+	d.bus.WriteRegister(uint8(d.Address), CFG_REG_A, cmd)
 	time.Sleep(10 * time.Millisecond)
 
 	data := make([]byte, 6)
-	err = d.bus.ReadRegister(uint8(d.Address), OUTX_L_REG, data)
-	if err != nil {
-		fmt.Printf("[ReadMagneticField] ReadRegister error: %v", err)
-	}		
+	d.bus.ReadRegister(uint8(d.Address), OUTX_L_REG, data)
 
 	x = int32(int16((uint16(data[0]) << 8) | uint16(data[1])))
 	y = int32(int16((uint16(data[2]) << 8) | uint16(data[3])))

@@ -78,34 +78,28 @@ func main() {
 	compass := lis2mdl.New(machine.I2C0)
 	time.Sleep(3 * time.Second)
 
-	fmt.Printf("-------------------------------------------------------\ntry default\n")
 	if !compass.Connected() {
-		fmt.Printf("not connected! %v\n", compass)
+		fmt.Printf("LIS2MDL not connected! %v\n", compass)
 	}
 	time.Sleep(3 * time.Second)
-
-	// fmt.Printf("-------------------------------------------------------\ntry 0x30\n")
-	// compass.Address = 0x30
-	// if !compass.Connected() {
-	// 	fmt.Printf("not connected! %v\n", compass)
-	// }
-	// time.Sleep(3 * time.Second)
-
-	fmt.Printf("-------------------------------------------------------\nloop with default\n")
-	// for {
-		if compass.Connected() {
-			fmt.Printf("LIS2MDL connected!\n")
-			// break
-		} else {
-			fmt.Printf("LIS2MDL not connected! %v\n", compass)
-			cls(&display)
-			msg := fmt.Sprintf("LIS2MDL not\nconnected!\n%v", compass.Address)
-			tinyfont.WriteLine(&display, &freemono.Regular24pt7b, 10, 30, msg, green)
-
-			time.Sleep(1 * time.Second)
-		}
-	// }
-
+	
+	
+	// fmt.Printf("-------------------------------------------------------\nloop with default\n")
+	// // for {
+		// 	if compass.Connected() {
+			// 		fmt.Printf("LIS2MDL connected!\n")
+			// 		// break
+			// 	} else {
+				// 		fmt.Printf("LIS2MDL not connected! %v\n", compass)
+				// 		cls(&display)
+				// 		msg := fmt.Sprintf("LIS2MDL not\nconnected!\n%v", compass.Address)
+				// 		tinyfont.WriteLine(&display, &freemono.Regular24pt7b, 10, 30, msg, green)
+				
+				// 		time.Sleep(1 * time.Second)
+				// 	}
+				// // }
+				
+	fmt.Printf("\nStart Reading Loop...\n")
 	compass.Configure(lis2mdl.Configuration{}) //default settings
 
 	for {
@@ -114,12 +108,13 @@ func main() {
 
 		x, y, z := compass.ReadMagneticField()
 		fmt.Printf("Reading x: %v, y: %v, z: %v\n",x,y,z)
+
 		cls(&display)
-		msg := fmt.Sprintf("Heading: %v", heading)
+		msg := fmt.Sprintf("Heading: %v\nx: %v\ny: %v\nz: %v", heading,x,y,z)
 		tinyfont.WriteLine(&display, &freemono.Regular24pt7b, 10, 30, msg, green)
 
 		println("ZZZzzz...")
-		time.Sleep(time.Millisecond * 1000)
+		time.Sleep(time.Millisecond * 1500)
 	}
 
 }
