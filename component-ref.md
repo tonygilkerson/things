@@ -298,14 +298,6 @@ Details
 * [product page](https://adafru.it/5579)
 * [learn page](https://learn.adafruit.com/adafruit-mmc5603-triple-axis-magnetometer)
 
-## Adafruit Feather RP2040
-
-![pico-feather](img/pico-adafruit-feather.jpg)
-
-![pico-feather2](img/pico-adafruit-feather2.jpg)
-
-* [product page](https://www.adafruit.com/product/4884)
-
 ## Adafruit Triple-axis Magnetometer - LIS2MDL - STEMMA QT / Qwiic
 
 ![lis2mdla](img/lis2mdl-a.jpg)
@@ -314,3 +306,14 @@ Details
 
 * [product page](https://www.adafruit.com/product/4488)
 * [tinygo driver - LIS2MDL](https://github.com/tinygo-org/drivers/tree/release/lis2mdl)
+
+## PIR (motion) sensor
+
+![pir1](img/pir1.jpg)
+
+![pir2](img/pir2.jpg)
+
+* [product page](https://www.adafruit.com/product/189)
+
+* [learn page](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor)
+

@@ -36,7 +36,15 @@ Product Desecription:
 * Temperature sensor
 * Accelerated integer and floating-point libraries on-chip
 
----
+## Adafruit Feather RP2040
+
+![pico-feather](img/pico-adafruit-feather.jpg)
+
+![pico-feather2](img/pico-adafruit-feather2.jpg)
+
+![pico-feather3](img/pico-adafruit-feather3.jpg)
+
+* [product page](https://www.adafruit.com/product/4884)
 
 ## ESP32-WROOM-32D
 

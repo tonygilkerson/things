@@ -126,16 +126,10 @@ func main() {
 		DataRate:   lis2mdl.DATARATE_10HZ,
 	}) 
 
-	// initial load into magneticReadings 
-	magneticReadingsSize := 500 
-	magneticReadings := make([]int32,magneticReadingsSize)
-	// for i := 0; i < magneticReadingsSize; i++ {
-	// 	_, _, z := compass.ReadMagneticField()
-	// 	magneticReadings[i] = int32(math.Abs(float64(z)))
-	// }
-	loadReading(magneticReadingsSize,magneticReadings,&compass)
+	// compute magnetic average readings
+	ha := magAvg(10,&compass)
 
-	var thresh int32 = 3_000
+	var thresh int32 = 7_000
 	var blipCount, hitCount,readingCount int
 	var isHit bool
 
@@ -143,8 +137,7 @@ func main() {
 	//			Main Loop
 	//
 	for {
-		readingCount += 1		
-
+		readingCount += 1
 		// heading := compass.ReadCompass()
 		// println("Heading:", heading)
 		if keyPressed == key0 {
@@ -172,58 +165,53 @@ func main() {
 			cls(&display)
 			msg = fmt.Sprintf("Resetting!")
 			tinyfont.WriteLine(&display, &freemono.Regular24pt7b, 10, 30, msg, green)
-			loadReading(magneticReadingsSize,magneticReadings,&compass)
+			ha = magAvg(500,&compass)
 
 		}
 		if keyPressed == key3 {
 			keyPressed = 0
 			fmt.Printf("Reset hit count\n")			
 			hitCount = 0
-			blipCount = 0
 		}
 		
-		//
-		//	Take a reading
-		//
-		_, _, z := compass.ReadMagneticField()
-
-		// populate magneticReadings with new reading to achieve a rolling average
-		magneticReadingsIndex := int(math.Mod(float64(readingCount), float64(magneticReadingsSize)))
-		magneticReadings[magneticReadingsIndex] = int32(math.Abs(float64(z)))
-		za := magneticAvg(magneticReadings)
+		x, y, z := compass.ReadMagneticField()
 
 		// abs reading, h is for heading but really just a sum of x y and z
+		xx := int32(math.Abs(float64(x)))
+		yy := int32(math.Abs(float64(y)))
 		zz := int32(math.Abs(float64(z)))
+		hh := xx + yy + zz
 
 		// diff from avg
-		zd := int32(math.Abs(float64(za - zz)))
-	
+		// xd := int32(math.Abs(float64(xa - xx)))
+		// yd := int32(math.Abs(float64(ya - yy)))
+		// zd := int32(math.Abs(float64(za - zz)))
+		hd := int32(math.Abs(float64(ha - hh)))
+
 		// xt := threshAdj(xd,thresh)
 		// yt := threshAdj(yd,thresh)
 		// zt := threshAdj(zd,thresh)
-		zt := threshAdj(zd,thresh)
+		ht := threshAdj(hd,thresh)
 
-		if zt > 0 {
+		if ht > 0 {
 			blipCount += 1
 			if blipCount > 2 {
 				isHit = true
-				blipCount = 0
-				fmt.Printf("Hit! zt: %v\n", zt)
 			}
 		}
 
 		if math.Mod(float64(readingCount), 15) == 0 {
 			if isHit {
 				isHit = false
-				hitCount += 1
 				blipCount = 0
+				hitCount += 1
 			}
 
 			// fmt.Printf("xx: %v xa: %v xd: %v xt: %v\t|\tyy: %v ya: %v yd: %v yt: %v\t|\tzz: %v za: %v zd: %v zt: %v\n",xx,xa,xd,xt,yy,ya,yd,yt,zz,za,zd,zt)
-			fmt.Printf("zz: %6d\t za: %6d\t zd: %6d\t zt: %6d\t thresh: %6d\t hit: %6d\n",zz,za,zd,zt,thresh,hitCount)
+			fmt.Printf("hh: %6d\t ha: %6d\t hd: %6d\t ht: %6d\t thresh: %6d\t hit: %6d\n",hh,ha,hd,ht,thresh,hitCount)
 
 			cls(&display)
-			msg := fmt.Sprintf("th.: %v\nzd.: %v\navg: %v\nhit: %v",thresh,zd,za,hitCount)
+			msg := fmt.Sprintf("th.: %v\nhit: %v",thresh,hitCount)
 			tinyfont.WriteLine(&display, &freemono.Regular24pt7b, 10, 30, msg, green)
 		}
 		
@@ -254,27 +242,28 @@ func cls(d *st7789.Device) {
 	d.FillScreen(black)
 }
 
-func magneticAvg(magReadings []int32) int32 {
+func magAvg(count int32, compass *lis2mdl.Device) int32 {
+	var xs, ys, zs int32
 
-	// sum up all elements of the slice
-	var totalReadings int32
-	for _, r := range magReadings {
-		totalReadings += r
+	// compute averages
+	fmt.Printf("Start - compute avg at: %v\n", time.Now())
+	for i := int32(0); i < count; i++ {
+		x, y, z := compass.ReadMagneticField()
+		// accumulate sum
+		xs += int32(math.Abs(float64(x)))
+		ys += int32(math.Abs(float64(y)))
+		zs += int32(math.Abs(float64(z)))
 	}
+	
+	// compute average
+	xa := xs / count
+	ya := ys / count
+	za := zs / count
+	ha := xa + ya + za
+	fmt.Printf("xa: %6d\t ya: %6d\t za: %6d\t ha: %6d\n",xa,ya,za,ha)
+	fmt.Printf("End   - compute avg at: %v\n", time.Now())
 
-	// compute the average
-	avg := totalReadings / int32(len(magReadings))
-
-	return avg
-}
-
-func loadReading(count int, readings []int32, compass *lis2mdl.Device){
-
-	for i := 0; i < count; i++ {
-		_, _, z := compass.ReadMagneticField()
-		readings[i] = int32(math.Abs(float64(z)))
-	}
-
+	return ha
 }
 
 func threshAdj(r int32, t int32) int32 {
