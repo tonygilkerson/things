@@ -50,7 +50,8 @@ brew install openocd
 
 # Connect components: LoRa-E5 <---> ST-LINK <---> Workstation
 # Press Boot button just before you apply power, hold for a few seconds 
-# Unlock your LoRa-E5 board
+# Unlock your LoRa-E5 board by sending the openocd command below
+# If it has trouble connecting try sending the openocd command what still holding the boot button 
 openocd -f /usr/local/Cellar/open-ocd/0.12.0/share/openocd/scripts/interface/stlink.cfg  \
         -f /usr/local/Cellar/open-ocd/0.12.0/share/openocd/scripts/target/stm32wlx.cfg \
         -c init \

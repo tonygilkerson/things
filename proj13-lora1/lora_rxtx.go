@@ -91,12 +91,10 @@ func runLight() {
 	led := machine.LED
 
 	// blink run light for a bit seconds so I can tell it is starting
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 10; i++ {
 		led.High()
-		println("DEBUG LED high")
 		time.Sleep(time.Millisecond * 500)
 		led.Low()
-		println("DEBUG LED low")
 		time.Sleep(time.Millisecond * 500)
 	}
 	led.High()
