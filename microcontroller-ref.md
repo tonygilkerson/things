@@ -98,11 +98,18 @@ Product Desecription:
 
 >See [proj13-lora1](./proj13-lora1/README.md) for instructions on how to program the Lora-E5
 
+![lorae5-pins](img/lora-e5-pins.jpg)
+
 ## LoRa-E5 Mini (STM32WLE5JC)
 
 ![lora-e5-mini](img/lora-e5-mini-1.jpg)
+
+---
+
 ![lora-e5-mini2](img/lora-e5-mini-2.jpg)
 ![lora-e5-mini3](img/lora-e5-mini-3.jpg)
+
+>WARNING: The RST and BOOT is not correct in the bottom two pics.  The RST is next to the LEDs
 
 * [Product Page (Seeed Studios)](https://www.seeedstudio.com/LoRa-E5-mini-STM32WLE5JC-p-4869.html?queryID=8bf68a34326ec4e8e6cba7b80073476b&objectID=4869&indexName=bazaar_retailer_products)
 * [Product Page (digikey)](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/113990939/13926228?s=N4IgTCBcDaIDIHkBKBBAtAUQKwAICyAkgHIE4gC6AvkA)

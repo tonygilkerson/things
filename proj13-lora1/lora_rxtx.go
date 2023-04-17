@@ -31,6 +31,20 @@ func main() {
 	// run light
   runLight()
 
+
+	//
+	// Input Pin
+	//
+	pinPB10 := machine.PB10
+	pinPB10.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+
+	pinPA9 := machine.PA9
+	pinPA9.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+
+	pinPA0 := machine.PA0
+	pinPA0.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+
+
 	// Create the driver
 	loraRadio = sx126x.New(spi)
 	loraRadio.SetDeviceType(sx126x.DEVICE_TYPE_SX1262)
@@ -64,18 +78,21 @@ func main() {
 	for {
 		start := time.Now()
 
-		println("main: Receiving Lora for 10 seconds")
-		for time.Since(start) < 10*time.Second {
+		println("pinPB10 ", pinPB10.Get())
+		println("pinPA9 ", pinPA9.Get())
+		println("pinPA0 ", pinPA0.Get())
+
+		println("Receiving for 5 seconds")
+		for time.Since(start) < 5*time.Second {
 			buf, err := loraRadio.Rx(LORA_DEFAULT_RXTIMEOUT_MS)
 			if err != nil {
 				println("RX Error: ", err)
 			} else if buf != nil {
 				println("Packet Received: len=", len(buf), string(buf))
-				runLight()
 			}
 		}
-		println("main: End Lora RX")
-		println("LORA TX size=", len(txmsg), " -> ", string(txmsg))
+
+		println("Send TX size=", len(txmsg), " -> ", string(txmsg))
 		err := loraRadio.Tx(txmsg, LORA_DEFAULT_TXTIMEOUT_MS)
 		if err != nil {
 			println("TX Error:", err)
