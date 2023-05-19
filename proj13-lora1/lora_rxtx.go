@@ -18,31 +18,37 @@ const (
 
 var (
 	loraRadio *sx126x.Device
-	txmsg     = []byte("Hi from Teresa")
+	txmsg     = []byte("Hi from Gateway")
 )
 
 func main() {
-	time.Sleep(3 * time.Second)
-
-	println("\n# TinyGo Lora RX/TX test - from Teresa")
-	println("# ----------------------")
 	machine.LED.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	// run light
-  runLight()
+  runLight(10)
+	time.Sleep(time.Second * 10)
 
+	println("High")
+	machine.LED.High()
+	time.Sleep(time.Second * 10)
+	
+	println("Low")
+	machine.LED.Low()
+	
+	time.Sleep(time.Second * 10)
+	println("Continue")
 
 	//
 	// Input Pin
 	//
-	pinPB10 := machine.PB10
-	pinPB10.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	// pinPB10 := machine.PB10
+	// pinPB10.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
-	pinPA9 := machine.PA9
-	pinPA9.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	// pinPA9 := machine.PA9
+	// pinPA9.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
-	pinPA0 := machine.PA0
-	pinPA0.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
+	// pinPA0 := machine.PA0
+	// pinPA0.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
 
 
 	// Create the driver
@@ -59,7 +65,7 @@ func main() {
 	}
 
 	loraConf := lora.Config{
-		Freq:           lora.MHz_868_1,
+		Freq:           lora.MHz_916_8,
 		Bw:             lora.Bandwidth_125_0,
 		Sf:             lora.SpreadingFactor9,
 		Cr:             lora.CodingRate4_7,
@@ -78,9 +84,9 @@ func main() {
 	for {
 		start := time.Now()
 
-		println("pinPB10 ", pinPB10.Get())
-		println("pinPA9 ", pinPA9.Get())
-		println("pinPA0 ", pinPA0.Get())
+		// println("pinPB10 ", pinPB10.Get())
+		// println("pinPA9 ", pinPA9.Get())
+		// println("pinPA0 ", pinPA0.Get())
 
 		println("Receiving for 5 seconds")
 		for time.Since(start) < 5*time.Second {
@@ -89,6 +95,7 @@ func main() {
 				println("RX Error: ", err)
 			} else if buf != nil {
 				println("Packet Received: len=", len(buf), string(buf))
+				// runLight(5)
 			}
 		}
 
@@ -98,21 +105,24 @@ func main() {
 			println("TX Error:", err)
 		}
 		count++
+
+		runLight(3)
 	}
 
 }
 
-func runLight() {
+func runLight(count int) {
 
 	// run light
 	led := machine.LED
 
 	// blink run light for a bit seconds so I can tell it is starting
-	for i := 0; i < 10; i++ {
-		led.High()
-		time.Sleep(time.Millisecond * 500)
+	for i := 0; i < count; i++ {
 		led.Low()
-		time.Sleep(time.Millisecond * 500)
+		time.Sleep(time.Millisecond * 200)
+		// Do high last because we want it to be off and for some reason
+		// high is off on lore E5 board, strange
+		led.High()
+		time.Sleep(time.Millisecond * 200)
 	}
-	led.High()
 }
