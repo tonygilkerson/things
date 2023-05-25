@@ -11,10 +11,12 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	chRise := make(chan string,1)
 
-	micDigitalPin := machine.GP22
+	// micDigitalPin := machine.GP22 // if Pico
+	micDigitalPin := machine.PA9 // if lora-e5
+
 	// micAnalogPin := machine.GP26 // ADC0
 
-	machine.InitADC() // init the machine's ADC subsystem
+	//machine.InitADC() // init the machine's ADC subsystem, if Pico
 	// micAnalog := machine.ADC{Pin: micAnalogPin}
 
 	micDigitalPin.Configure(machine.PinConfig{Mode: machine.PinInputPulldown})
