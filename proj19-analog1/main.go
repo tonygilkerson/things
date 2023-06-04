@@ -10,6 +10,7 @@ gnd  		- pot-right
 import (
 	"fmt"
 	"machine"
+	"math"
 	"time"
 )
 
@@ -17,11 +18,22 @@ func main() {
 
 
 	machine.InitADC() // init the machine's ADC subsystem
-	pinA0 := machine.ADC{Pin: machine.ADC0}
+	adc := machine.ADC{Pin: machine.ADC0}
 
+	var lastA uint16
+	var diff float64
 	for {
-		a0 := pinA0.Get()
-		fmt.Printf("A0: %v\n",a0)
-		time.Sleep(time.Millisecond * 1000)
+		a0 := adc.Get()
+	
+		diff = math.Abs(float64(int(a0) - int(lastA)))
+		lastA = a0
+
+		if a0 < 9000 {
+			fmt.Printf(".")
+		} else {
+			fmt.Printf("A0: %v\t Diff: %5.0f\n",a0,diff)
+		}
+		time.Sleep(time.Millisecond * 250)
+
 	}
 }

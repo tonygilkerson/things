@@ -20,7 +20,6 @@ func main() {
 	})
 	
 
-
 	for {
 		// pir := pir.Get()
 		fmt.Printf(".")

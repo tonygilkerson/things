@@ -36,7 +36,8 @@ func runLight(led machine.Pin, count int) {
 // Test the LIS2MDL - Magnetometer
 func testLIS2MDL() {
 	// ref: https://www.st.com/resource/en/datasheet/lis2mdl.pdf
-	const ADDR uint16 = 0x30
+	// const ADDR uint16 = 0x30
+	const ADDR uint16 = 0x5D
 	// const ADDR uint16 = 0x1E
 	const WHO_AM_I byte = 0x4F
 	const STATUS byte = 0x67

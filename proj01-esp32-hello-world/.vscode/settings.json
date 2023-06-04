@@ -1,6 +1,8 @@
 {
   "go.toolsEnvVars": {
-    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-63f98f7c0746b5367fd89697a081550e09d7ac25c4a684df27dda2655f2700b7",
-    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,atsamd21g18a,atsamd21g18,atsamd21,sam,arduino_nano33,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb"
+    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-eab8708914a295000e7ea7418ac6392c9c8f9d9e5c23f957157730ab648b1536",
+    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,atsamd21g18a,atsamd21g18,atsamd21,sam,arduino_nano33,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb",
+    "GOOS": "linux",
+    "GOARCH": "arm"
   }
 }

@@ -3,6 +3,6 @@
     "GOOS": "linux",
     "GOARCH": "arm",
     "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-5a943d9193f1fc055159cd51f715d180fca7ab4bbfbf4b89853651f1bef24ead",
-    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,pico,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb"
+    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,stm32wle5,stm32wlx,stm32,lorae5,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.uart"
   }
 }

@@ -317,3 +317,24 @@ Details
 
 * [learn page](https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor)
 
+## KY-037 Microphone sensor module
+
+![mic1](img/KY-037-a.jpg)
+
+![mic2](img/KY-037-b.jpg)
+
+![mic3](img/KY-037-c.jpg)
+
+
+* [Datasheet](https://datasheet4u.com/datasheet-pdf/Joy-IT/KY-037/pdf.php?id=1402047)
+
+## Adafruit LPS22 Pressure Sensor - STEMMA QT / Qwiic - LPS22HB
+
+![lps22](img/lps22.jpg)
+
+![lps22-a](img/lps22-a.jpg)
+
+![lps22-b](img/lps22-b.jpg)
+
+* [Product Page](https://www.adafruit.com/product/4633)
+* [Learn Page](https://learn.adafruit.com/adafruit-lps25-pressure-sensor)
