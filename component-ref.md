@@ -338,3 +338,24 @@ Details
 
 * [Product Page](https://www.adafruit.com/product/4633)
 * [Learn Page](https://learn.adafruit.com/adafruit-lps25-pressure-sensor)
+
+## Adafruit RFM95W LoRa Radio Transceiver Breakout - 868 or 915 MHz - RadioFruit
+
+
+
+![](img/LoRa-Radio-Transceiver-Breakout1.png)
+
+![](img/LoRa-Radio-Transceiver-Breakout2.png)
+
+* Vin - power in. This is regulated down to 3.3V so  you can use 3.3-6VDC in. Make sure it can supply 150mA since the peak radio currents can be kinda high
+* GND - ground for logic and power
+* EN - connected to the enable pin of the regulator. Pulled high to Vin by default, pull low to completely cut power to the radio.
+* SCK - This is the SPI Clock pin, its an input to the chip
+* MISO - this is the Microcontroller In Serial Out pin, for data sent from the radio to your processor, 3.3V logic level
+* MOSI - this is the Microcontroller Out Serial In pin, for data sent from your processor to the radio
+* CS - this is the Chip Select pin, drop it low to start an SPI transaction. Its an input to the chip
+* RST - this is the Reset pin for the radio. It's pulled high by default which is reset. Pull LOW to turn on the radio
+* G0 - the radio's "GPIO 0" pin, also known as the IRQ pin, used for interrupt request notification from the radio to the microcontroller, 3.3V logic level
+
+* [Product Page](https://www.adafruit.com/product/3072)
+* [Learn Page](https://learn.adafruit.com/adafruit-rfm69hcw-and-rfm96-rfm95-rfm98-lora-packet-padio-breakouts)
