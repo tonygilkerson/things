@@ -28,7 +28,7 @@ func main() {
 		diff = math.Abs(float64(int(a0) - int(lastA)))
 		lastA = a0
 
-		if a0 < 1000 {
+		if a0 < 1500 {
 			fmt.Printf(".")
 		} else {
 			fmt.Printf("A0: %v\t Diff: %5.0f\n",a0,diff)
