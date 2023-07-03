@@ -1,0 +1,8 @@
+{
+  "go.toolsEnvVars": {
+    "GOOS": "linux",
+    "GOARCH": "arm",
+    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-b60c2254592a95cf2404924764d12673ef31df46a9f7efa44743fe846d7bc997",
+    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,feather_rp2040,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb"
+  }
+}

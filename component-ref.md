@@ -341,11 +341,9 @@ Details
 
 ## Adafruit RFM95W LoRa Radio Transceiver Breakout - 868 or 915 MHz - RadioFruit
 
+![a](img/LoRa-Radio-Transceiver-Breakout1.png)
 
-
-![](img/LoRa-Radio-Transceiver-Breakout1.png)
-
-![](img/LoRa-Radio-Transceiver-Breakout2.png)
+![a](img/LoRa-Radio-Transceiver-Breakout2.png)
 
 * Vin - power in. This is regulated down to 3.3V so  you can use 3.3-6VDC in. Make sure it can supply 150mA since the peak radio currents can be kinda high
 * GND - ground for logic and power
@@ -359,3 +357,21 @@ Details
 
 * [Product Page](https://www.adafruit.com/product/3072)
 * [Learn Page](https://learn.adafruit.com/adafruit-rfm69hcw-and-rfm96-rfm95-rfm98-lora-packet-padio-breakouts)
+
+## 400x300, 4.2inch E-Ink display module
+
+![x](img/epaper-4.3-BW-front.png)
+![x](img/epaper-4.3-BW-back.png)
+
+* [Product Page](https://www.waveshare.com/4.2inch-e-paper-module.htm)
+
+| SYMBOL | DESCRIPTION                                             |
+| ------ | ------------------------------------------------------- |
+| VCC    | 3.3V~5V                                                 |
+| GND    | Ground                                                  |
+| DIN    | SPI MOSI pin                                            |
+| CLK    | SPI SCK pin                                             |
+| CS     | SPI chip selection, low active                          |
+| DC     | Data/Command selection (high for data, low for command) |
+| RST    | External reset, low active                              |
+| BUSY   | Busy status output, low active                          |

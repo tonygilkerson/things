@@ -24,7 +24,7 @@ var (
 	SX127X_PIN_RST  = machine.GP20
 	SX127X_PIN_CS   = machine.GP17
 	SX127X_PIN_DIO0 = machine.GP21 // (GP21--G0) Must be connected from pico to breakout for radio events IRQ to work
-	SX127X_PIN_DIO1 = machine.GP22 // (GP22--G1)I don't now what this does, it is assigned but I did not connect form pico to breakout
+	SX127X_PIN_DIO1 = machine.GP22 // (GP22--G1)I don't now what this does
 	SX127X_SPI      = machine.SPI0
 )
 
@@ -36,7 +36,7 @@ func main() {
 	time.Sleep(1 * time.Second)
 	led := machine.LED //GP25
 	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	runLight(led,20)
+	runLight(led,15)
 
 
 	machine.SPI0.Configure(machine.SPIConfig{
