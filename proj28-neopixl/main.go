@@ -14,13 +14,16 @@ import (
 )
 
 func main() {
+	fmt.Println("Setup LED")
 	var led machine.Pin = machine.LED
 	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	runLight(led, 10)
+	runLight(led, 2)
 
+	fmt.Println("Setup neo")
 	var neo machine.Pin = machine.GPIO16
 	neo.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
+	fmt.Println("Setup toggle")
 	var toggle machine.Pin = machine.GPIO4
 	toggle.Configure(machine.PinConfig{Mode: machine.PinInputPullup})
 
@@ -36,15 +39,15 @@ func main() {
 		if keyPressed != 0 {
 			keyPressed = 0
 			flash = true
-			fmt.Printf("X")
+			fmt.Println("Key pressed...")
 		} else {
 			flash = false
 			fmt.Printf(".")
 		}
 
 		if flash {
-			neoFlashOne(neo, 50, 50)
-			neoFlashOne(neo, 50, 100)
+			// neoFlashOne(neo, 50, 50)
+			neoFlashStrip(neo)
 		}
 
 		time.Sleep(1 * time.Second)
@@ -97,31 +100,63 @@ func neoFlashOne(neo machine.Pin, count int, brightness uint8) {
 	ws.WriteColors(leds[:])
 }
 
-func neoAll(neo machine.Pin) {
-	// Flash a single neo led
+func neoFlashStrip(neo machine.Pin) {
+	// Flash a strip of 8
 
 	ws := ws2812.New(neo)
-	// rg := false
-	var leds [1]color.RGBA
-	var r uint8
-	var g uint8
-	var b uint8
-	var c int
+	leds := make([]color.RGBA,8)
 
-	for r = 0; r < 255; r++ {
-		for g = 0; g < 255; g++ {
-			for b = 0; b < 255; b++ {
-				c++
-				if c%100 == 0 {
-					leds[0] = color.RGBA{R: r, G: g, B: b}
-					ws.WriteColors(leds[:])
-					// fmt.Printf("r: %v \t g: %v \t b: %v\n", r,g,b)
-					time.Sleep(2 * time.Millisecond)
-				}
+
+	runStripRGB(leds, neo, &ws)
+
+}
+
+func runStripRGB(leds []color.RGBA, neo machine.Pin, ws *ws2812.Device) {
+
+	for x := 0; x < 10; x++ {
+		
+		// night rider right to left
+		for i := 0; i < len(leds); i++ {
+
+			leds[i] = color.RGBA{R: 255, G: 0, B: 0}
+			for j := i-1; j >= 0; j-- {
+				leds[j] = color.RGBA{R: 0, G: 0, B: 0}
 			}
+			ws.WriteColors(leds[:])
+			time.Sleep(50 * time.Millisecond)
+
 		}
+
+		allLedsOff(leds,ws)
+		time.Sleep(10 * time.Millisecond)
+
+		// night rider left to right
+		for i := len(leds)-1; i >=0; i-- {
+
+			leds[i] = color.RGBA{R: 255, G: 0, B: 0}
+			for j := i+1; j < len(leds); j++ {
+				leds[j] = color.RGBA{R: 0, G: 0, B: 0}
+			}
+			ws.WriteColors(leds[:])
+			time.Sleep(50 * time.Millisecond)
+
+		}
+
+		allLedsOff(leds,ws)
+		time.Sleep(10 * time.Millisecond)
 	}
 
-	leds[0] = color.RGBA{R: 0x00, G: 0x00, B: 0x00}
+	allLedsOff(leds,ws)
+}
+
+func allLedsOff(leds []color.RGBA, ws *ws2812.Device) {
+	off := color.RGBA{R: 0, G: 0, B: 0}
+	setAllLeds(leds, off)
 	ws.WriteColors(leds[:])
+}
+
+func setAllLeds(leds []color.RGBA, c color.RGBA) {
+	for i := 0; i < len(leds); i++ {
+		leds[i] = c
+	}
 }
