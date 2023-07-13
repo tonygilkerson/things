@@ -1,10 +1,14 @@
 package main
 
 import (
-	"machine"
+	// "fmt"
 	"image/color"
+	"machine"
 	"time"
+
 	"tinygo.org/x/drivers/waveshare-epd/epd4in2"
+	// "tinygo.org/x/tinyfont"
+	// "tinygo.org/x/tinyfont/freemono"
 )
 
 var display epd4in2.Device
@@ -50,8 +54,10 @@ func main() {
 	display.ClearDisplay()
 	println("WaitUntilIdle")
 	display.WaitUntilIdle()
-	println("Waiting for 2 seconds")
-	time.Sleep(2 * time.Second)
+	println("Waiting for 3 seconds")
+	time.Sleep(3 * time.Second)
+
+	
 
 	println("Prep checkered board")
 	// Show a checkered board
@@ -62,18 +68,19 @@ func main() {
 			}
 		}
 	}
+	
+	println("Waiting for 3 seconds")
+	time.Sleep(3 * time.Second)
 
-	for i := 0; i < 10; i++ {
-		
-		println("Display")
-		display.Display()
-		println("WaitUntilIdle")
-		display.WaitUntilIdle()
+	println("Display()")
+	display.Display()
+	println("WaitUntilIdle()")
+	display.WaitUntilIdle()
 
-		println("Waiting for 5 seconds")
-		time.Sleep(5 * time.Second)
-		
-	}
+	println("Waiting for 3 seconds")
+
+
+
 
 	println("You could remove power now")
 }
