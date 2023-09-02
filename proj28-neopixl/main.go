@@ -45,12 +45,13 @@ func main() {
 			fmt.Printf(".")
 		}
 
-		if flash {
+		if flash || true {
+			fmt.Printf("blink\n")
 			// neoFlashOne(neo, 50, 50)
 			neoFlashStrip(neo)
 		}
 
-		time.Sleep(1 * time.Second)
+		time.Sleep(3 * time.Second)
 
 	}
 }

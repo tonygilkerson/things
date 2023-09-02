@@ -375,3 +375,10 @@ Details
 | DC     | Data/Command selection (high for data, low for command) |
 | RST    | External reset, low active                              |
 | BUSY   | Busy status output, low active                          |
+
+## NeoPixel Stick - 8 x 5050 RGB LED with Integrated Drivers
+
+![neopixel](./img/NeoPixelStick-8.png)
+
+* [Product Page](https://www.adafruit.com/product/1426)
+* [Learn Page](https://learn.adafruit.com/adafruit-neopixel-uberguide/downloads)

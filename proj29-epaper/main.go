@@ -8,9 +8,8 @@ import (
 
 	"tinygo.org/x/drivers/waveshare-epd/epd4in2"
 	"tinygo.org/x/tinyfont"
-	"tinygo.org/x/tinyfont/freemono"
-	// "tinygo.org/x/tinyfont"
 	// "tinygo.org/x/tinyfont/freemono"
+	"tinygo.org/x/tinyfont/gophers"
 )
 
 var display epd4in2.Device
@@ -23,9 +22,7 @@ func main() {
 	var dc machine.Pin = machine.GP11
 	var rst machine.Pin = machine.GP12
 	var busy machine.Pin = machine.GP13
-	
-	// var din machine.Pin = machine.GP16 // machine.SPI0_SDI_PIN
-	var cs machine.Pin = machine.GP17
+	var cs machine.Pin = machine.GP10
 	var clk machine.Pin = machine.GP18 // machine.SPI0_SCK_PIN
 	var din machine.Pin = machine.GP19 // machine.SPI0_SDO_PIN
 
@@ -111,8 +108,8 @@ func fontExamples(display *epd4in2.Device) {
 	black := color.RGBA{1, 1, 1, 255}
 	// white := color.RGBA{0, 0, 0, 255}
 
-	tinyfont.WriteLineRotated(display, &freemono.Bold9pt7b, 15, 20, "Hello, today is the first day of the rest of your life!", black, tinyfont.NO_ROTATION)
-	println("Waiting for 3 seconds")
+	//tinyfont.WriteLineRotated(display, &freemono.Bold9pt7b, 15, 20, "a", black, tinyfont.NO_ROTATION)
+	
 	time.Sleep(3 * time.Second)
 
 	// showRect(0, 22, 52, 20, black)
@@ -126,7 +123,11 @@ func fontExamples(display *epd4in2.Device) {
 
 	// tinyfont.WriteLineRotated(&display, &freemono.Bold9pt7b, 85, 26, "World!", white, tinyfont.ROTATION_180)
 	// tinyfont.WriteLineRotated(&display, &freemono.Bold9pt7b, 55, 60, "@tinyGolang", black, tinyfont.ROTATION_90)
+	tinyfont.WriteLineRotated(display, &gophers.Regular58pt, 40, 50,  "ABCDEFG\nHIJKLMN\nOPQRSTU\nVWXYZ\nabc", black, tinyfont.NO_ROTATION)
 	// tinyfont.WriteLineColorsRotated(&display, &freemono.Bold9pt7b, 45, 180, "tinyfont", []color.RGBA{white, black}, tinyfont.ROTATION_270)
+	
+	println("Waiting for 3 seconds")
+
 
 	println("Display()")
 	display.Display()
