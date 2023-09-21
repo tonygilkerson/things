@@ -20,12 +20,12 @@ func main() {
 	//
 	// Named PINs
 	//
-	var dc machine.Pin = machine.GP11
-	var rst machine.Pin = machine.GP12
-	var busy machine.Pin = machine.GP13
-	var cs machine.Pin = machine.GP17
-	var clk machine.Pin = machine.GP18 // machine.SPI0_SCK_PIN
-	var din machine.Pin = machine.GP19 // machine.SPI0_SDO_PIN
+	var dc machine.Pin = machine.GP11 		// pin15
+	var rst machine.Pin = machine.GP12 		// pin16
+	var busy machine.Pin = machine.GP13 	// pin17
+	var cs machine.Pin = machine.GP17 		// pin22
+	var clk machine.Pin = machine.GP18 		// pin24 machine.SPI0_SCK_PIN
+	var din machine.Pin = machine.GP19 		// pin25 machine.SPI0_SDO_PIN
 
 	time.Sleep(2 * time.Second)
 	println("Starting...")
@@ -123,8 +123,10 @@ func fontExamples(display *epd4in2.Device) {
 
 	// tinyfont.WriteLineRotated(&display, &freemono.Bold9pt7b, 85, 26, "World!", white, tinyfont.ROTATION_180)
 	// tinyfont.WriteLineRotated(&display, &freemono.Bold9pt7b, 55, 60, "@tinyGolang", black, tinyfont.ROTATION_90)
+
 	tinyfont.WriteLineRotated(display, &gophers.Regular58pt, 40, 50, "ABCDEFG\nHIJKLMN\nOPQRSTU", black, tinyfont.NO_ROTATION)
 	// tinyfont.WriteLineRotated(display, &gophers.Regular58pt, 40, 50,  "ABCDEFG\nHIJKLMN\nOPQRSTU\nH", black, tinyfont.NO_ROTATION)
+
 	// tinyfont.WriteLineColorsRotated(&display, &freemono.Bold9pt7b, 45, 180, "tinyfont", []color.RGBA{white, black}, tinyfont.ROTATION_270)
 
 	println("Waiting for 3 seconds")
