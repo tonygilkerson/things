@@ -29,13 +29,18 @@ func main() {
 	// read moisture
 	//
 
-	moist := soil.New(i2c)
+	soil := soil.New(i2c)
 	time.Sleep(1 * time.Second)	
 	
 	for {
-		m, err := moist.Read()
+		m, err := soil.ReadMoisture()
 		doOrDie(err)
 		fmt.Printf("Moisture: %v\n", m)
+		time.Sleep(time.Second)
+
+		t, err := soil.ReadTemperature()
+		doOrDie(err)
+		fmt.Printf("Temperature (F): %v\n", t)
 		time.Sleep(time.Second)
 	}
 }
