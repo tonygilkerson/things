@@ -382,3 +382,19 @@ Details
 
 * [Product Page](https://www.adafruit.com/product/1426)
 * [Learn Page](https://learn.adafruit.com/adafruit-neopixel-uberguide/downloads)
+
+## Adafruit STEMMA Soil Sensor - I2C Capacitive Moisture Sensor - JST PH 2mm
+
+![soil](./img/soil1.jpg)
+
+![soil](./img/soil2.jpg)
+
+* [Product Page](https://www.adafruit.com/product/4026)
+* [Learn Page](https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/overview)
+
+| Fn      | JST Color | Pin | Description                                                     |
+| ------- | --------- | --- | --------------------------------------------------------------- |
+| GND     | Black     | 1   | power and logic ground                                          |
+| VIN     | Red       | 2   | 3-5V DC (use the same power voltage as you would for I2C logic) |
+| I2C SDA | White     | 3   | there's a 10K pullup to VIN                                     |
+| I2C SCL | Green     | 4   | there's a 10K pullup to VIN                                     |

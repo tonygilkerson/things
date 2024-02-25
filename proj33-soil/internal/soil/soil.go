@@ -1,5 +1,9 @@
 package soil
-
+// Note there is now a tinygo driver for this but it is on the dev branch
+//      I should check out this driver and if it works for me switch ASAP
+//      see: https://github.com/tinygo-org/drivers/blob/dev/examples/seesaw/main.go
+//           https://gophers.slack.com/archives/CDJD3SUP6/p1708793230660769?thread_ts=1708486573.676089&cid=CDJD3SUP6
+//
 // This package taken from:
 //
 //  @ysoldak Yurii Soldak in the #tinygo channel
