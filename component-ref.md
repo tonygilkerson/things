@@ -398,3 +398,12 @@ Details
 | VIN     | Red       | 2   | 3-5V DC (use the same power voltage as you would for I2C logic) |
 | I2C SDA | White     | 3   | there's a 10K pullup to VIN                                     |
 | I2C SCL | Green     | 4   | there's a 10K pullup to VIN                                     |
+
+## Bingfu SMA Female Bulkhead Mount to SMA Male RG316 Antenna Extension Cable 12 inch 30cm 2-Pack Compatible with 4G LTE Router Cellular SDR USB Dongle Receiver
+
+
+I don't know if this is correct or now.  When then some in I will check it out and update this section.
+
+![smaext](img/sma-extend.jpg)
+
+* [Product Page](https://www.amazon.com/gp/product/B07MJQWH8S/ref=ox_sc_act_title_1?smid=A2X7IHOFTAZ9BA&th=1)

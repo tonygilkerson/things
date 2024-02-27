@@ -19,8 +19,10 @@ func main() {
 	//
 	i2c := machine.I2C0
 	err := i2c.Configure(machine.I2CConfig{
-		SDA: machine.GP20,
-		SCL: machine.GP21,
+		// SDA: machine.GP20,
+		// SCL: machine.GP21,
+		SDA: machine.GP12,
+		SCL: machine.GP13,
 	})
 	doOrDie(err)
 
