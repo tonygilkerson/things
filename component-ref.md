@@ -401,9 +401,23 @@ Details
 
 ## Bingfu SMA Female Bulkhead Mount to SMA Male RG316 Antenna Extension Cable 12 inch 30cm 2-Pack Compatible with 4G LTE Router Cellular SDR USB Dongle Receiver
 
-
-I don't know if this is correct or now.  When then some in I will check it out and update this section.
-
 ![smaext](img/sma-extend.jpg)
 
 * [Product Page](https://www.amazon.com/gp/product/B07MJQWH8S/ref=ox_sc_act_title_1?smid=A2X7IHOFTAZ9BA&th=1)
+
+## 4-Digit Display
+
+![4-digit display](img/4-dgit-display.jpg)
+
+* [Product Page](https://www.digikey.com/en/products/detail/seeed-technology-co-ltd/104030003/5488009)
+* [Data Sheet](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/880/Grove_4_Digit_Display_Web.pdf)
+
+| Fn  | JST Color | Pin | Description                                                     |
+| --- | --------- | --- | --------------------------------------------------------------- |
+| GND | Black     | 1   | power and logic ground                                          |
+| VIN | Red       | 2   | 3-5V DC (use the same power voltage as you would for I2C logic) |
+| DIO | White     | 3   |                                                                 |
+| CLK | Green     | 4   |                                                                 |
+
+>**Warning** The Grove-4-Digit Display includes 4 pins, GND, VCC, DIO, CLK. We can connect DIO
+and CLK to any digital pin. It is not I2C protocol.

@@ -110,7 +110,7 @@ func runLight() {
 
 	// run light
 	led := machine.LED
-	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	led.Configure(o)
 
 	// blink run light for a bit seconds so I can tell it is starting
 	for i := 0; i < 15; i++ {
