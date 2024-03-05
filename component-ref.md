@@ -421,3 +421,9 @@ Details
 
 >**Warning** The Grove-4-Digit Display includes 4 pins, GND, VCC, DIO, CLK. We can connect DIO
 and CLK to any digital pin. It is not I2C protocol.
+
+## Grove Wires
+
+* [ref](https://developer.electricimp.com/resources/grovesystem)
+
+![grove wires](img/grove-wires.jpg)
