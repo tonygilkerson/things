@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"machine"
 	"time"
 
@@ -14,17 +15,34 @@ func main() {
 
 	//ctm.ClearDisplay()
 
+	log.Println("Display digit 1,1")
 	tm.DisplayDigit(1,1)
 	time.Sleep(time.Second * 5)
 
-	tm.DisplayText([]byte("Tiny"))
-	time.Sleep(time.Millisecond * 1000)
+	tm.ClearDisplay()
+
+	log.Println("Display text T ")
+	tm.DisplayText([]byte("T"))
+	time.Sleep(time.Second * 5)
 
 	tm.ClearDisplay()
 
-	tm.DisplayChr(byte('G'), 1)
+	log.Println("Display char T")
+	tm.DisplayChr(byte('T'), 1)
+	time.Sleep(time.Second * 5)
+	
+	tm.ClearDisplay()
+
+	log.Println("Display text M ")
+	tm.DisplayText([]byte("M"))
+	time.Sleep(time.Second * 5)
+	
+	tm.ClearDisplay()
+	
+	log.Println("Display Char M")
+	tm.DisplayChr(byte('M'), 1)
 	tm.DisplayDigit(0, 2) // looks like O
-	time.Sleep(time.Millisecond * 1000)
+	time.Sleep(time.Second * 5)
 
 	tm.DisplayClock(12, 59, true)
 
@@ -35,9 +53,10 @@ func main() {
 
 	i := int16(0)
 	for {
+		log.Printf("Display number %v\n", i)
 		tm.DisplayNumber(i)
 		i++
-		time.Sleep(time.Millisecond * 50)
+		time.Sleep(time.Millisecond * 500)
 	}
 
 }

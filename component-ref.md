@@ -427,3 +427,33 @@ and CLK to any digital pin. It is not I2C protocol.
 * [ref](https://developer.electricimp.com/resources/grovesystem)
 
 ![grove wires](img/grove-wires.jpg)
+
+## L293D H-Bridge
+
+![l293d](img/l293d.jpg)
+
+![l293d-pins](img/l293d-pins.jpg)
+
+![l293d-truth-table](img/l293d-truth-table.jpg)
+
+* [data sheet](https://www.st.com/content/ccc/resource/technical/document/datasheet/04/ac/22/f9/20/5d/43/a1/CD00000059.pdf/files/CD00000059.pdf/jcr:content/translations/en.CD00000059.pdf)
+
+| Pin | Fn       | Description                                                      |
+| --- | -------- | ---------------------------------------------------------------- |
+| 1   | Enable 1 | Enable channel 1, default high (enabled)                         |
+| 2   | Input 1  | Logic High or Low for channel 1 (see truth table)                |
+| 3   | Output 1 | Pos or Neg for channel 1 motor (see truth table)                 |
+| 4   | GND      |                                                                  |
+| 5   | GND      |                                                                  |
+| 6   | Output 2 | Pos or Neg for channel 1 motor (see truth table)                 |
+| 7   | Input 2  | Logic High or Low for channel 1 (see truth table)                |
+| 8   | VSmot    | Not regulated power for motor up to 36v (0.5A per channel)       |
+| -   | -        | --------------------------------------------                     |
+| 9   | Enable 2 | Enable channel 2, default high (enabled)                         |
+| 10  | Input 3  | Logic High or Low for channel 2 (see truth table)                |
+| 11  | Output 3 | Pos or Neg for channel 2 motor (see truth table)                 |
+| 12  | GND      |                                                                  |
+| 13  | GND      |                                                                  |
+| 14  | Output 4 | Pos or Neg for channel 2 motor (see truth table)                 |
+| 15  | Input 4  | Logic High or Low for channel 2 (see truth table)                |
+| 16  | VSS      | Regulated power, Logic supply voltage min 4.5v (use 5v from USB) |
