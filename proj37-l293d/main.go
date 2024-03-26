@@ -1,6 +1,7 @@
 package main
 
 /*
+L293D
 In this project we are using the pico USB 5v to drive the IC and the "motor"
 Actually we are not using a motor just two LEDs. One of the LEDs will light up depending on the direction
 
