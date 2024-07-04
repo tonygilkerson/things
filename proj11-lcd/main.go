@@ -14,8 +14,8 @@ import (
 
 func main() {
 
-		// run light
-		runLight()
+	// run light
+	runLight()
 
 	// Example configuration for Adafruit Clue
 	// machine.SPI1.Configure(machine.SPIConfig{
@@ -35,7 +35,6 @@ func main() {
 		Frequency: 8000000,
 		LSBFirst:  false,
 		Mode:      0,
-		DataBits:  0,
 		SCK:       machine.GP10,
 		SDO:       machine.GP11,
 		SDI:       machine.GP28, // I don't think this is actually used for LCD, just assign to any open pin
@@ -43,8 +42,8 @@ func main() {
 
 	display := st7789.New(machine.SPI1,
 		machine.GP12, // TFT_RESET
-		machine.GP8, // TFT_DC
-		machine.GP9, // TFT_CS
+		machine.GP8,  // TFT_DC
+		machine.GP9,  // TFT_CS
 		machine.GP13) // TFT_LITE
 
 	display.Configure(st7789.Config{
@@ -62,7 +61,7 @@ func main() {
 	fmt.Printf("start")
 
 	width, height := display.Size()
-	fmt.Printf("width: %v, height: %v\n",width, height)
+	fmt.Printf("width: %v, height: %v\n", width, height)
 
 	// red := color.RGBA{126, 0, 0, 255} // dim
 	red := color.RGBA{255, 0, 0, 255}
@@ -74,7 +73,7 @@ func main() {
 	for {
 
 		cls(&display)
-		
+
 		// paintScreen(red, &display,10)
 		// time.Sleep(time.Second * 3)
 
@@ -84,24 +83,22 @@ func main() {
 
 		cls(&display)
 		// tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,20,"123456789-123456789-x",red)
-		tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,20,"freemono.Regular12pt7b",red)
+		tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 10, 20, "freemono.Regular12pt7b", red)
 		time.Sleep(time.Second * 5)
-		
+
 		//display.EnableBacklight(false)
 
-		// at this font the screen can hold 10 lines 21 character across 
+		// at this font the screen can hold 10 lines 21 character across
 		cls(&display)
-		tinyfont.WriteLine(&display,&freemono.Regular12pt7b,10,20,"123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\na23456789-123456789-x\nB23456789-123456789-x",red)
+		tinyfont.WriteLine(&display, &freemono.Regular12pt7b, 10, 20, "123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\n123456789-123456789-x\na23456789-123456789-x\nB23456789-123456789-x", red)
 		time.Sleep(time.Second * 5)
-		
 
 		//display.EnableBacklight(true)
 
 		cls(&display)
-		tinyfont.WriteLine(&display,&freemono.Regular18pt7b,10,30,"123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X",red)
+		tinyfont.WriteLine(&display, &freemono.Regular18pt7b, 10, 30, "123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X\n123456789-123X", red)
 		time.Sleep(time.Second * 5)
 
-		
 	}
 
 }
@@ -110,7 +107,7 @@ func runLight() {
 
 	// run light
 	led := machine.LED
-	led.Configure(o)
+	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	// blink run light for a bit seconds so I can tell it is starting
 	for i := 0; i < 15; i++ {
@@ -123,15 +120,15 @@ func runLight() {
 }
 
 func paintScreen(c color.RGBA, d *st7789.Device, s int16) {
-	var x,y int16
-	for y = 0; y < 240; y=y+s {
-		for x = 0; x < 320; x=x+s {
+	var x, y int16
+	for y = 0; y < 240; y = y + s {
+		for x = 0; x < 320; x = x + s {
 			d.FillRectangle(x, y, s, s, c)
 		}
 	}
 }
 
-func cls (d *st7789.Device){
+func cls(d *st7789.Device) {
 	black := color.RGBA{0, 0, 0, 255}
 	d.FillScreen(black)
 	fmt.Printf("FillScreen(black)\n")

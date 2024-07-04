@@ -10,9 +10,9 @@ func main() {
 
 	println("START")
 
-	// var pin machine.Pin = 2  // esp32
+	var pin machine.Pin = 2  // esp32
 	// var pin machine.Pin = 25 // pico
-	pin := machine.D12 // arduino-nano33
+	// pin := machine.D12 // arduino-nano33
 	pin.Configure(machine.PinConfig{Mode: machine.PinOutput})
 
 	e := errors.New("test error")
@@ -20,11 +20,11 @@ func main() {
 
 	for {
 		pin.Low()
-		println("low")
+		println("low...")
 		time.Sleep(time.Millisecond * 500)
 
 		pin.High()
-		println("high")
+		println("high...")
 		time.Sleep(time.Millisecond * 500)
 	}
 }

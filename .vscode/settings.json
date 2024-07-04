@@ -1,7 +1,7 @@
 {
   "go.toolsEnvVars": {
-    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-59de636c28312649c31c37e57d70033b47f17c14b6be1a079524f1c200ce35f2",
-    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,pico,tinygo,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb",
+    "GOROOT": "/Users/tgilkerson/Library/Caches/tinygo/goroot-eb941a703ad599b4d99f7c7b18d31ff847993e9b553eb0f9d18a99698eaa3c4e",
+    "GOFLAGS": "-tags=cortexm,baremetal,linux,arm,rp2040,rp,pico,tinygo,purego,math_big_pure_go,gc.conservative,scheduler.tasks,serial.usb",
     "GOOS": "linux",
     "GOARCH": "arm"
   }
