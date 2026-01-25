@@ -1,6 +1,9 @@
 # Components Reference
 
-Below is an aggergate list of reference infomation used components use.
+> NOTE: The components reference has move to the Notebook
+
+
+Below is an aggregate list of reference information used components use.
 
 ---
 
